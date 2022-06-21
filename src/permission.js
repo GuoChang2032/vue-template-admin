@@ -5,13 +5,14 @@ import { useUserInfo } from "@/stores/user"
 const whiteList = ['/login'] // no redirect whitelist
 
 
+// 路由跳转前
 router.beforeEach((to, from, next) => {
     start()
     const user = useUserInfo()
     if (to.meta.title) {
         document.title = to.meta.title
     } else {
-        document.title = '论文查引系统'
+        document.title = '前端模板'
     }
 
     let token = user.tokens
@@ -24,6 +25,7 @@ router.beforeEach((to, from, next) => {
     done()
     next()
 })
+// 路由跳转后
 router.afterEach(() => {
     done()
 })
