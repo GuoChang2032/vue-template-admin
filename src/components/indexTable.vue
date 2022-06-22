@@ -67,7 +67,8 @@ export default defineComponent({
         .catch((err) => {
           console.error("错误:", err);
         })
-        .finally(() => {});
+        .finally(() => {
+        });
     };
     const addShow = ref(false);
     const itemData = ref({});

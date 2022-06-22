@@ -1,5 +1,5 @@
 # **技术栈**
-## Vue 3 + TypeScript + Vite + pinia + element-ui-plus + axios + vue-router + less
+## Vue 3 + TypeScript + Vite + pinia + element-ui-plus + axios + vue-router + less + echarts
 ### 1. permission 路由的权限验证还不是很完整,需要完善
 ### 2. naive ui 的表格自定义列渲染太麻烦了,建议不使用naive ui(已换成element-ui-plus,可惜了)
 ### 3. pinia 状态管理还是不完善,需要重新构思.
