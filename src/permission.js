@@ -2,6 +2,7 @@ import router from './router'
 import { start, done } from '@/utils/nprogress.js'
 import { Message } from "@/utils/tool.js";
 import { useUserInfo } from "@/stores/user"
+
 const whiteList = ['/login'] // no redirect whitelist
 
 

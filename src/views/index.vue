@@ -74,6 +74,9 @@ export default defineComponent({
         };
         handleExportXls("/crawercontents/crawerContents/exportXls", p);
       },
+      charts(){
+        router.push({path:'/charts'})
+      },
     };
   },
 });
@@ -170,6 +173,9 @@ export default defineComponent({
             </el-button>
             <el-button @click="exportFun" type="warning">
               <Icon icon="mdi:export" size="17px" /> 导出
+            </el-button>
+            <el-button @click="charts" type="warning">
+              <Icon icon="mdi:export" size="17px" /> 图表
             </el-button>
             <!-- <n-button type="warning">
               <template #icon>

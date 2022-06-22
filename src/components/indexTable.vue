@@ -53,7 +53,6 @@ export default defineComponent({
       articleAuthor: "",
     });
     const getList = () => {
-      bus.emit("loading", { show: true, desc: "获取中" });
       http
         .get("/crawercontents/crawerContents/list", params.value)
         .then((res: any) => {
@@ -68,9 +67,7 @@ export default defineComponent({
         .catch((err) => {
           console.error("错误:", err);
         })
-        .finally(() => {
-          bus.emit("loading", { show: false });
-        });
+        .finally(() => {});
     };
     const addShow = ref(false);
     const itemData = ref({});

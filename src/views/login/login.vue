@@ -13,8 +13,8 @@ export default defineComponent({
     const user = useUserInfo()
     const formRef = ref<FormInstance>();
     const formValue = reactive({
-      account: "",
-      password: "",
+      account: "admin",
+      password: "elang1234",
       code: "",
     });
     const router = useRouter();
@@ -118,7 +118,7 @@ export default defineComponent({
                   <el-input
                     size="large"
                     v-model="formValue.account"
-                    placeholder="输入账号"
+                    placeholder="admin"
                   />
                 </el-form-item>
                 <el-form-item label="密码" prop="password">
@@ -127,7 +127,7 @@ export default defineComponent({
                     size="large"
                     show-password-on="mousedown"
                     v-model="formValue.password"
-                    placeholder="输入密码"
+                    placeholder="elang1234"
                   />
                 </el-form-item>
                 <el-form-item label="验证码" prop="code">
