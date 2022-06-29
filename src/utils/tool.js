@@ -1,10 +1,21 @@
-import {ElMessage} from 'element-plus'
-
-function Message(type,msg){
+import { ElMessage } from 'element-plus'
+function Message(type, msg) {
     ElMessage({
         message:msg,
         type:type,
     })
+    // const message = window.$message
+    // if (type === 'success') {
+    //     message.success(msg)
+    // } else if (type === 'warning') {
+    //     message.warning(msg)
+    // } else if (type === 'error') {
+    //     message.error(msg)
+    // } else if (type === 'loading') {
+    //     message.loading(msg)
+    // } else if (type === 'info') {
+    //     message.info(msg)
+    // }
 }
 
 const sourceOpt = [

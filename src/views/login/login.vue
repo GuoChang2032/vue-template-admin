@@ -152,15 +152,7 @@ export default defineComponent({
                     </el-col>
                   </el-row>
                 </el-form-item>
-                <el-button
-                  type="primary"
-                  size="large"
-                  :loading="loading"
-                  style="margin: 20px 0 0; width: 100%"
-                  @click="login(formRef)"
-                >
-                  登录
-                </el-button>
+                <n-button type="info" block :loading="loading" @click="login(formRef)" style="margin:40px 0 10px" size="large">登 录</n-button>
               </el-form>
             </div>
           </div>

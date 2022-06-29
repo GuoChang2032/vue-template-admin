@@ -160,23 +160,23 @@ export default defineComponent({
               />
             </el-form-item>
             <el-form-item class="btn-content">
-              <el-button @click="resetSearch">
+              <n-button @click="resetSearch">
                 <Icon icon="mdi:autorenew" size="17px" /> 重置
-              </el-button>
+              </n-button>
             </el-form-item>
           </el-form>
         </div>
         <div class="action-content">
           <el-space wrap>
-            <el-button type="primary" @click="showAdd">
+            <n-button type="primary" @click="showAdd">
               <Icon icon="mdi:file-document-plus-outline" size="17px" /> 新建
-            </el-button>
-            <el-button @click="exportFun" type="warning">
+            </n-button>
+            <n-button @click="exportFun" type="warning">
               <Icon icon="mdi:export" size="17px" /> 导出
-            </el-button>
-            <el-button @click="charts" type="warning">
+            </n-button>
+            <n-button @click="charts" type="info">
               <Icon icon="mdi:export" size="17px" /> 图表
-            </el-button>
+            </n-button>
             <!-- <n-button type="warning">
               <template #icon>
                 <n-icon>

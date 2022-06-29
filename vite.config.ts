@@ -2,7 +2,7 @@ import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import AutoImport from "unplugin-auto-import/vite";
 import Components from "unplugin-vue-components/vite";
-import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
+import { ElementPlusResolver,NaiveUiResolver } from "unplugin-vue-components/resolvers";
 import PurgeIcons from "vite-plugin-purge-icons";
 import commpressPlugin from "vite-plugin-compression";
 
@@ -12,10 +12,10 @@ export default defineConfig({
   plugins: [
     vue(),
     AutoImport({
-      resolvers: [ElementPlusResolver()],
+      resolvers: [ElementPlusResolver(),NaiveUiResolver()],
     }),
     Components({
-      resolvers: [ElementPlusResolver()],
+      resolvers: [ElementPlusResolver(),NaiveUiResolver()],
     }),
     PurgeIcons({
       /* PurgeIcons Options */
@@ -54,7 +54,7 @@ export default defineConfig({
     // },
   },
   esbuild: {
-    pure: ["console.log", "console.error"],
+    pure: ["console.log", "console.info"],
     minify: true,
   },
 });

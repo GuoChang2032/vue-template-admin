@@ -18,7 +18,7 @@ export default defineComponent({
 
 <template>
   <div class="main-container">
-    <el-page-header content="echarts图表" @back="goBack" />
+    <n-page-header subtitle="echarts图表" @back="goBack"> </n-page-header>
     <el-row :gutter="15">
       <el-col :span="12">
         <lineChart />
