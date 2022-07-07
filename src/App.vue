@@ -1,21 +1,18 @@
 <template>
-  <!-- <n-message-provider> -->
   <div v-loading="loading" :element-loading-text="tips">
     <n-config-provider :locale="zhCN" :date-locale="dateZhCN">
       <router-view />
     </n-config-provider>
   </div>
-  <!-- </n-message-provider> -->
 </template>
 
 <script lang="ts">
 import { defineComponent, ref, onUnmounted } from "vue";
-import { NConfigProvider, zhCN, dateZhCN, useMessage } from "naive-ui";
 import bus from "@/utils/bus";
+
 export default defineComponent({
-  components: { NConfigProvider },
+  components: { },
   setup() {
-    // window.$message = useMessage();
     onUnmounted(() => {
       bus.off("loading");
     });
@@ -35,9 +32,13 @@ export default defineComponent({
     return {
       loading,
       tips,
-      zhCN,
-      dateZhCN,
+      themeOverrides,
     };
   },
 });
 </script>
+<style>
+.xxx span {
+  color: #d3af38;
+}
+</style>
