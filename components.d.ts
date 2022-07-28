@@ -5,15 +5,17 @@ import '@vue/runtime-core'
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    ElButton: typeof import('element-plus/es')['ElButton']
+    Chart2: typeof import('./src/components/chartComponents/chart2.vue')['default']
     ElCol: typeof import('element-plus/es')['ElCol']
     ElForm: typeof import('element-plus/es')['ElForm']
     ElFormItem: typeof import('element-plus/es')['ElFormItem']
+    ElHeader: typeof import('element-plus/es')['ElHeader']
     ElInput: typeof import('element-plus/es')['ElInput']
     ElRow: typeof import('element-plus/es')['ElRow']
     Icon: typeof import('./src/components/icon.vue')['default']
     IndexAddEditModal: typeof import('./src/components/indexAddEditModal.vue')['default']
     IndexTable: typeof import('./src/components/indexTable.vue')['default']
+    LineCahrt: typeof import('./src/components/chartComponents/lineCahrt.vue')['default']
     Loading: typeof import('element-plus/es')['ElLoadingDirective']
     Pagination: typeof import('./src/components/pagination/pagination.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']

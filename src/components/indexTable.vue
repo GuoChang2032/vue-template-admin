@@ -53,7 +53,6 @@ export default defineComponent({
       articleAuthor: "",
     });
     const getList = () => {
-      bus.emit("loading", { show: true, desc: "获取中" });
       http
         .get("/crawercontents/crawerContents/list", params.value)
         .then((res: any) => {
@@ -69,7 +68,6 @@ export default defineComponent({
           console.error("错误:", err);
         })
         .finally(() => {
-          bus.emit("loading", { show: false });
         });
     };
     const addShow = ref(false);
@@ -103,7 +101,7 @@ export default defineComponent({
             console.error(err);
           })
           .finally(() => {
-            bus.emit("loading", { show: true });
+            bus.emit("loading", { show: false });
           });
       },
       retry(row: Song) {
@@ -120,7 +118,7 @@ export default defineComponent({
             console.error(err);
           })
           .finally(() => {
-            bus.emit("loading", { show: true });
+            bus.emit("loading", { show: false });
           });
       },
       cancel(row: Song) {
@@ -138,7 +136,7 @@ export default defineComponent({
             console.error(err);
           })
           .finally(() => {
-            bus.emit("loading", { show: true });
+            bus.emit("loading", { show: false });
           });
       },
       // 分页变换
@@ -152,9 +150,9 @@ export default defineComponent({
 </script>
 
 <template>
-  <el-button type="info">
+  <n-button type="info">
     <Icon icon="mdi:printer-outline" size="17px" /> 打印
-  </el-button>
+  </n-button>
 
   <section id="print-content">
     <el-table :data="data" style="width: 100%" max-height="550">
@@ -176,15 +174,15 @@ export default defineComponent({
       <el-table-column prop="createTime" label="创建时间" width="200" />
       <el-table-column fixed="right" label="操作" width="200">
         <template #default="scope">
-          <el-button link type="primary" size="small" @click="edit(scope.row)">
+          <n-button text tag="a" type="info" size="small" class="action-btn" @click="edit(scope.row)">
             编辑
-          </el-button>
-          <el-button link type="primary" size="small" @click="retry(scope.row)">
+          </n-button>
+          <n-button text tag="a" type="info" size="small" class="action-btn" @click="retry(scope.row)">
             重试
-          </el-button>
+          </n-button>
           <el-popconfirm title="确定取消?" @confirm="cancel(scope.row)">
             <template #reference>
-              <el-button link type="primary" size="small"> 取消 </el-button>
+              <n-button text tag="a" type="info" size="small" class="action-btn"> 取消 </n-button>
             </template>
           </el-popconfirm>
 
@@ -193,7 +191,7 @@ export default defineComponent({
             @confirm="deleteItem(scope.row)"
           >
             <template #reference>
-              <el-button link type="primary" size="small"> 删除 </el-button>
+              <n-button text tag="a" type="info" size="small" class="action-btn"> 删除 </n-button>
             </template>
           </el-popconfirm>
         </template>
@@ -217,5 +215,8 @@ export default defineComponent({
 }
 .pagination {
   margin: 20px 0 10px;
+}
+.action-btn{
+  margin:0 5px;
 }
 </style>

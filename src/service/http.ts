@@ -18,7 +18,7 @@ axios.interceptors.request.use(
   (config): AxiosRequestConfig<any> => {
     // 请求token或其他鉴权
     let user = useUserInfo();
-    let token = user.tokens || "";
+    let token = user.tokens;
     //@ts-ignore
     if (token) {
       //@ts-ignore

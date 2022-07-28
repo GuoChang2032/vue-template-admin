@@ -136,8 +136,8 @@ export default defineComponent({
         </el-form-item>
       </el-form>
       <div class="add-btn-content">
-        <el-button @click="cancel"> 取消 </el-button>
-        <el-button type="primary" @click="confirm"> 确定 </el-button>
+        <n-button @click="cancel"> 取消 </n-button>
+        <n-button type="primary" @click="confirm"> 确定 </n-button>
       </div>
     </el-dialog>
   </div>

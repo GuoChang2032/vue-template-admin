@@ -17,6 +17,14 @@ const routes: RouteRecordRaw[] = [
     },
     component: () => import("@/views/login/login.vue"),
   },
+  {
+    path: "/charts",
+    name: "Charts",
+    meta: {
+      title: "图表",
+    },
+    component: () => import("@/views/charts/charts.vue"),
+  },
 ];
 
 const router = createRouter({

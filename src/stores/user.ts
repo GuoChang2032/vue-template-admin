@@ -9,10 +9,10 @@ export const useUserInfo = defineStore("user", {
   },
   getters: {
     tokens: (state) => {
-      return state.token;
+      return state.token || localStorage.getItem("user_login_token") || "";
     },
     userInfo: (state) => {
-      return state.info;
+      return state.info || localStorage.getItem("user_login_info") || {};
     },
   },
   actions: {
