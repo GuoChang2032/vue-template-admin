@@ -9,9 +9,10 @@
 <script lang="ts">
 import { defineComponent, ref, onUnmounted } from "vue";
 import bus from "@/utils/bus";
+import { zhCN, dateZhCN, GlobalThemeOverrides } from "naive-ui";
 
 export default defineComponent({
-  components: { },
+  components: {zhCN, dateZhCN},
   setup() {
     onUnmounted(() => {
       bus.off("loading");
@@ -28,7 +29,13 @@ export default defineComponent({
 
     const loading = ref(false);
     const tips = ref("");
-
+    const themeOverrides: GlobalThemeOverrides = {
+      common: {
+        primaryColor: "#5983b8",
+        primaryColorHover: "#79a4da",
+        primaryColorPressed: "#426897",
+      },
+    };
     return {
       loading,
       tips,
