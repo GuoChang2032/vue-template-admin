@@ -1,6 +1,10 @@
 <template>
   <div v-loading="loading" :element-loading-text="tips">
-    <n-config-provider :locale="zhCN" :date-locale="dateZhCN">
+    <n-config-provider
+      :locale="zhCN"
+      :date-locale="dateZhCN"
+      :theme-overrides="themeOverrides"
+    >
       <router-view />
     </n-config-provider>
   </div>
@@ -12,7 +16,6 @@ import bus from "@/utils/bus";
 import { zhCN, dateZhCN, GlobalThemeOverrides } from "naive-ui";
 
 export default defineComponent({
-  components: {zhCN, dateZhCN},
   setup() {
     onUnmounted(() => {
       bus.off("loading");
@@ -37,6 +40,8 @@ export default defineComponent({
       },
     };
     return {
+      zhCN,
+      dateZhCN,
       loading,
       tips,
       themeOverrides,
