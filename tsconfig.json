@@ -30,7 +30,6 @@
     "src/**/*.d.ts",
     "src/**/*.tsx",
     "src/**/*.vue",
-    "src/utils/hooks.js",
     "src/service/api/index.js"
   ],
   "references": [

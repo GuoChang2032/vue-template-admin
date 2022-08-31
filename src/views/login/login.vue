@@ -1,6 +1,5 @@
 <script lang='ts'>
 import { defineComponent, onMounted, ref, reactive } from "vue";
-import http from "@/service/http";
 import { useRouter } from "vue-router";
 import { Message } from "@/utils/tool.js";
 import { FormRules,FormInstance } from "element-plus";
@@ -23,16 +22,6 @@ export default defineComponent({
     const img = ref("");
     // 获取验证码
     const handleChangeCheckCode = () => {
-      currentDateTime.value = new Date().getTime();
-      http
-        .get(`/sys/randomImage/${currentDateTime.value}`)
-        .then((res: any) => {
-          img.value = res.result;
-        })
-        .catch((err) => {
-          Message("error", "获取验证码失败");
-          console.error(err)
-        });
     };
     const loading = ref(false)
     return {
@@ -66,28 +55,7 @@ export default defineComponent({
 
         formEl?.validate((valid,fields) => {
           if (valid) {
-            let params = {
-              captcha: formValue.code,
-              checkKey: currentDateTime.value,
-              password: formValue.password,
-              username: formValue.account,
-            };
-            loading.value = true
-            http
-              .post("/sys/login", params)
-              .then((res: any) => {
-                loading.value = false
-                if (res.success) {
-                  router.push({ path: "/" });
-                  user.add(res)
-                } else {
-                  handleChangeCheckCode();
-                }
-              })
-              .catch((err) => {
-                loading.value = false
-                Message("error", "请求错误");
-              });
+            router.push({ path: "/" });
           }
         });
       },

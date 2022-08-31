@@ -2,7 +2,6 @@
 import axios, { AxiosRequestConfig } from "axios";
 import { Message } from "@/utils/tool.js";
 import { start, done } from "@/utils/nprogress.js";
-import { logout } from "@/utils/hooks.js";
 import { ResType } from "@/utils/types";
 import { useUserInfo } from "@/stores/user";
 // import {start,close} from '@/utils/nprogress'
@@ -42,7 +41,7 @@ axios.interceptors.response.use(
       err.response.data.status === 500 &&
       err.response.data.message.includes("Token")
     ) {
-      logout();
+      // logout();
     }
     return err;
   }

@@ -1,11 +1,8 @@
 <script lang='ts'>
-import { defineComponent, h, onMounted, ref, watch } from "vue";
-import http from "@/service/http";
+import { defineComponent, ref, watch } from "vue";
 import { queryParams, Song } from "@/utils/types";
-import bus from "@/utils/bus";
 import indexAddEditModal from "@/components/indexAddEditModal.vue";
 import pagination from "@/components/pagination/pagination.vue";
-import { Message } from "@/utils/tool.js";
 import Icon from "@/components/icon.vue";
 export default defineComponent({
   name: "indexTable",
@@ -25,17 +22,10 @@ export default defineComponent({
       () => props.qs,
       (state: any, prevState) => {
         params.value = state;
-        getList();
       },
       { deep: true }
     );
-    onMounted(() => {
-      getList();
-    });
 
-    bus.on("reload", () => {
-      getList();
-    });
 
     const data = ref([]);
     const pages = ref({
@@ -52,24 +42,6 @@ export default defineComponent({
       processStatus: "",
       articleAuthor: "",
     });
-    const getList = () => {
-      http
-        .get("/crawercontents/crawerContents/list", params.value)
-        .then((res: any) => {
-          if (res.success) {
-            data.value = res.result.records;
-            pages.value = {
-              page: res.result.current,
-              pageCount: res.result.total,
-            };
-          }
-        })
-        .catch((err) => {
-          console.error("错误:", err);
-        })
-        .finally(() => {
-        });
-    };
     const addShow = ref(false);
     const itemData = ref({});
     return {
@@ -77,7 +49,6 @@ export default defineComponent({
       pages,
       params,
       // 获取数据列表
-      getList,
       // 关闭
       close() {
         addShow.value = false;
@@ -90,59 +61,14 @@ export default defineComponent({
         itemData.value = row;
       },
       deleteItem(row: Song) {
-        bus.emit("loading", { show: true });
-        http
-          .delete("/crawercontents/crawerContents/delete?id=" + row.id, {})
-          .then((res) => {
-            Message("success", "删除成功");
-            getList();
-          })
-          .catch((err: any) => {
-            console.error(err);
-          })
-          .finally(() => {
-            bus.emit("loading", { show: false });
-          });
       },
       retry(row: Song) {
-        bus.emit("loading", { show: true });
-        http
-          .post(
-            `/crawercontents/crawerContents/updateStatus/${row.id}?version=2&status=0`,
-            {}
-          )
-          .then((res) => {
-            getList();
-          })
-          .catch((err: any) => {
-            console.error(err);
-          })
-          .finally(() => {
-            bus.emit("loading", { show: false });
-          });
       },
       cancel(row: Song) {
-        bus.emit("loading", { show: true });
-        http
-          .post(
-            `/crawercontents/crawerContents/updateStatus/${row.id}?version=1&status=4`,
-            {}
-          )
-          .then((res) => {
-            Message("success", "取消成功");
-            getList();
-          })
-          .catch((err: any) => {
-            console.error(err);
-          })
-          .finally(() => {
-            bus.emit("loading", { show: false });
-          });
       },
       // 分页变换
       pageChange(param: any) {
         params.value.pageNo = param.page;
-        getList();
       },
     };
   },

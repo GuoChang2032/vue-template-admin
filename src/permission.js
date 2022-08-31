@@ -16,13 +16,13 @@ router.beforeEach((to, from, next) => {
         document.title = '前端模板'
     }
 
-    let token = user.tokens
-    if (!token && !whiteList.includes(to.path)) {
-        done()
-        Message('warning', '请登录')
-        next({ path: '/login' })
-        return
-    }
+    // let token = user.tokens
+    // if (!token && !whiteList.includes(to.path)) {
+    //     done()
+    //     Message('warning', '请登录')
+    //     next({ path: '/login' })
+    //     return
+    // }
     done()
     next()
 })

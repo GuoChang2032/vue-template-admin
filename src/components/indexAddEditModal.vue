@@ -1,7 +1,6 @@
 <script lang='ts'>
 import { defineComponent, ref, watch, reactive } from "vue";
 import { sourceOpt, Message } from "@/utils/tool.js";
-import http from "@/service/http";
 import bus from "@/utils/bus";
 export default defineComponent({
   name: "indexAddEditModal",
@@ -68,28 +67,6 @@ export default defineComponent({
           url = "/crawercontents/crawerContents/edit";
           action = "put";
         }
-        http
-          .action(action, url, model.value)
-          .then((res) => {
-            Message(
-              "success",
-              modalType.value === "1" ? "新建成功" : "编辑成功"
-            );
-            bus.emit("reload");
-            cancel();
-            model.value = {
-              querySource: "",
-              articleName: "",
-              authorComp: "",
-              articleAuthor: "",
-            };
-          })
-          .catch((err) => {
-            console.error(err);
-          })
-          .finally(() => {
-            bus.emit("loading", { show: false });
-          });
       },
     };
   },
