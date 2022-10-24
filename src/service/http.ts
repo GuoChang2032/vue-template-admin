@@ -1,6 +1,6 @@
 //http.ts
 import axios, { AxiosRequestConfig } from "axios";
-import { Message } from "@/utils/tool.js";
+import { Message } from "@/utils/hooks";
 import { start, done } from "@/utils/nprogress.js";
 import { ResType } from "@/utils/types";
 import { useUserInfo } from "@/stores/user";
@@ -8,7 +8,8 @@ import { useUserInfo } from "@/stores/user";
 // 设置请求头和请求路径
 
 // 请求url
-axios.defaults.baseURL = import.meta.env.VITE_APP_API_BASE_URL;
+//@ts-ignore
+axios.defaults.baseURL = window.config.open?window.config.base:import.meta.env.VITE_APP_API_BASE_URL;
 axios.defaults.timeout = 10000;
 axios.defaults.headers.post["Content-Type"] = "application/json;charset=UTF-8";
 

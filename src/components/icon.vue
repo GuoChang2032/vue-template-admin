@@ -11,7 +11,7 @@ export default defineComponent({
   name: "Icon",
   props: {
     icon: { type: String, required: true },
-    size: { type: String, default: "17" },
+    size: { type: String, default: "17px" },
   },
 
   setup() {

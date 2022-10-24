@@ -1,7 +1,6 @@
 <script lang='ts'>
 import { defineComponent, onMounted, ref, reactive } from "vue";
 import { useRouter } from "vue-router";
-import { Message } from "@/utils/tool.js";
 import { FormRules,FormInstance } from "element-plus";
 import {useUserInfo} from '@/stores/user'
 export default defineComponent({

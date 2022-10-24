@@ -1,6 +1,5 @@
 <script lang='ts'>
 import { defineComponent, ref, watch, reactive } from "vue";
-import { sourceOpt, Message } from "@/utils/tool.js";
 import bus from "@/utils/bus";
 export default defineComponent({
   name: "indexAddEditModal",
@@ -47,14 +46,12 @@ export default defineComponent({
     return {
       isShow,
       model,
-      sourceOpt,
       modalType,
       // 取消
       cancel,
       // 确定新增/编辑
       confirm() {
         if (!model.value.querySource) {
-          Message("warning", "请选择查找源");
           return;
         }
         bus.emit("loading", { show: true });
@@ -87,21 +84,6 @@ export default defineComponent({
         label-width="auto"
         require-mark-placement="right-hanging"
       >
-        <el-form-item label="查找源" prop="querySource">
-          <el-select
-            style="width: 100%"
-            v-model="model.querySource"
-            placeholder="选择查找源"
-          >
-            <el-option
-              :label="item.label"
-              :value="item.value"
-              v-for="(item, idx) in sourceOpt"
-              :key="idx"
-            >
-            </el-option>
-          </el-select>
-        </el-form-item>
         <el-form-item label="论文标题" prop="articleName">
           <el-input v-model="model.articleName" placeholder="输入论文标题" />
         </el-form-item>

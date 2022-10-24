@@ -1,7 +1,6 @@
 <script lang='ts'>
 import { defineComponent, ref } from "vue";
 import { useRouter } from "vue-router";
-import { sourceOpt, statusOpt } from "@/utils/tool.js";
 import indexTableVue from "@/components/indexTable.vue";
 import { queryParams } from "@/utils/types";
 import indexAddEditModal from "@/components/indexAddEditModal.vue";
@@ -29,13 +28,9 @@ export default defineComponent({
       processStatus: "",
       articleAuthor: "",
     });
-    let so = ref(sourceOpt);
-    let sto = ref(statusOpt);
 
     const addShow = ref(false);
     return {
-      sourceOpt: so,
-      statusOpt: sto,
       formValue,
       handleLogout() {
         router.replace({ path: "/login" });
@@ -115,34 +110,6 @@ export default defineComponent({
             :model="formValue"
             label-placement="left"
           >
-            <el-form-item label="查找源:">
-              <el-select
-                class="n-form-item-input"
-                placeholder="选择查找源"
-                v-model="formValue.querySource"
-              >
-                <el-option
-                  v-for="item in sourceOpt"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value"
-                />
-              </el-select>
-            </el-form-item>
-            <el-form-item label="状态:">
-              <el-select
-                class="n-form-item-input"
-                placeholder="选择状态"
-                v-model="formValue.processStatus"
-              >
-                <el-option
-                  v-for="item in statusOpt"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value"
-                />
-              </el-select>
-            </el-form-item>
             <el-form-item label="作者:">
               <el-input
                 class="n-form-item-input"
