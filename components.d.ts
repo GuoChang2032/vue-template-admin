@@ -6,6 +6,7 @@ import '@vue/runtime-core'
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     Chart2: typeof import('./src/components/chartComponents/chart2.vue')['default']
+    CodeMirror: typeof import('./src/components/codeMirror/codeMirror.vue')['default']
     ElCol: typeof import('element-plus/es')['ElCol']
     ElContainer: typeof import('element-plus/es')['ElContainer']
     ElDialog: typeof import('element-plus/es')['ElDialog']
@@ -14,11 +15,9 @@ declare module '@vue/runtime-core' {
     ElHeader: typeof import('element-plus/es')['ElHeader']
     ElInput: typeof import('element-plus/es')['ElInput']
     ElMain: typeof import('element-plus/es')['ElMain']
-    ElOption: typeof import('element-plus/es')['ElOption']
     ElPagination: typeof import('element-plus/es')['ElPagination']
     ElPopconfirm: typeof import('element-plus/es')['ElPopconfirm']
     ElRow: typeof import('element-plus/es')['ElRow']
-    ElSelect: typeof import('element-plus/es')['ElSelect']
     ElSpace: typeof import('element-plus/es')['ElSpace']
     ElTable: typeof import('element-plus/es')['ElTable']
     ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
@@ -27,14 +26,16 @@ declare module '@vue/runtime-core' {
     IndexAddEditModal: typeof import('./src/components/indexAddEditModal.vue')['default']
     IndexTable: typeof import('./src/components/indexTable.vue')['default']
     LineCahrt: typeof import('./src/components/chartComponents/lineCahrt.vue')['default']
-    Loading: typeof import('element-plus/es')['ElLoadingDirective']
     NButton: typeof import('naive-ui')['NButton']
     NConfigProvider: typeof import('naive-ui')['NConfigProvider']
     NDialogProvider: typeof import('naive-ui')['NDialogProvider']
     NNotificationProvider: typeof import('naive-ui')['NNotificationProvider']
+    NSpace: typeof import('naive-ui')['NSpace']
     Pagination: typeof import('./src/components/pagination/pagination.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    Upload: typeof import('./src/components/fileUploadCom/upload.vue')['default']
+    WEditor: typeof import('./src/components/wangEditor/wEditor.vue')['default']
   }
 }
 

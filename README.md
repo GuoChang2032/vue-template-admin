@@ -1,4 +1,8 @@
-# **elang脚手架模板代码技术栈**
+# pnpm/npm/yarn install
+# pnpm/npm/yarn run dev
+# pnpm/npm/yarn run build
+
+# 技术栈
 ## Vue 3 + TypeScript + Vite + pinia + element-ui-plus + axios + vue-router + less
 ### 1. permission 路由的权限验证还不是很完整,需要完善
 ### 2. naive ui 的表格自定义列渲染太麻烦了,建议不使用naive ui(已换成element-ui-plus,可惜了),尝试是否能两个一起用...(有了按需加载的话是可以一起用的)

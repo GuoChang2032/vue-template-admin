@@ -6,14 +6,12 @@ import { queryParams } from "@/utils/types";
 import indexAddEditModal from "@/components/indexAddEditModal.vue";
 import { handleExportXls } from "@/service/api/index.js";
 import Icon from "@/components/icon.vue";
-// import IndexModal from "@/components/indexModal.vue";
 import { useUserInfo } from "@/stores/user";
 export default defineComponent({
   components: {
     indexTableVue,
     indexAddEditModal,
     Icon,
-    // IndexModal,
   },
   setup() {
     const router = useRouter();
@@ -144,14 +142,6 @@ export default defineComponent({
             <n-button @click="charts" type="info">
               <Icon icon="mdi:export" size="17px" /> 图表
             </n-button>
-            <!-- <n-button type="warning">
-              <template #icon>
-                <n-icon>
-                  <ArrowExportUp20Filled />
-                </n-icon>
-              </template>
-              导入
-            </n-button> -->
           </el-space>
         </div>
       </div>

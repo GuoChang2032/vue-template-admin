@@ -54,7 +54,4 @@ export default defineComponent({
 });
 </script>
 <style>
-.xxx span {
-  color: #d3af38;
-}
 </style>
