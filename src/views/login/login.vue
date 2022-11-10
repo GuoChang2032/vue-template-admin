@@ -1,14 +1,14 @@
-<script lang='ts'>
+<script lang="ts">
 import { defineComponent, onMounted, ref, reactive } from "vue";
 import { useRouter } from "vue-router";
-import { FormRules,FormInstance } from "element-plus";
-import {useUserInfo} from '@/stores/user'
+import { FormRules, FormInstance } from "element-plus";
+import { useUserInfo } from "@/stores/user";
 export default defineComponent({
-  setup() {
+  setup(props, { emit }) {
     onMounted(() => {
       handleChangeCheckCode();
     });
-    const user = useUserInfo()
+    const user = useUserInfo();
     const formRef = ref<FormInstance>();
     const formValue = reactive({
       account: "admin",
@@ -20,9 +20,8 @@ export default defineComponent({
     const currentDateTime = ref(0);
     const img = ref("");
     // 获取验证码
-    const handleChangeCheckCode = () => {
-    };
-    const loading = ref(false)
+    const handleChangeCheckCode = () => {};
+    const loading = ref(false);
     return {
       formRef,
       handleChangeCheckCode,
@@ -51,12 +50,14 @@ export default defineComponent({
       }),
       // 登录
       login(formEl: FormInstance | undefined) {
-
-        formEl?.validate((valid,fields) => {
+        formEl?.validate((valid, fields) => {
           if (valid) {
             router.push({ path: "/" });
           }
         });
+      },
+      back() {
+        emit("callback", { type: "1" });
       },
     };
   },
@@ -119,7 +120,15 @@ export default defineComponent({
                     </el-col>
                   </el-row>
                 </el-form-item>
-                <n-button type="info" block :loading="loading" @click="login(formRef)" style="margin:40px 0 10px" size="large">登 录</n-button>
+                <n-button
+                  type="info"
+                  block
+                  :loading="loading"
+                  @click="login(formRef)"
+                  style="margin: 40px 0 10px"
+                  size="large"
+                  >登 录</n-button
+                >
               </el-form>
             </div>
           </div>
@@ -129,7 +138,7 @@ export default defineComponent({
   </div>
 </template>
 
-<style scoped lang='less'>
+<style scoped lang="less">
 .main-container {
   position: relative;
   &:after {
