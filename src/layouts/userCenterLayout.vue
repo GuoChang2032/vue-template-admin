@@ -49,17 +49,16 @@ export default defineComponent({
   <div class="uc-header">
     <div class="g-layout-container flex-between">
       <div class="uc-h-left flex-center-start" @click="goFuckingIndex">
-        <div class="logo-wrap">
-          <img class="logo" src="@/assets/logo.png" alt="" />
-        </div>
+        <img class="logo" src="@/assets/logo.png" alt="" />
         <div class="uc-head-topic">个人中心</div>
       </div>
       <div class="uc-h-right flex-center">
         <div class="description1" style="margin-right: 10px">
           欢迎你，小瘪三
         </div>
-        <div class="logout" @click="logoutHandle">
-            <icon i con="ant-design:logout-outlined" size="22px" />
+        <div class="logout flex-center" @click="logoutHandle">
+          <icon icon="ant-design:logout-outlined" size="22px" />
+          登出
         </div>
       </div>
     </div>
@@ -113,7 +112,7 @@ export default defineComponent({
 }
 
 .uc-header {
-  padding: 4px 0;
+  padding: 8px 0;
   background-color: #3c3c3ce6;
   color: rgb(240, 240, 240);
 }
@@ -133,6 +132,7 @@ export default defineComponent({
   transition: all 0.25s;
   cursor: pointer;
   border-radius: 2px;
+  margin-left: 5px;
   &:hover {
     background-color: rgba(255, 255, 255, 0.2);
   }
