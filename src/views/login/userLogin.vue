@@ -50,7 +50,7 @@ export default defineComponent({
         <div class="g-topic2">熠朗宇宙级无代码平台</div>
         <div class="g-subtitle">
           是全宇宙最具影响力的 无代码平台！脑机链接，零代码实现100%的功能~
-          全自动生成代码，无需人工，真正的心想事成，无所不能。
+          全自动生成代码，无需人工，真正的心想事成，无所不能,让你一天一个项目
         </div>
       </div>
       <div class="m-right flex-center-start">
