@@ -16,23 +16,10 @@
 
 <script lang="ts">
 import { defineComponent, ref, onUnmounted } from "vue";
-// import bus from "@/utils/bus";
 import { zhCN, dateZhCN, GlobalThemeOverrides } from "naive-ui";
 
 export default defineComponent({
   setup() {
-    // onUnmounted(() => {
-    //   bus.off("loading");
-    // });
-
-    // bus.on("loading", (params: any) => {
-    //   if (params.desc) {
-    //     tips.value = params.desc;
-    //   } else {
-    //     tips.value = "";
-    //   }
-    //   loading.value = params.show;
-    // });
 
     const loading = ref(false);
     const tips = ref("");

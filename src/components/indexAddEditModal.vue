@@ -1,6 +1,5 @@
 <script lang='ts'>
 import { defineComponent, ref, watch, reactive } from "vue";
-import bus from "@/utils/bus";
 export default defineComponent({
   name: "indexAddEditModal",
   props: {
@@ -54,7 +53,6 @@ export default defineComponent({
         if (!model.value.querySource) {
           return;
         }
-        bus.emit("loading", { show: true });
         let url = "";
         let action = "post";
         if (modalType.value === "1") {

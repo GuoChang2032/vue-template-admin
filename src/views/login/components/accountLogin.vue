@@ -2,6 +2,7 @@
 import { defineComponent, ref } from "vue";
 import { FormInst } from "naive-ui";
 import { useRouter } from "vue-router";
+import { useUserInfo } from "@/stores/user";
 export default defineComponent({
   setup(props, { emit }) {
     const loginForm = ref<FormInst | null>(null);
@@ -13,7 +14,7 @@ export default defineComponent({
     const remember = ref<boolean>(false);
     const loading = ref<boolean>(false);
     const router = useRouter();
-
+    const us = useUserInfo()
     return {
       loading,
       remember,
@@ -41,6 +42,7 @@ export default defineComponent({
         loading.value = true;
         setTimeout(() => {
           loading.value = false;
+          us.setUserInfo(loginModel.value)
           router.push({ path: "/" });
         }, 800);
       },
@@ -93,7 +95,7 @@ export default defineComponent({
     <div class="l-c-operation">
       <div class="flex-between">
         <n-checkbox size="large" v-model:value="remember" label="记住我" />
-        <n-button text type="primary">忘记密码？</n-button>
+        <n-button text type="primary" @click="otherLogin('6')">忘记密码？</n-button>
       </div>
     </div>
     <div class="l-c-btn">

@@ -10,9 +10,12 @@ import zhCn from "element-plus/es/locale/lang/zh-cn";
 import "element-plus/es/components/message/style/css";
 import "@purge-icons/generated";
 import { createPinia } from "pinia";
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 const app = createApp(App);
+const pinia = createPinia()
+pinia.use(piniaPluginPersistedstate)
 app.use(ElementPlus, {
   locale: zhCn,
 });
-app.use(createPinia());
+app.use(pinia);
 app.use(router).mount("#app");

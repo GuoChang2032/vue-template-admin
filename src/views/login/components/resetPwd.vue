@@ -8,6 +8,8 @@ export default defineComponent({
     const loginModel = ref<any>({
       phone: null,
       code: null,
+      password: null,
+      again: null,
     });
     const remember = ref<boolean>(false);
     const loading = ref<boolean>(false);
@@ -35,7 +37,10 @@ export default defineComponent({
         },
       },
 
-      handleLogin() {},
+      handleLogin() {
+        Message('success','重置成功')
+        emit("callback", { type: "1" });
+      },
       back() {
         emit("callback", { type: "1" });
       },
@@ -65,7 +70,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="l-c-head">手机登录</div>
+  <div class="l-c-head">重置密码</div>
   <div class="l-c-form">
     <n-form
       ref="loginForm"
@@ -101,10 +106,28 @@ export default defineComponent({
           </n-button>
         </div>
       </n-form-item>
+      <n-form-item label="" path="password">
+        <n-input
+          size="large"
+          type="password"
+          show-password-on="mousedown"
+          v-model:value="loginModel.password"
+          placeholder="输入密码"
+        />
+      </n-form-item>
+      <n-form-item label="" path="again">
+        <n-input
+          size="large"
+          type="password"
+          show-password-on="mousedown"
+          v-model:value="loginModel.again"
+          placeholder="确认密码"
+        />
+      </n-form-item>
     </n-form>
     <div class="l-c-btn">
       <n-button size="large" type="info" block @click="handleLogin">
-        登 录
+        确 定
       </n-button>
     </div>
     <div class="other-btn">

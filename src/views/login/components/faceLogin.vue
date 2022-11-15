@@ -15,7 +15,7 @@ export default defineComponent({
   <div class="l-c-head">人脸登录</div>
   <div style="margin:30px 0">暂不支持</div>
   <div class="other-btn">
-    <n-button block @click="back"> 返回 </n-button>
+    <n-button block @click="back"> 返 回 </n-button>
   </div>
 </template>
 

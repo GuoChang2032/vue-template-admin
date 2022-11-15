@@ -22,6 +22,7 @@ specifiers:
   naive-ui: ^2.30.2
   nprogress: ^0.2.0
   pinia: ^2.0.14
+  pinia-plugin-persistedstate: ^2.4.0
   prettier: ^2.6.2
   super-tools-lib: ^1.35.0
   typescript: ^4.5.4
@@ -51,6 +52,7 @@ dependencies:
   naive-ui: 2.33.5_vue@3.2.44
   nprogress: 0.2.0
   pinia: 2.0.23_d45o5shxrtvj6wh4y524t7cqnm
+  pinia-plugin-persistedstate: 2.4.0_pinia@2.0.23
   prettier: 2.7.1
   super-tools-lib: 1.39.0
   vue: 3.2.44
@@ -2044,6 +2046,17 @@ packages:
     engines: {node: '>=6'}
     dev: true
     optional: true
+
+  /pinia-plugin-persistedstate/2.4.0_pinia@2.0.23:
+    resolution: {integrity: sha512-bQcpv47jk3ISl+InuJWsFaS/K7pRZ97kfoD2WCf/suhnlLy48k3BnFM2tI6YZ1xMsDaPv4yOsaPuPAUuSmEO2Q==}
+    peerDependencies:
+      pinia: ^2.0.0
+    peerDependenciesMeta:
+      pinia:
+        optional: true
+    dependencies:
+      pinia: 2.0.23_d45o5shxrtvj6wh4y524t7cqnm
+    dev: false
 
   /pinia/2.0.23_d45o5shxrtvj6wh4y524t7cqnm:
     resolution: {integrity: sha512-N15hFf4o5STrxpNrib1IEb1GOArvPYf1zPvQVRGOO1G1d74Ak0J0lVyalX/SmrzdT4Q0nlEFjbURsmBmIGUR5Q==}

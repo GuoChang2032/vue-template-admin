@@ -6,10 +6,11 @@ import {
   register,
   qrCodeLogin,
   faceLogin,
+  resetPwd
 } from "@/views/login/components";
 
 export default defineComponent({
-  components: { accountLogin, phoneLogin, qrCodeLogin, register,faceLogin },
+  components: { accountLogin, phoneLogin, qrCodeLogin, register, faceLogin,resetPwd },
   setup() {
     const type = ref<string>("1");
     return {
@@ -70,6 +71,9 @@ export default defineComponent({
           <template v-else-if="type === '5'">
             <register @callback="handleCallback" />
           </template>
+          <template v-else-if="type === '6'">
+            <resetPwd @callback="handleCallback" />
+          </template>
         </div>
       </div>
     </div>
@@ -121,11 +125,11 @@ export default defineComponent({
   @media screen and (max-width: 900px) {
     background-image: url(@/assets/login-bg.jpg);
     background-repeat: repeat;
-
   }
 }
 .m-left {
   position: relative;
+  z-index: 1;
   height: 100%;
   width: 55%;
   padding: 4rem 4.5rem 4rem 6rem;
