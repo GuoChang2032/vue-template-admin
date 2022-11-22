@@ -17,9 +17,8 @@ axios.defaults.headers.post["Content-Type"] = "application/json;charset=UTF-8";
 axios.interceptors.request.use(
   (config): AxiosRequestConfig<any> => {
     // 请求token或其他鉴权
-    let user = useUserInfo();
+    let user:any = useUserInfo();
     let token = user.tokens;
-    //@ts-ignore
     if (token) {
       //@ts-ignore
       config.headers["x-access-token"] = token;
