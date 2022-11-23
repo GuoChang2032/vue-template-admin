@@ -43,7 +43,7 @@ export default defineComponent({
         setTimeout(() => {
           loading.value = false;
           us.setUserInfo(loginModel.value)
-          router.push({ path: "/" });
+          router.push({ path: "/index" });
         }, 800);
       },
       otherLogin(type: string) {
