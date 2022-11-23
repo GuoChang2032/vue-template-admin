@@ -4,19 +4,8 @@ import { useRouter } from "vue-router";
 export default defineComponent({
   name: "Header",
   setup() {
-    const options = ref<any>([
-      {
-        label: "个人中心",
-        key: "1",
-      },
-      {
-        label: "退出登录",
-        key: "2",
-      },
-    ]);
     const router = useRouter();
     return {
-      options,
       handleSelect(key: string) {
         if (key === "1") {
           router.push({ path: "/usercenter" });
@@ -24,6 +13,9 @@ export default defineComponent({
       },
       goCenter() {
         router.push({ path: "/usercenter" });
+      },
+      logout() {
+        router.push({ path: "/login", replace: true });
       },
     };
   },
@@ -33,14 +25,13 @@ export default defineComponent({
 <template>
   <div class="header flex-between">
     <div class="h-left flex-center-start">
-      <img src="@/assets/logo.png" style="width: 50px" alt="" />
+      <img src="@/assets/elogo-large.png" class="h-l-logo" alt="" />
       <span class="h-l-topic">世界第一无代码平台</span>
     </div>
     <div class="h-right">
-      <!-- <n-dropdown trigger="hover" :options="options" @select="handleSelect"> -->
       <div class="flex-center">
         <div class="search-content">
-          <n-input type="text" placeholder="搜索" clearable />
+          <n-input type="text" placeholder="搜索..." clearable />
         </div>
         <div class="notice-content">
           <div class="n-c-wrap" title="通知">
@@ -58,17 +49,19 @@ export default defineComponent({
           />
           <div class="h-r-a-name">张三</div>
         </div>
-        <div class="logout flex-center">
+        <div class="logout flex-center" @click="logout">
           <icon icon="teenyicons:logout-outline" size="18px" />
           注销
         </div>
       </div>
-      <!-- </n-dropdown> -->
     </div>
   </div>
 </template>
 
 <style scoped lang="less">
+.h-l-logo{
+  height: 50px;
+}
 .search-content,
 .user-content,
 .notice-content,
