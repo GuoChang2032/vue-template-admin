@@ -1,5 +1,13 @@
 <script lang="ts">
-import { defineComponent, ref, Component, h } from "vue";
+import {
+  defineComponent,
+  ref,
+  Component,
+  h,
+  onMounted,
+  watch,
+  onUnmounted,
+} from "vue";
 import Footer from "@/components/footer.vue";
 import Header from "@/components/header.vue";
 import type { MenuOption } from "naive-ui";
@@ -9,6 +17,8 @@ import {
   PersonOutline as PersonIcon,
   WineOutline as WineIcon,
 } from "@vicons/ionicons5";
+import { useIndex } from "@/stores/indexStore";
+import m from "@/utils/mitt";
 
 function renderIcon(icon: Component) {
   return () => h(NIcon, null, { default: () => h(icon) });
@@ -16,7 +26,9 @@ function renderIcon(icon: Component) {
 
 export default defineComponent({
   setup() {
+    const ui = useIndex();
     const collapsed = ref<boolean>(false);
+    const inverted = ref<boolean>(ui.getInverted);
     const activeKey = ref<string>("");
     const menuOptions: MenuOption[] = [
       {
@@ -92,8 +104,38 @@ export default defineComponent({
         ],
       },
     ];
+    const clientWidth = ref<number>(document.body.clientWidth);
+
+    m.on("switch", (e: any) => {
+      inverted.value = e.val;
+    });
+
+    watch(
+      () => clientWidth.value,
+      (nv, ov) => {
+        if (nv < 900) {
+          collapsed.value = true;
+        } else {
+          collapsed.value = false;
+        }
+      }
+    );
+
+    onMounted(() => {
+      window.onresize = () => {
+        return (() => {
+          clientWidth.value = document.body.clientWidth;
+        })();
+      };
+    });
+
+    onUnmounted(() => {
+      m.off("switch");
+    });
 
     return {
+      inverted,
+      clientWidth,
       activeKey,
       collapsed,
       menuOptions,
@@ -109,6 +151,7 @@ export default defineComponent({
     <n-layout class="heights" has-sider>
       <n-layout-sider
         bordered
+        :inverted="inverted"
         collapse-mode="width"
         :collapsed-width="64"
         :width="220"
@@ -118,6 +161,7 @@ export default defineComponent({
         @expand="collapsed = false"
       >
         <n-menu
+          :inverted="inverted"
           v-model:value="activeKey"
           :collapsed="collapsed"
           :collapsed-width="64"
@@ -125,10 +169,12 @@ export default defineComponent({
           :options="menuOptions"
         />
       </n-layout-sider>
-      <n-layout-content
-        content-style="padding: 24px;height: 100%;background-color:#f1f1f1;"
-      >
-        <div class="router-content">
+      <n-layout-content :class="[inverted?'n-l-c-b':'n-l-c-w']">
+        <n-breadcrumb>
+          <n-breadcrumb-item> 北京总行 </n-breadcrumb-item>
+          <n-breadcrumb-item> 天津分行 </n-breadcrumb-item>
+        </n-breadcrumb>
+        <div :class="['router-content',inverted?'bkw':'bkb']">
           <n-scrollbar style="max-height: 100%">
             <router-view />
           </n-scrollbar>
@@ -142,10 +188,25 @@ export default defineComponent({
 </template>
 
 <style scoped lang="less">
-.router-content {
-  height: 100%;
-  min-height: 500px;
+.bkb{
   background: #fff;
+}
+.bkw{
+  background-color: transparent;
+}
+.n-l-c-w {
+  padding: 24px;
+  height: 100%;
+  background-color: #f1f1f1;
+}
+.n-l-c-b {
+  padding: 24px;
+  height: 100%;
+  background-color: #000;
+}
+.router-content {
+  height: calc(100% - 25.5px);
+  min-height: 500px;
   border-radius: 3px;
   max-height: 100%;
 }
@@ -153,6 +214,6 @@ export default defineComponent({
   height: 100%;
 }
 .heights {
-  height: calc(100% - 70px);
+  height: calc(100% - 71px);
 }
 </style>
