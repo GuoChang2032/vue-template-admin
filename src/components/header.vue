@@ -40,7 +40,7 @@ export default defineComponent({
   <div :class="['header','flex-between',theme?'theme-black':'theme-white']">
     <div class="h-left flex-center-start">
       <img src="@/assets/elogo-large.png" class="h-l-logo" alt="" />
-      <div class="h-l-topic">世界第一无代码平台</div>
+      <div class="h-l-topic">世界第一低能平台</div>
     </div>
     <div class="h-right">
       <div class="flex-center">

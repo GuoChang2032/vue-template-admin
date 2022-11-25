@@ -10,7 +10,6 @@ import {
 } from "vue";
 import Footer from "@/components/footer.vue";
 import Header from "@/components/header.vue";
-import type { MenuOption } from "naive-ui";
 import { NIcon } from "naive-ui";
 import {
   BookOutline as BookIcon,
@@ -19,6 +18,7 @@ import {
 } from "@vicons/ionicons5";
 import { useIndex } from "@/stores/indexStore";
 import m from "@/utils/mitt";
+import { RouterLink } from "vue-router";
 
 function renderIcon(icon: Component) {
   return () => h(NIcon, null, { default: () => h(icon) });
@@ -30,80 +30,7 @@ export default defineComponent({
     const collapsed = ref<boolean>(false);
     const inverted = ref<boolean>(ui.getInverted);
     const activeKey = ref<string>("");
-    const menuOptions: MenuOption[] = [
-      {
-        label: "且听风吟",
-        key: "hear-the-wind-sing",
-        icon: renderIcon(BookIcon),
-      },
-      {
-        label: "1973年的弹珠玩具",
-        key: "pinball-1973",
-        icon: renderIcon(BookIcon),
-        disabled: true,
-        children: [
-          {
-            label: "鼠",
-            key: "rat",
-          },
-        ],
-      },
-      {
-        label: "寻羊冒险记",
-        key: "a-wild-sheep-chase",
-        disabled: true,
-        icon: renderIcon(BookIcon),
-      },
-      {
-        label: "舞，舞，舞",
-        key: "dance-dance-dance",
-        icon: renderIcon(BookIcon),
-        children: [
-          {
-            type: "group",
-            label: "人物",
-            key: "people",
-            children: [
-              {
-                label: "叙事者",
-                key: "narrator",
-                icon: renderIcon(PersonIcon),
-              },
-              {
-                label: "羊男",
-                key: "sheep-man",
-                icon: renderIcon(PersonIcon),
-              },
-            ],
-          },
-          {
-            label: "饮品",
-            key: "beverage",
-            icon: renderIcon(WineIcon),
-            children: [
-              {
-                label: "威士忌",
-                key: "whisky",
-              },
-            ],
-          },
-          {
-            label: "食物",
-            key: "food",
-            children: [
-              {
-                label: "三明治",
-                key: "sandwich",
-              },
-            ],
-          },
-          {
-            label: "过去增多，未来减少",
-            key: "the-past-increases-the-future-recedes",
-          },
-        ],
-      },
-    ];
+    const menuOptions = ref<any>([]);
     const clientWidth = ref<number>(document.body.clientWidth);
 
     m.on("switch", (e: any) => {
@@ -122,12 +49,116 @@ export default defineComponent({
     );
 
     onMounted(() => {
+      setMenuData();
       window.onresize = () => {
         return (() => {
           clientWidth.value = document.body.clientWidth;
         })();
       };
     });
+
+    const setMenuData = () => {
+      let m = [
+        {
+          label: () =>
+            h(
+              RouterLink,
+              {
+                to: {
+                  name: "index",
+                  params: {
+                    lang: "zh-CN",
+                  },
+                },
+              },
+              { default: () => "首页" }
+            ),
+
+          key: "1",
+          icon: renderIcon(BookIcon),
+        },
+        {
+          label: "人生如寄",
+          key: "2",
+          icon: renderIcon(BookIcon),
+          children: [
+            {
+              label: () =>
+                h(
+                  RouterLink,
+                  {
+                    to: {
+                      name: "dashboard",
+                      params: {
+                        lang: "zh-CN",
+                      },
+                    },
+                  },
+                  { default: () => "Dashboard" }
+                ),
+
+              key: "3",
+            },
+          ],
+        },
+        // {
+        //   label: "寻羊冒险记",
+        //   key: "a-wild-sheep-chase",
+        //   disabled: true,
+        //   icon: renderIcon(BookIcon),
+        // },
+        // {
+        //   label: "舞，舞，舞",
+        //   key: "dance-dance-dance",
+        //   icon: renderIcon(BookIcon),
+        //   children: [
+        //     {
+        //       type: "group",
+        //       label: "人物",
+        //       key: "people",
+        //       children: [
+        //         {
+        //           label: "叙事者",
+        //           key: "narrator",
+        //           icon: renderIcon(PersonIcon),
+        //         },
+        //         {
+        //           label: "羊男",
+        //           key: "sheep-man",
+        //           icon: renderIcon(PersonIcon),
+        //         },
+        //       ],
+        //     },
+        //     {
+        //       label: "饮品",
+        //       key: "beverage",
+        //       icon: renderIcon(WineIcon),
+        //       children: [
+        //         {
+        //           label: "威士忌",
+        //           key: "whisky",
+        //         },
+        //       ],
+        //     },
+        //     {
+        //       label: "食物",
+        //       key: "food",
+        //       children: [
+        //         {
+        //           label: "三明治",
+        //           key: "sandwich",
+        //         },
+        //       ],
+        //     },
+        //     {
+        //       label: "过去增多，未来减少",
+        //       key: "the-past-increases-the-future-recedes",
+        //     },
+        //   ],
+        // },
+      ];
+      menuOptions.value = m;
+    };
 
     onUnmounted(() => {
       m.off("switch");
@@ -169,12 +200,12 @@ export default defineComponent({
           :options="menuOptions"
         />
       </n-layout-sider>
-      <n-layout-content :class="[inverted?'n-l-c-b':'n-l-c-w']">
+      <n-layout-content :class="[inverted ? 'n-l-c-b' : 'n-l-c-w']">
         <n-breadcrumb>
           <n-breadcrumb-item> 北京总行 </n-breadcrumb-item>
           <n-breadcrumb-item> 天津分行 </n-breadcrumb-item>
         </n-breadcrumb>
-        <div :class="['router-content',inverted?'bkw':'bkb']">
+        <div :class="['router-content', inverted ? 'bkw' : 'bkb']">
           <n-scrollbar style="max-height: 100%">
             <router-view />
           </n-scrollbar>
@@ -188,10 +219,10 @@ export default defineComponent({
 </template>
 
 <style scoped lang="less">
-.bkb{
+.bkb {
   background: #fff;
 }
-.bkw{
+.bkw {
   background-color: transparent;
 }
 .n-l-c-w {

@@ -99,8 +99,3 @@ export const Message = (type: any, msg: string) => {
     message.success(msg);
   }
 };
-
-// const Notification = (type: any, title: string, content: string) => {
-//   const { notification } = createDiscreteApi(["notification"]);
-//   notification.create({ type, title, content, duration: 2500 });
-// };

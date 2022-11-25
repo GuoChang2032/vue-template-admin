@@ -11,14 +11,26 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, onUnmounted } from "vue";
+import { defineComponent, ref, onUnmounted, watch, onMounted } from "vue";
 import { zhCN, dateZhCN, GlobalThemeOverrides,darkTheme } from "naive-ui";
+import { useIndex } from "@/stores/indexStore";
 import m from "@/utils/mitt";
 export default defineComponent({
   setup() {
     const loading = ref(false);
+    const inver = useIndex();
     const theme = ref<any>(null);
     const tips = ref("");
+
+
+    onMounted(()=>{
+      if (inver.getInverted) {
+        theme.value = darkTheme;
+      } else {
+        theme.value = null;
+      }
+    })
+
     const themeOverrides: GlobalThemeOverrides = {
       common: {
         primaryColor: "#5983b8",
