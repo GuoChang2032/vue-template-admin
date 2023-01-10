@@ -3,6 +3,7 @@ import { createDiscreteApi } from "naive-ui";
 import router from "../router";
 
 const LOCAL_NAME = "localStorageName";
+
 export const backTop = (num = 0, duration = 50): void => {
   // document.documentElement.scrollTop = num === 0 ? document.body.scrollTop : num
   // 现在的位置
@@ -26,6 +27,7 @@ export const backTop = (num = 0, duration = 50): void => {
   }, 10);
 };
 
+// 加密
 export const toCode = (str: string): string => {
   const key = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   const st = key.length;
@@ -47,6 +49,7 @@ export const toCode = (str: string): string => {
   return s;
 };
 
+// 解密
 export const fromCode = (str: string): string => {
   const key = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   const st = key.length;
@@ -71,11 +74,14 @@ export const fromCode = (str: string): string => {
   return b;
 };
 
+// 获取用户信息
 export const getUserInfo = () => {
   const d = localStorage.getItem(LOCAL_NAME);
   if (!d) return;
   return JSON.parse(fromCode(d));
 };
+
+// 设置用户信息
 export const setUserInfo = (data: any): void => {
   const str = toCode(JSON.stringify(data));
   localStorage.setItem(LOCAL_NAME, str);

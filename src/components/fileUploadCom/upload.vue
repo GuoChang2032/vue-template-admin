@@ -1,6 +1,6 @@
 <script lang="ts">
 import { defineComponent, ref, watch } from "vue";
-import { getUserInfo, Message } from "@/utils/hooks";
+import { getUserInfo, Message } from "@/utils/utils";
 import { genFileId } from "element-plus";
 import type {
   UploadFile,

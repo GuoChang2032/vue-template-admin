@@ -7,7 +7,7 @@ const routes: RouteRecordRaw[] = [
     component: IndexLayout,
     children: [
       {
-        path: "/index",
+        path: "/index", 
         name: "index",
         meta: {
           title: "首页",
