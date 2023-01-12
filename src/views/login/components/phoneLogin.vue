@@ -1,7 +1,7 @@
 <script lang="ts">
 import { defineComponent, ref } from "vue";
 import { FormInst, FormItemRule } from "naive-ui";
-import { Message } from "@/utils/hooks";
+import { Message } from "@/utils/utils";
 export default defineComponent({
   setup(props, { emit }) {
     const loginForm = ref<FormInst | null>(null);

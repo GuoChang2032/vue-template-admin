@@ -1,6 +1,6 @@
 //http.ts
 import axios, { AxiosRequestConfig } from "axios";
-import { Message } from "@/utils/hooks";
+import { Message } from "@/utils/utils";
 import { start, done } from "@/utils/nprogress.js";
 import { ResType } from "@/utils/types";
 import { useUserInfo } from "@/stores/user";

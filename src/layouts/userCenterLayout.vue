@@ -2,7 +2,7 @@
 import { defineComponent, ref, onMounted, h } from "vue";
 import { useRouter, RouterLink } from "vue-router";
 import { NIcon } from "naive-ui";
-import { getUserInfo, logout, Message } from "@/utils/hooks";
+import { getUserInfo, logout, Message } from "@/utils/utils";
 import { BookOutline } from "@vicons/ionicons5";
 function renderIcon(icon: any) {
   return () => h(NIcon, null, { default: () => h(icon) });

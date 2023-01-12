@@ -10,7 +10,7 @@ import {
 import { Editor, Toolbar } from "@wangeditor/editor-for-vue";
 import { IToolbarConfig, IDomEditor, IEditorConfig } from "@wangeditor/editor";
 import "@wangeditor/editor/dist/css/style.css";
-import { getUserInfo } from "@/utils/hooks";
+import { getUserInfo } from "@/utils/utils";
 
 type InsertFnType = (url: string, alt: string, href: string) => void;
 
