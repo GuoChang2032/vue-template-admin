@@ -101,61 +101,24 @@ export default defineComponent({
             },
           ],
         },
-        // {
-        //   label: "寻羊冒险记",
-        //   key: "a-wild-sheep-chase",
-        //   disabled: true,
-        //   icon: renderIcon(BookIcon),
-        // },
-        // {
-        //   label: "舞，舞，舞",
-        //   key: "dance-dance-dance",
-        //   icon: renderIcon(BookIcon),
-        //   children: [
-        //     {
-        //       type: "group",
-        //       label: "人物",
-        //       key: "people",
-        //       children: [
-        //         {
-        //           label: "叙事者",
-        //           key: "narrator",
-        //           icon: renderIcon(PersonIcon),
-        //         },
-        //         {
-        //           label: "羊男",
-        //           key: "sheep-man",
-        //           icon: renderIcon(PersonIcon),
-        //         },
-        //       ],
-        //     },
-        //     {
-        //       label: "饮品",
-        //       key: "beverage",
-        //       icon: renderIcon(WineIcon),
-        //       children: [
-        //         {
-        //           label: "威士忌",
-        //           key: "whisky",
-        //         },
-        //       ],
-        //     },
-        //     {
-        //       label: "食物",
-        //       key: "food",
-        //       children: [
-        //         {
-        //           label: "三明治",
-        //           key: "sandwich",
-        //         },
-        //       ],
-        //     },
-        //     {
-        //       label: "过去增多，未来减少",
-        //       key: "the-past-increases-the-future-recedes",
-        //     },
-        //   ],
-        // },
+        {
+          label: () =>
+            h(
+              RouterLink,
+              {
+                to: {
+                  name: "userMan",
+                  params: {
+                    lang: "zh-CN",
+                  },
+                },
+              },
+              { default: () => "用户管理" }
+            ),
+
+          key: "userman",
+          icon: renderIcon(BookIcon),
+        },
       ];
       menuOptions.value = m;
     };
