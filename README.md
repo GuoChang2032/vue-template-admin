@@ -1,6 +1,6 @@
-# pnpm/npm/yarn install
-# pnpm/npm/yarn run dev
-# pnpm/npm/yarn run build
+## pnpm/npm/yarn install
+## pnpm/npm/yarn run dev
+## pnpm/npm/yarn run build
 
 
 # 特性 ✨
@@ -13,7 +13,7 @@
 ### 6. 富文本编辑器 wangEditor
 ### 7. 代码编辑器 Monaco(部署到线上有不可预期的错误), 现改为codeMirror
 ### 8. 可视化图表 Echarts
-### 9. TailWindCss 预定义css插件
+### 9. TailWindCss 预定义css插件,适用于中后台管理网站,其他定制化程度高的网站不适用,但也可以适量使用,减少调样式时间
 
 ---     
 
