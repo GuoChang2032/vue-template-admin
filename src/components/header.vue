@@ -34,7 +34,7 @@ export default defineComponent({
   <div class="header flex-between">
     <div class="h-left flex-center-start">
       <img src="@/assets/logo.png" style="width: 50px" alt="" />
-      <span class="h-l-topic">熠朗宇宙第一无代码平台</span>
+      <span class="h-l-topic">Header</span>
     </div>
     <div class="h-right">
       <!-- <n-dropdown trigger="hover" :options="options" @select="handleSelect"> -->

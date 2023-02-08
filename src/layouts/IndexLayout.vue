@@ -11,7 +11,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <Header />
+  <!-- <Header /> -->
   <div style="height: 100%">
     <router-view />
   </div>
