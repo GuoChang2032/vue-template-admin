@@ -1,13 +1,5 @@
-<script lang="ts">
-import {
-  defineComponent,
-  ref,
-  Component,
-  h,
-  onMounted,
-  watch,
-  onUnmounted,
-} from "vue";
+<script lang="ts" setup>
+import { ref, Component, h, onMounted, watch, onUnmounted } from "vue";
 import Footer from "@/components/footer.vue";
 import Header from "@/components/header.vue";
 import { NIcon } from "naive-ui";
@@ -19,105 +11,86 @@ import {
 import { useIndex } from "@/stores/indexStore";
 import m from "@/utils/mitt";
 import { RouterLink } from "vue-router";
-
+import { useI18n } from "vue-i18n";
 function renderIcon(icon: Component) {
   return () => h(NIcon, null, { default: () => h(icon) });
 }
 
-export default defineComponent({
-  setup() {
-    const ui = useIndex();
-    const collapsed = ref<boolean>(false);
-    const inverted = ref<boolean>(ui.getInverted);
-    const activeKey = ref<string>("");
-    const menuOptions = ref<any>([]);
-    const clientWidth = ref<number>(document.body.clientWidth);
+const { t } = useI18n();
+const ui = useIndex();
+const collapsed = ref<boolean>(false);
+const inverted = ref<boolean>(ui.getInverted);
+const activeKey = ref<string>("");
+const menuOptions = ref<any>([]);
+const clientWidth = ref<number>(document.body.clientWidth);
 
-    m.on("switch", (e: any) => {
-      inverted.value = e.val;
-    });
+m.on("switch", (e: any) => {
+  inverted.value = e.val;
+});
 
-    watch(
-      () => clientWidth.value,
-      (nv, ov) => {
-        if (nv < 900) {
-          collapsed.value = true;
-        } else {
-          collapsed.value = false;
-        }
-      }
-    );
+watch(
+  () => clientWidth.value,
+  (nv, ov) => {
+    if (nv < 900) {
+      collapsed.value = true;
+    } else {
+      collapsed.value = false;
+    }
+  }
+);
 
-    onMounted(() => {
-      setMenuData();
-      window.onresize = () => {
-        return (() => {
-          clientWidth.value = document.body.clientWidth;
-        })();
-      };
-    });
+onMounted(() => {
+  setMenuData();
+  window.onresize = () => {
+    return (() => {
+      clientWidth.value = document.body.clientWidth;
+    })();
+  };
+});
 
-    const setMenuData = () => {
-      let m = [
-        {
-          label: () =>
-            h(
-              RouterLink,
-              {
-                to: {
-                  name: "index",
-                  params: {
-                    lang: "zh-CN",
-                  },
-                },
+const setMenuData = () => {
+  let m = [
+    {
+      label: () =>
+        h(
+          RouterLink,
+          {
+            to: {
+              name: "index",
+              params: {
+                lang: "zh-CN",
               },
-              { default: () => "首页" }
-            ),
-
-          key: "1",
-          icon: renderIcon(BookIcon),
-        },
-        {
-          label: "人生如寄",
-          key: "2",
-          icon: renderIcon(BookIcon),
-          children: [
-            {
-              label: () =>
-                h(
-                  RouterLink,
-                  {
-                    to: {
-                      name: "dashboard",
-                      params: {
-                        lang: "zh-CN",
-                      },
-                    },
-                  },
-                  { default: () => "Dashboard" }
-                ),
-
-              key: "3",
             },
-          ],
-        },
-      ];
-      menuOptions.value = m;
-    };
+          },
+          { default: () => t("page.index") }
+        ),
 
-    onUnmounted(() => {
-      m.off("switch");
-    });
+      key: "1",
+      icon: renderIcon(BookIcon),
+    },
+    {
+      label: () =>
+        h(
+          RouterLink,
+          {
+            to: {
+              name: "dashboard",
+              params: {
+                lang: "zh-CN",
+              },
+            },
+          },
+          { default: () => t("page.dashboard") }
+        ),
+      icon: renderIcon(BookIcon),
+      key: "3",
+    },
+  ];
+  menuOptions.value = m;
+};
 
-    return {
-      inverted,
-      clientWidth,
-      activeKey,
-      collapsed,
-      menuOptions,
-    };
-  },
-  components: { Footer, Header },
+onUnmounted(() => {
+  m.off("switch");
 });
 </script>
 
@@ -147,8 +120,8 @@ export default defineComponent({
       </n-layout-sider>
       <n-layout-content :class="[inverted ? 'n-l-c-b' : 'n-l-c-w']">
         <n-breadcrumb>
-          <n-breadcrumb-item> 北京总行 </n-breadcrumb-item>
-          <n-breadcrumb-item> 天津分行 </n-breadcrumb-item>
+          <n-breadcrumb-item> {{ t("page.index") }} </n-breadcrumb-item>
+          <n-breadcrumb-item> 西巴龙 </n-breadcrumb-item>
         </n-breadcrumb>
         <div :class="['router-content', inverted ? 'bkw' : 'bkb']">
           <n-scrollbar style="max-height: 100%">

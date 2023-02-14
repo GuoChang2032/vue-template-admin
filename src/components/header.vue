@@ -4,7 +4,8 @@ import { onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
 import m from "@/utils/mitt";
 import { useDark, useToggle } from "@vueuse/core";
-
+import { Message } from "@/utils/utils";
+import { useI18n } from "vue-i18n";
 const isDark = useDark();
 const toggleDark = useToggle(isDark);
 
@@ -15,14 +16,21 @@ const theme = ref<boolean>(false);
 onMounted(() => {
   theme.value = inver.getInverted;
 });
+const i18n = useI18n();
 
+const options = ref<any>([
+  {
+    label: "简体中文",
+    key: "zh",
+  },
+  {
+    label: "英语",
+    key: "en",
+  },
+]);
 const handleSelect = (key: string) => {
-  if (key === "1") {
-    router.push({ path: "/usercenter" });
-  }
-};
-const goCenter = () => {
-  router.push({ path: "/usercenter" });
+  Message("success", `切换${key === "zh" ? "简体中文" : "英语"}成功`);
+  i18n.locale.value = key;
 };
 const logout = () => {
   router.push({ path: "/login", replace: true });
@@ -30,7 +38,7 @@ const logout = () => {
 const themeChange = () => {
   inver.setInverted();
   m.emit("switch", { val: theme.value });
-  toggleDark()
+  toggleDark();
 };
 </script>
 
@@ -44,9 +52,9 @@ const themeChange = () => {
     </div>
     <div class="h-right">
       <div class="flex-center">
-        <div class="search-content">
+        <!-- <div class="search-content">
           <n-input type="text" placeholder="搜索..." clearable />
-        </div>
+        </div> -->
         <div class="theme-content">
           <n-switch v-model:value="theme" @update:value="themeChange">
             <template #checked-icon>
@@ -64,6 +72,13 @@ const themeChange = () => {
               size="26px"
             />
           </div>
+        </div>
+        <div class="i18n-content">
+          <n-dropdown trigger="hover" :options="options" @select="handleSelect">
+            <div class="n-c-wrap" title="语言">
+              <icon icon="mdi:language" size="23px" />
+            </div>
+          </n-dropdown>
         </div>
         <div class="user-content flex-center">
           <n-avatar
@@ -98,9 +113,13 @@ const themeChange = () => {
 }
 .search-content,
 .user-content,
-.notice-content,
+.theme-content,
 .logout {
   margin: 0 10px;
+  cursor: pointer;
+}
+.i18n-content,
+.notice-content {
   cursor: pointer;
 }
 .n-c-wrap {
@@ -108,7 +127,7 @@ const themeChange = () => {
   border-radius: 3px;
   transition: all 0.2s;
   &:hover {
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(65, 65, 65, 0.2);
   }
 }
 .logout {

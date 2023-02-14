@@ -1,6 +1,7 @@
 // import { Message } from "@/utils/tool.js";
 import { createDiscreteApi } from "naive-ui";
 import router from "../router";
+import i18n from "@/locales/i18n";
 
 const LOCAL_NAME = "localStorageName";
 
