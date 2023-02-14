@@ -1,43 +1,43 @@
-<script lang="ts">
+<script lang="ts" setup>
 import { useIndex } from "@/stores/indexStore";
-import { defineComponent, onMounted, ref } from "vue";
+import { onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
 import m from "@/utils/mitt";
-export default defineComponent({
-  name: "Header",
-  setup() {
-    const inver = useIndex();
-    const router = useRouter();
-    const theme = ref<boolean>(false);
+import { useDark, useToggle } from "@vueuse/core";
 
-    onMounted(() => {
-      theme.value = inver.getInverted;
-    });
+const isDark = useDark();
+const toggleDark = useToggle(isDark);
 
-    return {
-      theme,
-      handleSelect(key: string) {
-        if (key === "1") {
-          router.push({ path: "/usercenter" });
-        }
-      },
-      goCenter() {
-        router.push({ path: "/usercenter" });
-      },
-      logout() {
-        router.push({ path: "/login", replace: true });
-      },
-      themeChange() {
-        inver.setInverted();
-        m.emit("switch", { val: theme.value });
-      },
-    };
-  },
+const inver = useIndex();
+const router = useRouter();
+const theme = ref<boolean>(false);
+
+onMounted(() => {
+  theme.value = inver.getInverted;
 });
+
+const handleSelect = (key: string) => {
+  if (key === "1") {
+    router.push({ path: "/usercenter" });
+  }
+};
+const goCenter = () => {
+  router.push({ path: "/usercenter" });
+};
+const logout = () => {
+  router.push({ path: "/login", replace: true });
+};
+const themeChange = () => {
+  inver.setInverted();
+  m.emit("switch", { val: theme.value });
+  toggleDark()
+};
 </script>
 
 <template>
-  <div :class="['header','flex-between',theme?'theme-black':'theme-white']">
+  <div
+    :class="['header', 'flex-between', theme ? 'theme-black' : 'theme-white']"
+  >
     <div class="h-left flex-center-start">
       <img src="@/assets/elogo-large.png" class="h-l-logo" alt="" />
       <div class="h-l-topic">世界第一低能平台</div>
@@ -132,7 +132,7 @@ export default defineComponent({
   min-width: 600px;
   padding: 10px 30px;
   box-sizing: content-box;
-  transition: all .2s;
+  transition: all 0.2s;
   .h-l-topic {
     font-size: 24px;
     margin-left: 10px;

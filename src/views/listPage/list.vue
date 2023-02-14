@@ -72,26 +72,6 @@ export default defineComponent({
     const router = useRouter();
     const courseOpt = ref<any>([]);
     const getList = () => {};
-    const tableData = ref<any>([
-      {
-        courseName: "高等数学",
-        taskName: "高等数学作业",
-        startTime: "2022-10-11",
-        lastTime: "2035-10-28",
-      },
-      {
-        courseName: "高等数学",
-        taskName: "高等数学作业",
-        startTime: "2022-10-11",
-        lastTime: "2035-10-28",
-      },
-      {
-        courseName: "高等数学",
-        taskName: "高等数学作业",
-        startTime: "2022-10-11",
-        lastTime: "2035-10-28",
-      },
-    ]);
     const more = ref<any>([
       { label: "复制", key: "1" },
       { label: "冻结", key: "2" },
@@ -99,7 +79,7 @@ export default defineComponent({
     ]);
     const handleSelectionChange = (val: any) => {};
     return {
-      tableData,
+      tableData:[],
       courseOpt,
       show,
       more,
@@ -120,14 +100,6 @@ export default defineComponent({
       close() {
         show.value = false;
       },
-      columns: createColumns({
-        play(row: any) {
-          Message('info','Play')
-        },
-        remove(row: any) {
-          Message('info','删除')
-        },
-      }),
     };
   },
 });
@@ -159,7 +131,7 @@ export default defineComponent({
       </n-space>
     </div>
     <div>
-      <!-- <el-table
+      <el-table
         :data="tableData"
         style="width: 100%"
         @selection-change="handleSelectionChange"
@@ -185,14 +157,8 @@ export default defineComponent({
             </n-space>
           </template>
         </el-table-column>
-      </el-table> -->
-      <n-data-table
-        :columns="columns"
-        :data="tableData"
-        :pagination="false"
-        :bordered="false"
-      />
-      <!-- <pagination :total="0" /> -->
+      </el-table>
+      <pagination :total="0" />
     </div>
   </div>
   <indexAddEditModalVue :show="show" modalType="1" @close="close" />

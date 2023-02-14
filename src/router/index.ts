@@ -22,14 +22,6 @@ const routes: RouteRecordRaw[] = [
         },
         component: () => import("@/views/dashboard/dashboard.vue"),
       },
-      {
-        path: "/userMan",
-        name: "userMan",
-        meta: {
-          title: "用户管理",
-        },
-        component: () => import("@/views/userMan.vue"),
-      },
     ],
   },
 

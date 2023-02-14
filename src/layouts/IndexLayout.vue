@@ -101,24 +101,6 @@ export default defineComponent({
             },
           ],
         },
-        {
-          label: () =>
-            h(
-              RouterLink,
-              {
-                to: {
-                  name: "userMan",
-                  params: {
-                    lang: "zh-CN",
-                  },
-                },
-              },
-              { default: () => "用户管理" }
-            ),
-
-          key: "userman",
-          icon: renderIcon(BookIcon),
-        },
       ];
       menuOptions.value = m;
     };
