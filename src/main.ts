@@ -2,8 +2,11 @@ import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
 import "@/permission.js";
-// 全局css
+import 'element-plus/theme-chalk/dark/css-vars.css'
+
+// 自定义全局css
 import "./assets/style/main.less";
+import './index.css'
 import "nprogress/nprogress.css";
 import ElementPlus from "element-plus";
 import zhCn from "element-plus/es/locale/lang/zh-cn";
