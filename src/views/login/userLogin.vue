@@ -1,61 +1,75 @@
-<script lang="ts">
-import { defineComponent, ref } from "vue";
+<script lang="ts" setup>
+import { ref } from "vue";
 import {
   accountLogin,
   phoneLogin,
   register,
   qrCodeLogin,
   faceLogin,
-  resetPwd
+  resetPwd,
 } from "@/views/login/components";
+import { useIndex } from "@/stores/indexStore";
+import { useI18n } from "vue-i18n";
+import { Message } from "@/utils/utils";
 
-export default defineComponent({
-  components: { accountLogin, phoneLogin, qrCodeLogin, register, faceLogin,resetPwd },
-  setup() {
-    const type = ref<string>("1");
-    return {
-      type,
-      handleCallback(e: any) {
-        type.value = e.type;
-      },
-    };
-  },
-});
+const ui = useIndex();
+const inverted = ref<boolean>(ui.getInverted);
+const { t } = useI18n();
+const i18n = useI18n();
+const type = ref<string>("1");
+
+const handleCallback = (e: any) => {
+  type.value = e.type;
+};
+const handleSelect = () => {
+  let k = i18n.locale.value;
+  Message("success", `切换${k === "zh" ? "英语" : "中文"}成功`);
+  if (k === "zh") {
+    i18n.locale.value = "en";
+  } else {
+    i18n.locale.value = "zh";
+  }
+};
 </script>
 
 <template>
-  <div class="container">
+  <div :class="['container', inverted ? 'black' : '']">
+    <!-- <div class="container"> -->
+    <div class="i18n-content">
+      <n-button quaternary @click="handleSelect">
+        <template #icon><icon icon="mdi:language" size="23px" /></template>
+        {{ i18n.locale.value === "zh" ? "中" : "英" }}
+      </n-button>
+    </div>
     <div class="main flex-center">
       <div class="low-screen">
         <div class="flex-center-start">
           <img class="h-c-logo" src="@/assets/logo.png" alt="" />
-          <span class="h-c-topic">熠朗宇宙级无代码平台</span>
+          <span class="h-c-topic">{{ t("header.title") }}</span>
         </div>
       </div>
-      <!-- <div class="head-content">
-        <div class="flex-center-start">
-          <img class="h-c-logo" src="@/assets/logo.png" alt="" />
-          <span class="h-c-topic">熠朗企业级低代码平台</span>
-        </div>
-      </div> -->
-      <div class="m-left">
+      <div :class="[inverted ? 'm-left-w' : 'm-left']">
         <div class="head-content">
           <div class="flex-center-start">
             <img class="h-c-logo" src="@/assets/logo.png" alt="" />
-            <span class="h-c-topic">熠朗宇宙级无代码平台</span>
+            <span class="h-c-topic">{{ t("header.title") }}</span>
           </div>
         </div>
         <div class="svg-content">
           <img src="@/assets/subalaxi.svg" alt="" />
         </div>
-        <div class="g-topic2">熠朗宇宙级无代码平台</div>
+        <div class="g-topic2">{{ t("header.title") }}</div>
         <div class="g-subtitle">
-          是全宇宙最具影响力的 无代码平台！脑机链接，零代码实现100%的功能~
-          全自动生成代码，无需人工，真正的心想事成，无所不能,让你一天一个项目
+          {{ t("header.desc") }}
         </div>
       </div>
       <div class="m-right flex-center-start">
-        <div class="login-card">
+        <div
+          class="login-card"
+          :style="{
+            backgroundColor: +inverted ? 'rgb(39, 39, 39)' : '#fff',
+          }"
+        >
           <template v-if="type === '1'">
             <accountLogin @callback="handleCallback" />
           </template>
@@ -81,6 +95,9 @@ export default defineComponent({
 </template>
 
 <style scoped lang="less">
+.black {
+  background-color: rgb(39, 39, 39);
+}
 .low-screen {
   position: absolute;
   top: 55px;
@@ -108,13 +125,21 @@ export default defineComponent({
   }
 }
 .container {
+  position: relative;
   width: 100%;
   height: 100%;
 }
+.i18n-content {
+  position: absolute;
+  z-index: 999;
+  top: 50px;
+  right: 50px;
+}
+
 .login-card {
+  padding: 15px;
   @media screen and (max-width: 900px) {
     padding: 1rem 2rem;
-    background-color: #fff;
     box-shadow: 0 0 15px -1px rgb(0 0 0 / 20%);
   }
 }
@@ -125,6 +150,37 @@ export default defineComponent({
   @media screen and (max-width: 900px) {
     background-image: url(@/assets/login-bg.jpg);
     background-repeat: repeat;
+  }
+}
+.m-left-w {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  width: 55%;
+  padding: 4rem 4.5rem 4rem 6rem;
+  box-sizing: border-box;
+  display: block;
+  // &::before {
+  //   position: absolute;
+  //   left: 0;
+  //   top: 0;
+  //   z-index: -1;
+  //   width: 100%;
+  //   height: 100%;
+  //   background-image: url(@/assets/login-bg.svg);
+  //   background-position: 100%;
+  //   background-repeat: no-repeat;
+  //   background-size: auto 100%;
+  //   content: "";
+  // }
+  @media screen and (max-width: 1245px) {
+    padding: 4rem 3.5rem 4rem 4rem;
+  }
+  @media screen and (max-width: 1080px) {
+    padding: 4rem 0 4rem 2rem;
+  }
+  @media screen and (max-width: 900px) {
+    display: none;
   }
 }
 .m-left {

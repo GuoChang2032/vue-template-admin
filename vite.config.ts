@@ -5,7 +5,8 @@ import Components from "unplugin-vue-components/vite";
 import { ElementPlusResolver,NaiveUiResolver } from "unplugin-vue-components/resolvers";
 import PurgeIcons from "vite-plugin-purge-icons";
 import commpressPlugin from "vite-plugin-compression";
-
+import OptimizationPersist from 'vite-plugin-optimize-persist'
+import PkgConfig from 'vite-plugin-package-config'
 const path = require("path");
 
 export default defineConfig({
@@ -28,6 +29,8 @@ export default defineConfig({
       algorithm: "gzip", //压缩算法
       ext: ".gz", //文件类型
     }),
+    PkgConfig(),
+    OptimizationPersist()
   ],
   css: {
     // css预处理器

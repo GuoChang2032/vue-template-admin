@@ -4,7 +4,6 @@ import router from "../router";
 import i18n from "@/locales/i18n";
 
 const LOCAL_NAME = "localStorageName";
-
 export const backTop = (num = 0, duration = 50): void => {
   // document.documentElement.scrollTop = num === 0 ? document.body.scrollTop : num
   // 现在的位置
@@ -90,7 +89,7 @@ export const setUserInfo = (data: any): void => {
 
 export const logout = () => {
   router.push({ path: "/login", replace: true });
-  localStorage.removeItem("user_login_info");
+  // localStorage.removeItem("user_login_info");
   // Message("warning", "登录过期,请重新登录!");
 };
 

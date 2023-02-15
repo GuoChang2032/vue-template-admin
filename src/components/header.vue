@@ -4,7 +4,7 @@ import { onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
 import m from "@/utils/mitt";
 import { useDark, useToggle } from "@vueuse/core";
-import { Message } from "@/utils/utils";
+import { Message,logout } from "@/utils/utils";
 import { useI18n } from "vue-i18n";
 const isDark = useDark();
 const toggleDark = useToggle(isDark);
@@ -17,6 +17,7 @@ onMounted(() => {
   theme.value = inver.getInverted;
 });
 const i18n = useI18n();
+const { t } = useI18n();
 
 const options = ref<any>([
   {
@@ -29,11 +30,11 @@ const options = ref<any>([
   },
 ]);
 const handleSelect = (key: string) => {
-  Message("success", `切换${key === "zh" ? "简体中文" : "英语"}成功`);
+  Message("success", `切换${key === "zh" ? "中文" : "英语"}成功`);
   i18n.locale.value = key;
 };
-const logout = () => {
-  router.push({ path: "/login", replace: true });
+const logoutss = () => {
+  logout()
 };
 const themeChange = () => {
   inver.setInverted();
@@ -48,7 +49,7 @@ const themeChange = () => {
   >
     <div class="h-left flex-center-start">
       <img src="@/assets/elogo-large.png" class="h-l-logo" alt="" />
-      <div class="h-l-topic">世界第一低能平台</div>
+      <div class="h-l-topic">{{ t("header.title") }}</div>
     </div>
     <div class="h-right">
       <div class="flex-center">
@@ -88,9 +89,9 @@ const themeChange = () => {
           />
           <div class="h-r-a-name">张三</div>
         </div>
-        <div class="logout flex-center" @click="logout">
+        <div class="logout flex-center" @click="logoutss">
           <icon icon="teenyicons:logout-outline" size="18px" />
-          注销
+          {{t('logout')}}
         </div>
       </div>
     </div>

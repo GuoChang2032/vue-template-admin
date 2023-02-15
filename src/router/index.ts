@@ -4,6 +4,7 @@ const routes: RouteRecordRaw[] = [
   {
     path: "/",
     redirect: "index",
+    name:'home',
     component: IndexLayout,
     children: [
       {

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { ref, Component, h, onMounted, watch, onUnmounted } from "vue";
-import Footer from "@/components/footer.vue";
-import Header from "@/components/header.vue";
+// import Footer from "@/components/footer.vue";
+// import Header from "@/components/header.vue";
 import { NIcon } from "naive-ui";
 import {
   BookOutline as BookIcon,
@@ -29,7 +29,7 @@ m.on("switch", (e: any) => {
 });
 
 watch(
-  () => clientWidth.value,
+  () =>clientWidth.value,
   (nv, ov) => {
     if (nv < 900) {
       collapsed.value = true;
@@ -100,7 +100,6 @@ onUnmounted(() => {
     <n-layout class="heights" has-sider>
       <n-layout-sider
         bordered
-        :inverted="inverted"
         collapse-mode="width"
         :collapsed-width="64"
         :width="220"
@@ -110,7 +109,6 @@ onUnmounted(() => {
         @expand="collapsed = false"
       >
         <n-menu
-          :inverted="inverted"
           v-model:value="activeKey"
           :collapsed="collapsed"
           :collapsed-width="64"
@@ -118,12 +116,13 @@ onUnmounted(() => {
           :options="menuOptions"
         />
       </n-layout-sider>
-      <n-layout-content :class="[inverted ? 'n-l-c-b' : 'n-l-c-w']">
+      <n-layout-content :class="[inverted?'n-l-c-b':'n-l-c-w']">
         <n-breadcrumb>
           <n-breadcrumb-item> {{ t("page.index") }} </n-breadcrumb-item>
           <n-breadcrumb-item> 西巴龙 </n-breadcrumb-item>
         </n-breadcrumb>
-        <div :class="['router-content', inverted ? 'bkw' : 'bkb']">
+        <!-- <div class="router-content"> -->
+        <div :class="['router-content', inverted ? 'bkb' : 'bkw']">
           <n-scrollbar style="max-height: 100%">
             <router-view />
           </n-scrollbar>
@@ -138,20 +137,21 @@ onUnmounted(() => {
 
 <style scoped lang="less">
 .bkb {
-  background: #fff;
+  background-color: rgb(24, 24, 28);
 }
 .bkw {
-  background-color: transparent;
+  
+  background: #fff;
 }
 .n-l-c-w {
-  padding: 24px;
+  padding: 24px 12px;
   height: 100%;
-  background-color: #f1f1f1;
+  background-color: white;
 }
 .n-l-c-b {
-  padding: 24px;
+  padding: 24px 12px;
   height: 100%;
-  background-color: #000;
+  background-color: black;
 }
 .router-content {
   height: calc(100% - 25.5px);
