@@ -1,61 +1,56 @@
-<script lang="ts">
+<script lang="ts" setup>
 import { defineComponent, ref } from "vue";
 import { FormInst } from "naive-ui";
 import { useRouter } from "vue-router";
 import { useUserInfo } from "@/stores/user";
-export default defineComponent({
-  setup(props, { emit }) {
-    const loginForm = ref<FormInst | null>(null);
-    const loginModel = ref<any>({
-      account: null,
-      password: null,
-      code: null,
-    });
-    const remember = ref<boolean>(false);
-    const loading = ref<boolean>(false);
-    const router = useRouter();
-    const us = useUserInfo()
-    return {
-      loading,
-      remember,
-      loginForm,
-      loginModel,
-      loginRules: {
-        account: {
-          required: true,
-          trigger: ["blur", "input"],
-          message: "请输入账号",
-        },
-        password: {
-          required: true,
-          trigger: ["blur", "input"],
-          message: "请输入密码",
-        },
-        code: {
-          required: true,
-          trigger: ["blur", "input"],
-          message: "请输入验证码",
-        },
-      },
+import { useI18n } from "vue-i18n";
 
-      handleLogin() {
-        loading.value = true;
-        setTimeout(() => {
-          loading.value = false;
-          us.setUserInfo(loginModel.value)
-          router.push({ path: "/index" });
-        }, 800);
-      },
-      otherLogin(type: string) {
-        emit("callback", { type });
-      },
-    };
-  },
+const emit = defineEmits(["callback"]);
+
+const loginForm = ref<FormInst | null>(null);
+const loginModel = ref<any>({
+  account: null,
+  password: null,
+  code: null,
 });
+const remember = ref<boolean>(false);
+const loading = ref<boolean>(false);
+const router = useRouter();
+const us = useUserInfo();
+const { t } = useI18n();
+const loginRules = {
+  account: {
+    required: true,
+    trigger: ["blur", "input"],
+    message: t("form.login.account"),
+  },
+  password: {
+    required: true,
+    trigger: ["blur", "input"],
+    message: t("form.login.password"),
+  },
+  code: {
+    required: true,
+    trigger: ["blur", "input"],
+    message: t("form.login.code"),
+  },
+};
+
+const handleLogin = () => {
+  loading.value = true;
+  setTimeout(() => {
+    loading.value = false;
+    us.setUserInfo(loginModel.value);
+    router.push({ path: "/index" });
+  }, 800);
+};
+const otherLogin = (type: string) => {
+  emit("callback", { type });
+};
 </script>
 
 <template>
-  <div class="l-c-head">登录</div>
+  <div class="l-c-head">{{ t("form.login.title") }}</div>
   <div class="l-c-form">
     <n-form
       ref="loginForm"
@@ -70,7 +65,7 @@ export default defineComponent({
         <n-input
           size="large"
           v-model:value="loginModel.account"
-          placeholder="输入登录账号"
+          :placeholder="t('form.login.account')"
         />
       </n-form-item>
       <n-form-item label="" path="password">
@@ -78,7 +73,7 @@ export default defineComponent({
           type="password"
           size="large"
           v-model:value="loginModel.password"
-          placeholder="输入登录密码"
+          :placeholder="t('form.login.password')"
         />
       </n-form-item>
       <n-form-item label="" path="code">
@@ -86,7 +81,7 @@ export default defineComponent({
           <n-input
             size="large"
             v-model:value="loginModel.code"
-            placeholder="输入验证码"
+            :placeholder="t('form.login.code')"
           />
           <img src="@/assets/checkcode.png" class="code-img" alt="" />
         </div>
@@ -94,8 +89,10 @@ export default defineComponent({
     </n-form>
     <div class="l-c-operation">
       <div class="flex-between">
-        <n-checkbox size="large" v-model:value="remember" label="记住我" />
-        <n-button text type="primary" @click="otherLogin('6')">忘记密码？</n-button>
+        <n-checkbox size="large" v-model:value="remember" :label="t('form.login.remember')" />
+        <n-button text type="primary" @click="otherLogin('6')"
+          >{{t('form.login.forgot')}}</n-button
+        >
       </div>
     </div>
     <div class="l-c-btn">
@@ -106,16 +103,16 @@ export default defineComponent({
         @click="handleLogin"
         :loading="loading"
       >
-        登 录
+      {{t('form.login.title')}}
       </n-button>
     </div>
-    <n-divider> 其他登录方式 </n-divider>
+    <n-divider>{{t('form.login.otherLogin')}} </n-divider>
     <div class="other-btn">
       <n-space justify="space-around">
-        <n-button ghost @click="otherLogin('2')"> 手机登录 </n-button>
-        <n-button ghost @click="otherLogin('3')"> 二维码登录 </n-button>
-        <n-button ghost @click="otherLogin('4')"> 人脸登录 </n-button>
-        <n-button ghost @click="otherLogin('5')"> 立即注册 </n-button>
+        <n-button ghost @click="otherLogin('2')"> {{t('form.login.phoneLogin')}} </n-button>
+        <n-button ghost @click="otherLogin('3')"> {{t('form.login.codeLogin')}} </n-button>
+        <n-button ghost @click="otherLogin('4')"> {{t('form.login.faceLogin')}} </n-button>
+        <n-button ghost @click="otherLogin('5')"> {{t('form.login.register')}} </n-button>
       </n-space>
     </div>
   </div>
