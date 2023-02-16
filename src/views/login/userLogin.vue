@@ -41,7 +41,7 @@ const handleSelect = () => {
         {{ i18n.locale.value === "zh" ? "中" : "英" }}
       </n-button>
     </div>
-    <div class="main flex-center">
+    <div class="main flex-center" :class="[inverted ? 'bg-black' : 'bg-img']">
       <div class="low-screen">
         <div class="flex-center-start">
           <img class="h-c-logo" src="@/assets/logo.png" alt="" />
@@ -56,7 +56,8 @@ const handleSelect = () => {
           </div>
         </div>
         <div class="svg-content">
-          <img src="@/assets/subalaxi.svg" alt="" />
+          <img v-if="!inverted" src="@/assets/subalaxi.svg" alt="" />
+          <img v-else src="@/assets/login-dark.svg" alt="" />
         </div>
         <div class="g-topic2">{{ t("header.title") }}</div>
         <div class="g-subtitle">
@@ -117,7 +118,7 @@ const handleSelect = () => {
   }
 }
 .m-right {
-  width: 45%;
+  width: 50%;
   height: 100%;
 
   @media screen and (max-width: 900px) {
@@ -132,12 +133,12 @@ const handleSelect = () => {
 .i18n-content {
   position: absolute;
   z-index: 999;
-  top: 50px;
+  top: 65px;
   right: 50px;
 }
 
 .login-card {
-  padding: 15px;
+  padding: 15px 25px;
   @media screen and (max-width: 900px) {
     padding: 1rem 2rem;
     box-shadow: 0 0 15px -1px rgb(0 0 0 / 20%);
@@ -147,6 +148,13 @@ const handleSelect = () => {
   position: relative;
   height: 100%;
   width: 100%;
+}
+.bg-black {
+  @media screen and (max-width: 900px) {
+    background-color: #3b3a3a;
+  }
+}
+.bg-img {
   @media screen and (max-width: 900px) {
     background-image: url(@/assets/login-bg.jpg);
     background-repeat: repeat;
@@ -156,7 +164,7 @@ const handleSelect = () => {
   position: relative;
   z-index: 1;
   height: 100%;
-  width: 55%;
+  width: 49%;
   padding: 4rem 4.5rem 4rem 6rem;
   box-sizing: border-box;
   display: block;
@@ -187,7 +195,7 @@ const handleSelect = () => {
   position: relative;
   z-index: 1;
   height: 100%;
-  width: 55%;
+  width: 49%;
   padding: 4rem 4.5rem 4rem 6rem;
   box-sizing: border-box;
   display: block;

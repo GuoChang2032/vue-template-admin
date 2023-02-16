@@ -22,7 +22,7 @@ export default defineComponent({
 
 <style scoped lang="less">
 .qr-code {
-  width: 300px;
+  width: 250px;
   margin: 25px 0 0;
 }
 .l-c-head {

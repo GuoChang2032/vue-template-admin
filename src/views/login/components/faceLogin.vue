@@ -13,7 +13,7 @@ export default defineComponent({
 
 <template>
   <div class="l-c-head">人脸登录</div>
-  <div style="margin:30px 0">暂不支持</div>
+  <div style="margin: 30px 60px">暂不支持</div>
   <div class="other-btn">
     <n-button block @click="back"> 返 回 </n-button>
   </div>
