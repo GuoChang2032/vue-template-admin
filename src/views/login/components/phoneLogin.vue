@@ -30,12 +30,12 @@ export default defineComponent({
             );
           },
           trigger: ["blur", "input"],
-          message: t("form.login.phone"),
+          message: t('form.login.phone'),
         },
         code: {
           required: true,
           trigger: ["blur", "input"],
-          message: "请输入验证码",
+          message: t('form.login.code'),
         },
       },
 
@@ -49,7 +49,7 @@ export default defineComponent({
             loginModel.value.phone
           )
         ) {
-          Message("warning", "请输入正确的手机号");
+          Message("warning", t('form.login.rightPhone'));
           return;
         }
         let timer: any;
@@ -93,7 +93,7 @@ export default defineComponent({
             <n-input
               size="large"
               v-model:value="loginModel.code"
-              placeholder="输入验证码"
+              :placeholder="t('form.login.code')"
             />
           </div>
           <div style="width: 10%"></div>
@@ -101,18 +101,18 @@ export default defineComponent({
             size="large"
             @click="send"
             :disabled="count > 0 && count < 60"
-            >{{ count > 0 && count < 60 ? count + "秒后重发" : "发送验证码" }}
+            >{{ count > 0 && count < 60 ? count +  t("form.login.resendCode") : t("form.login.code")}}
           </n-button>
         </div>
       </n-form-item>
     </n-form>
     <div class="l-c-btn">
       <n-button size="large" type="info" block @click="handleLogin">
-        登 录
+        {{t('form.login.title')}}
       </n-button>
     </div>
     <div class="other-btn">
-      <n-button block @click="back"> 返 回 </n-button>
+      <n-button block @click="back"> {{t('form.login.return')}} </n-button>
     </div>
   </div>
 </template>

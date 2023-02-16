@@ -1,9 +1,11 @@
 <script lang="ts">
 import { defineComponent, ref } from "vue";
 import { FormInst, FormItemRule } from "naive-ui";
+import { useI18n } from "vue-i18n";
 export default defineComponent({
   setup(props, { emit }) {
     const registerForm = ref<FormInst | null>(null);
+    const { t } = useI18n();
     const registerModel = ref<any>({
       account: null,
       phone: null,
@@ -14,13 +16,14 @@ export default defineComponent({
 
     return {
       loading,
+      t,
       registerForm,
       registerModel,
       loginRules: {
         account: {
           required: true,
           trigger: ["blur", "input"],
-          message: "请输入账号",
+          message: t('form.login.account'),
         },
         phone: {
           validator(rule: FormItemRule, value: number) {
@@ -29,17 +32,17 @@ export default defineComponent({
             );
           },
           trigger: ["blur", "input"],
-          message: "请输入正确的手机号",
+          message: t('form.login.rightPhone'),
         },
         password: {
           required: true,
           trigger: ["blur", "input"],
-          message: "请输入密码",
+          message: t('form.login.password'),
         },
         code: {
           required: true,
           trigger: ["blur", "input"],
-          message: "请输入验证码",
+          message: t('form.login.code'),
         },
       },
 
@@ -53,7 +56,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="l-c-head">账号注册</div>
+  <div class="l-c-head">{{ t("form.login.register") }}</div>
   <div class="l-c-form">
     <n-form
       ref="registerForm"
@@ -68,14 +71,14 @@ export default defineComponent({
         <n-input
           size="large"
           v-model:value="registerModel.account"
-          placeholder="输入登录账号"
+          :placeholder="t('form.login.account')"
         />
       </n-form-item>
       <n-form-item label="" path="phone">
         <n-input
           size="large"
           v-model:value="registerModel.phone"
-          placeholder="输入手机号"
+          :placeholder="t('form.login.phone')"
         />
       </n-form-item>
       <n-form-item label="" path="code">
@@ -84,11 +87,11 @@ export default defineComponent({
             <n-input
               size="large"
               v-model:value="registerModel.code"
-              placeholder="输入验证码"
+              :placeholder="t('form.login.code')"
             />
           </div>
           <div style="width: 10%"></div>
-          <n-button size="large"> 发送验证码 </n-button>
+          <n-button size="large"> {{t('form.login.sendCode')}} </n-button>
         </div>
       </n-form-item>
       <n-form-item label="" path="password">
@@ -97,17 +100,17 @@ export default defineComponent({
           show-password-on="mousedown"
           size="large"
           v-model:value="registerModel.password"
-          placeholder="输入登录密码"
+          :placeholder="t('form.login.password')"
         />
       </n-form-item>
     </n-form>
     <div class="l-c-btn">
       <n-button size="large" type="info" block @click="handleRegister">
-        注 册
+        {{t('form.login.register')}}
       </n-button>
     </div>
     <div class="other-btn">
-      <n-button block @click="back"> 返回 </n-button>
+      <n-button block @click="back"> {{t('form.login.return')}} </n-button>
     </div>
   </div>
 </template>
