@@ -2,6 +2,8 @@
 import { defineComponent, ref } from "vue";
 import { FormInst, FormItemRule } from "naive-ui";
 import { Message } from "@/utils/utils";
+import { useI18n } from "vue-i18n";
+
 export default defineComponent({
   setup(props, { emit }) {
     const loginForm = ref<FormInst | null>(null);
@@ -12,9 +14,11 @@ export default defineComponent({
     const remember = ref<boolean>(false);
     const loading = ref<boolean>(false);
     const count = ref<number>(60);
+    const { t } = useI18n();
     return {
       count,
       loading,
+      t,
       remember,
       loginForm,
       loginModel,
@@ -26,12 +30,12 @@ export default defineComponent({
             );
           },
           trigger: ["blur", "input"],
-          message: "请输入正确的手机号",
+          message: t('form.login.phone'),
         },
         code: {
           required: true,
           trigger: ["blur", "input"],
-          message: "请输入验证码",
+          message: t('form.login.code'),
         },
       },
 
@@ -45,7 +49,7 @@ export default defineComponent({
             loginModel.value.phone
           )
         ) {
-          Message("warning", "请输入正确的手机号");
+          Message("warning", t('form.login.rightPhone'));
           return;
         }
         let timer: any;
@@ -65,7 +69,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="l-c-head">手机登录</div>
+  <div class="l-c-head">{{ t("form.login.phoneLogin") }}</div>
   <div class="l-c-form">
     <n-form
       ref="loginForm"
@@ -80,7 +84,7 @@ export default defineComponent({
         <n-input
           size="large"
           v-model:value="loginModel.phone"
-          placeholder="输入手机号"
+          :placeholder="t('form.login.phone')"
         />
       </n-form-item>
       <n-form-item label="" path="code">
@@ -89,7 +93,7 @@ export default defineComponent({
             <n-input
               size="large"
               v-model:value="loginModel.code"
-              placeholder="输入验证码"
+              :placeholder="t('form.login.code')"
             />
           </div>
           <div style="width: 10%"></div>
@@ -97,18 +101,18 @@ export default defineComponent({
             size="large"
             @click="send"
             :disabled="count > 0 && count < 60"
-            >{{ count > 0 && count < 60 ? count + "秒后重发" : "发送验证码" }}
+            >{{ count > 0 && count < 60 ? count +  t("form.login.resendCode") : t("form.login.code")}}
           </n-button>
         </div>
       </n-form-item>
     </n-form>
     <div class="l-c-btn">
       <n-button size="large" type="info" block @click="handleLogin">
-        登 录
+        {{t('form.login.title')}}
       </n-button>
     </div>
     <div class="other-btn">
-      <n-button block @click="back"> 返 回 </n-button>
+      <n-button block @click="back"> {{t('form.login.return')}} </n-button>
     </div>
   </div>
 </template>

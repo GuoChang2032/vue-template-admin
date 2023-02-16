@@ -30,7 +30,14 @@ const messages = {
         otherLogin:'Other login methods',
         phoneLogin:'Phone login',
         codeLogin:'QR code login',
-        faceLogin:'Face login'
+        faceLogin:'Face login',
+        phone:'Enter phone number',
+        return:'Return',
+        sendCode:'Send verification code',
+        resendCode:' seconds resend later',
+        wechatQR:'Use wechat to scan the code to log in',
+        notSupport:'Not supported yet',
+        rightPhone:'Please enter the correct phone number',
       }
     },
     logout: "logout",
@@ -65,6 +72,13 @@ const messages = {
         phoneLogin:'手机号登录',
         codeLogin:'二维码登录',
         faceLogin:'人脸识别登录',
+        phone:'输入手机号',
+        return:'返回',
+        sendCode:'发送验证码',
+        resendCode:' 秒后重发',
+        wechatQR:'使用微信扫码即可登录',
+        notSupport:'暂未支持',
+        rightPhone:'请输入正确的手机号'
       }
     },
     logout: "注销",

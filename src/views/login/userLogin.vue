@@ -164,7 +164,7 @@ const handleSelect = () => {
   position: relative;
   z-index: 1;
   height: 100%;
-  width: 49%;
+  width: 50%;
   padding: 4rem 4.5rem 4rem 6rem;
   box-sizing: border-box;
   display: block;
@@ -195,7 +195,7 @@ const handleSelect = () => {
   position: relative;
   z-index: 1;
   height: 100%;
-  width: 49%;
+  width: 50%;
   padding: 4rem 4.5rem 4rem 6rem;
   box-sizing: border-box;
   display: block;
