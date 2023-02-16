@@ -2,6 +2,8 @@
 import { defineComponent, ref } from "vue";
 import { FormInst, FormItemRule } from "naive-ui";
 import { Message } from "@/utils/utils";
+import { useI18n } from "vue-i18n";
+
 export default defineComponent({
   setup(props, { emit }) {
     const loginForm = ref<FormInst | null>(null);
@@ -12,9 +14,11 @@ export default defineComponent({
     const remember = ref<boolean>(false);
     const loading = ref<boolean>(false);
     const count = ref<number>(60);
+    const { t } = useI18n();
     return {
       count,
       loading,
+      t,
       remember,
       loginForm,
       loginModel,
@@ -26,7 +30,7 @@ export default defineComponent({
             );
           },
           trigger: ["blur", "input"],
-          message: "请输入正确的手机号",
+          message: t("form.login.phone"),
         },
         code: {
           required: true,
@@ -65,7 +69,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="l-c-head">手机登录</div>
+  <div class="l-c-head">{{ t("form.login.phoneLogin") }}</div>
   <div class="l-c-form">
     <n-form
       ref="loginForm"
@@ -80,7 +84,7 @@ export default defineComponent({
         <n-input
           size="large"
           v-model:value="loginModel.phone"
-          placeholder="输入手机号"
+          :placeholder="t('form.login.phone')"
         />
       </n-form-item>
       <n-form-item label="" path="code">

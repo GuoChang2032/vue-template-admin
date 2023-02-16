@@ -30,7 +30,8 @@ const messages = {
         otherLogin:'Other login methods',
         phoneLogin:'Phone login',
         codeLogin:'QR code login',
-        faceLogin:'Face login'
+        faceLogin:'Face login',
+        phone:'Enter the phone number'
       }
     },
     logout: "logout",
@@ -65,6 +66,7 @@ const messages = {
         phoneLogin:'手机号登录',
         codeLogin:'二维码登录',
         faceLogin:'人脸识别登录',
+        phone:'输入手机号'
       }
     },
     logout: "注销",
