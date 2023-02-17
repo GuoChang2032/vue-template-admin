@@ -3,11 +3,7 @@ import { ref, Component, h, onMounted, watch, onUnmounted } from "vue";
 // import Footer from "@/components/footer.vue";
 // import Header from "@/components/header.vue";
 import { NIcon } from "naive-ui";
-import {
-  BookOutline as BookIcon,
-  PersonOutline as PersonIcon,
-  WineOutline as WineIcon,
-} from "@vicons/ionicons5";
+import { SettingsOutline, HomeOutline } from "@vicons/ionicons5";
 import { useIndex } from "@/stores/indexStore";
 import m from "@/utils/mitt";
 import { RouterLink } from "vue-router";
@@ -20,16 +16,15 @@ const { t } = useI18n();
 const ui = useIndex();
 const collapsed = ref<boolean>(false);
 const inverted = ref<boolean>(ui.getInverted);
-const activeKey = ref<string>("");
 const menuOptions = ref<any>([]);
 const clientWidth = ref<number>(document.body.clientWidth);
-
+const activeKey = ref<string>("1");
 m.on("switch", (e: any) => {
   inverted.value = e.val;
 });
 
 watch(
-  () =>clientWidth.value,
+  () => clientWidth.value,
   (nv, ov) => {
     if (nv < 900) {
       collapsed.value = true;
@@ -64,9 +59,8 @@ const setMenuData = () => {
           },
           { default: () => t("page.index") }
         ),
-
       key: "1",
-      icon: renderIcon(BookIcon),
+      icon: renderIcon(HomeOutline),
     },
     {
       label: () =>
@@ -82,8 +76,49 @@ const setMenuData = () => {
           },
           { default: () => t("page.dashboard") }
         ),
-      icon: renderIcon(BookIcon),
+      icon: renderIcon(SettingsOutline),
+      key: "2",
+    },
+    {
+      label: () => {
+        return t("page.system");
+      },
+      icon: renderIcon(SettingsOutline),
       key: "3",
+      children: [
+        {
+          label: () =>
+            h(
+              RouterLink,
+              {
+                to: {
+                  name: "userManage",
+                  params: {
+                    lang: "zh-CN",
+                  },
+                },
+              },
+              { default: () => t("page.userManage") }
+            ),
+          key: "userManage",
+        },
+        {
+          label: () =>
+            h(
+              RouterLink,
+              {
+                to: {
+                  name: "routeManage",
+                  params: {
+                    lang: "zh-CN",
+                  },
+                },
+              },
+              { default: () => t("page.routeManage") }
+            ),
+          key: "routeManage",
+        },
+      ],
     },
   ];
   menuOptions.value = m;
@@ -116,7 +151,7 @@ onUnmounted(() => {
           :options="menuOptions"
         />
       </n-layout-sider>
-      <n-layout-content :class="[inverted?'n-l-c-b':'n-l-c-w']">
+      <n-layout-content :class="[inverted ? 'n-l-c-b' : 'n-l-c-w']">
         <n-breadcrumb>
           <n-breadcrumb-item> {{ t("page.index") }} </n-breadcrumb-item>
           <n-breadcrumb-item> 西巴龙 </n-breadcrumb-item>
@@ -140,7 +175,6 @@ onUnmounted(() => {
   background-color: rgb(24, 24, 28);
 }
 .bkw {
-  
   background: #fff;
 }
 .n-l-c-w {

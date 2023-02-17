@@ -23,6 +23,22 @@ const routes: RouteRecordRaw[] = [
         },
         component: () => import("@/views/dashboard/dashboard.vue"),
       },
+      {
+        path: "/userManage",
+        name: "userManage",
+        meta: {
+          title: "userManage",
+        },
+        component: () => import("@/views/sys/userManage.vue"),
+      },
+      {
+        path: "/routeManage",
+        name: "routeManage",
+        meta: {
+          title: "routeManage",
+        },
+        component: () => import("@/views/sys/menuManage.vue"),
+      },
     ],
   },
 

@@ -1,40 +1,18 @@
 <script lang="ts" setup>
-import http from "@/service/http";
-import { defineComponent, onMounted, ref, h } from "vue";
-import { Message, getUserInfo } from "@/utils/utils";
-import indexAddEditModalVue from "@/components/indexAddEditModal.vue";
-import _ from "super-tools-lib";
-import { useRouter } from "vue-router";
-import Pagination from "@/components/pagination/pagination.vue";
+import { onMounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
 
-
-onMounted(() => {
-  getList();
-});
-const pageObj = ref<any>({ page: 1, total: 0 });
-const show = ref<boolean>(false);
-const router = useRouter();
-const courseOpt = ref<any>([]);
-const getList = () => {};
+onMounted(() => {});
 const { t } = useI18n();
+const courseOpt = ref<any>([]);
+const tableData: any = [];
 const more = ref<any>([
   { label: "复制", key: "1" },
   { label: "冻结", key: "2" },
   { label: "删除", key: "3" },
 ]);
-const handleSelectionChange = (val: any) => {};
-const tableData: any = [];
-const create = () => {
-  show.value = true;
-};
-const edit = (item: any) => {
-  show.value = true;
-};
-const close = () => {
-  show.value = false;
-};
 </script>
+
 <template>
   <div class="container">
     <div class="search-content">
@@ -50,34 +28,25 @@ const close = () => {
     </div>
     <div class="operation-content">
       <n-space>
-        <n-button type="primary" @click="create">
+        <n-button type="primary">
           <template #icon>
             <Icon icon="mdi:file-document-plus-outline" size="17px" />
           </template>
           新建
         </n-button>
-        <n-dropdown placement="bottom-start" trigger="hover" :options="more">
-          <n-button>批量操作</n-button>
-        </n-dropdown>
       </n-space>
     </div>
     <div>
-      <el-table
-        :data="tableData"
-        style="width: 100%"
-        @selection-change="handleSelectionChange"
-      >
+      <el-table :data="tableData" style="width: 100%">
         <el-table-column type="selection" width="55" />
         <el-table-column prop="courseName" label="课程名称" />
         <el-table-column prop="taskName" label="作业名称" />
         <el-table-column prop="startTime" label="开始时间" />
         <el-table-column prop="lastTime" label="提交时间" />
         <el-table-column fixed="right" label="操作">
-          <template #default="scope">
+          <template #default>
             <n-space wrap>
-              <n-button text tag="a" type="info" @click="edit(scope.row)">
-                编辑
-              </n-button>
+              <n-button text tag="a" type="info"> 编辑 </n-button>
               <n-dropdown
                 placement="bottom-start"
                 trigger="hover"
@@ -92,10 +61,9 @@ const close = () => {
       <pagination :total="0" />
     </div>
   </div>
-  <indexAddEditModalVue :show="show" modalType="1" @close="close" />
 </template>
-<style scoped lang="less">
 
+<style scoped lang="less">
 .search-content {
   margin: 10px 0 20px;
 }
