@@ -87,12 +87,14 @@ export const setUserInfo = (data: any): void => {
   localStorage.setItem(LOCAL_NAME, str);
 };
 
+// 登出
 export const logout = () => {
   router.push({ path: "/login", replace: true });
   // localStorage.removeItem("user_login_info");
   // Message("warning", "登录过期,请重新登录!");
 };
 
+// 消息
 export const Message = (type: any, msg: string) => {
   const { message } = createDiscreteApi(["message"]);
   if (type === "info") {
@@ -104,4 +106,10 @@ export const Message = (type: any, msg: string) => {
   } else if (type === "success") {
     message.success(msg);
   }
+};
+
+// 判断该页面的分页是否需要记忆
+export const judgePage = (r_page: any, route: string): boolean => {
+  if (!r_page.getPage.reset && r_page.getPage.route === route) return true;
+  return false;
 };

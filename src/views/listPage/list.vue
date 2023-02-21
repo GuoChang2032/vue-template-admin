@@ -1,17 +1,22 @@
 <script lang="ts" setup>
 import http from "@/service/http";
 import { defineComponent, onMounted, ref, h } from "vue";
-import { Message, getUserInfo } from "@/utils/utils";
+import { Message, getUserInfo, judgePage } from "@/utils/utils";
 import indexAddEditModalVue from "@/components/indexAddEditModal.vue";
 import _ from "super-tools-lib";
 import { useRouter } from "vue-router";
 import Pagination from "@/components/pagination/pagination.vue";
 import { useI18n } from "vue-i18n";
-
+import { usePage } from "@/stores/user";
 
 onMounted(() => {
+  if (judgePage(r_page, "list")) {
+    pageObj.value.page = r_page.getPage.page;
+  }
   getList();
 });
+
+const r_page = usePage();
 const pageObj = ref<any>({ page: 1, total: 0 });
 const show = ref<boolean>(false);
 const router = useRouter();
@@ -29,6 +34,7 @@ const create = () => {
   show.value = true;
 };
 const edit = (item: any) => {
+  r_page.setPage(pageObj.value.page, "list");
   show.value = true;
 };
 const close = () => {
@@ -95,7 +101,6 @@ const close = () => {
   <indexAddEditModalVue :show="show" modalType="1" @close="close" />
 </template>
 <style scoped lang="less">
-
 .search-content {
   margin: 10px 0 20px;
 }
