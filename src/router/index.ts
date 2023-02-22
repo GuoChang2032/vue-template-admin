@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import IndexLayout from "@/layouts/IndexLayout.vue";
 import userCenterLayout from "@/layouts/userCenterLayout.vue";
+
 const routes: RouteRecordRaw[] = [
   {
     path: "/",

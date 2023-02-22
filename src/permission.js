@@ -3,16 +3,16 @@ import { start, done } from '@/utils/nprogress.js'
 import { useUserInfo } from "@/stores/user"
 
 const whiteList = ['/login'] // no redirect whitelist
-
+const APP_NAME = ' - GC-low-code'
 
 // 路由跳转前
 router.beforeEach((to, from, next) => {
     start()
     const user = useUserInfo()
     if (to.meta.title) {
-        document.title = to.meta.title
+        document.title = to.meta.title + APP_NAME
     } else {
-        document.title = '前端模板'
+        document.title = '前端模板项目'
     }
 
     // let token = user.tokens
