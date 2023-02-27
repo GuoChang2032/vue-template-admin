@@ -1,28 +1,45 @@
 <script lang="ts" setup>
-import { onMounted ,ref} from "vue";
-import {useDark, useToggle} from '@vueuse/core'
+import { onMounted, ref } from "vue";
+import { useDark, useToggle } from "@vueuse/core";
 onMounted(() => {});
-const isDark = useDark()
-const toggleDark = useToggle(isDark)
-const tableData = ref<any>([])
+const isDark = useDark();
 </script>
 
 <template>
-  <div class="p-5 h-full">
-    <!-- element的主题改变有用 -->
-    <el-button @click="toggleDark()">默认按钮</el-button>
-    <el-button type="primary">主要按钮</el-button>
-    <el-button type="info">info按钮</el-button>
-    <el-button type="danger">危险按钮</el-button>
-    <el-button type="warning">警告按钮</el-button>
-  </div>
-  <div>
-    <el-table :data="tableData" style="width: 100%">
-    <el-table-column prop="date" label="Date" width="180" />
-    <el-table-column prop="name" label="Name" width="180" />
-    <el-table-column prop="address" label="Address" />
-  </el-table>
-  </div>
+  <section class="text-white bg-gray-900">
+    <div
+      class="max-w-screen-xl px-4 py-32 mx-auto lg:flex lg:h-screen lg:items-center"
+    >
+      <div class="max-w-3xl mx-auto text-center">
+        <h1
+          class="text-3xl font-extrabold text-transparent bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 bg-clip-text sm:text-5xl"
+        >
+          Understand User Flow.
+
+          <span class="sm:block"> Increase Conversion. </span>
+        </h1>
+
+        <p class="max-w-xl mx-auto mt-4 sm:text-xl sm:leading-relaxed">
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nesciunt
+          illo tenetur fuga ducimus numquam ea!
+        </p>
+
+        <div class="flex flex-wrap justify-center gap-4 mt-8">
+          <a
+            class="block w-full px-12 py-3 text-sm font-medium text-white bg-blue-600 border border-blue-600 rounded cursor-pointer focus:outline-none focus:ring active:text-opacity-75 sm:w-auto"
+          >
+            Get Started
+          </a>
+
+          <a
+            class="block w-full px-12 py-3 text-sm font-medium text-white border border-blue-600 rounded cursor-pointer focus:outline-none focus:ring active:bg-blue-500 sm:w-auto"
+          >
+            Learn More
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
 </template>
 
 <style scoped lang="less"></style>

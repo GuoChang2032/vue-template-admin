@@ -1,13 +1,6 @@
-<script lang="ts">
-import { defineComponent } from "vue";
-import Footer from "@/components/footer.vue";
-import Header from "@/components/header.vue";
-export default defineComponent({
-  setup() {
-    return {};
-  },
-  components: { Footer, Header },
-});
+<script lang="ts" setup>
+// import Footer from "@/components/footer.vue";
+// import Header from "@/components/header.vue";
 </script>
 
 <template>
@@ -15,7 +8,7 @@ export default defineComponent({
   <div style="height: 100%">
     <router-view />
   </div>
-  <Footer />
+  <!-- <Footer /> -->
 </template>
 
 <style scoped lang="less"></style>
