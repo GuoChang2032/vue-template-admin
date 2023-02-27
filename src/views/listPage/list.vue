@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import http from "@/service/http";
-import { defineComponent, onMounted, ref, h } from "vue";
 import { Message, getUserInfo, judgePage } from "@/utils/utils";
 import indexAddEditModalVue from "@/components/indexAddEditModal.vue";
 import _ from "super-tools-lib";

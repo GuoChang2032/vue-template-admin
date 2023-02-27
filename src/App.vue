@@ -15,7 +15,6 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watch, onMounted, reactive } from "vue";
 import {
   zhCN,
   dateZhCN,

@@ -1,9 +1,7 @@
 <script lang="ts" setup>
-import { defineComponent, ref } from "vue";
 import { FormInst } from "naive-ui";
 import { useRouter } from "vue-router";
 import { useUserInfo } from "@/stores/user";
-import { useI18n } from "vue-i18n";
 
 const emit = defineEmits(["callback"]);
 

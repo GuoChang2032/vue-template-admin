@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { ref } from "vue";
 import {
   accountLogin,
   phoneLogin,
@@ -17,7 +16,6 @@ const inverted = ref<boolean>(ui.getInverted);
 const { t } = useI18n();
 const i18n = useI18n();
 const type = ref<string>("1");
-
 const handleCallback = (e: any) => {
   type.value = e.type;
 };

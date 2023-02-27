@@ -2,21 +2,26 @@ import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import AutoImport from "unplugin-auto-import/vite";
 import Components from "unplugin-vue-components/vite";
-import { ElementPlusResolver,NaiveUiResolver } from "unplugin-vue-components/resolvers";
+import {
+  ElementPlusResolver,
+  NaiveUiResolver,
+} from "unplugin-vue-components/resolvers";
 import PurgeIcons from "vite-plugin-purge-icons";
 import commpressPlugin from "vite-plugin-compression";
-import OptimizationPersist from 'vite-plugin-optimize-persist'
-import PkgConfig from 'vite-plugin-package-config'
+import OptimizationPersist from "vite-plugin-optimize-persist";
+import PkgConfig from "vite-plugin-package-config";
 const path = require("path");
 
 export default defineConfig({
   plugins: [
     vue(),
     AutoImport({
-      resolvers: [ElementPlusResolver(),NaiveUiResolver()],
+      resolvers: [ElementPlusResolver(), NaiveUiResolver()],
+      imports: ["vue",'vue-i18n','vue-router'],
+      dts: "src/auto-import.d.ts",
     }),
     Components({
-      resolvers: [ElementPlusResolver(),NaiveUiResolver()],
+      resolvers: [ElementPlusResolver(), NaiveUiResolver()],
     }),
     PurgeIcons({
       /* PurgeIcons Options */
@@ -30,7 +35,7 @@ export default defineConfig({
       ext: ".gz", //文件类型
     }),
     PkgConfig(),
-    OptimizationPersist()
+    OptimizationPersist(),
   ],
   css: {
     // css预处理器
