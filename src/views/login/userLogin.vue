@@ -1,26 +1,16 @@
-<script lang="ts">
-import { defineComponent, ref } from "vue";
+<script lang="ts" setup>
 import {
   accountLogin,
   phoneLogin,
   register,
   qrCodeLogin,
   faceLogin,
-  resetPwd
+  resetPwd,
 } from "@/views/login/components";
-
-export default defineComponent({
-  components: { accountLogin, phoneLogin, qrCodeLogin, register, faceLogin,resetPwd },
-  setup() {
-    const type = ref<string>("1");
-    return {
-      type,
-      handleCallback(e: any) {
-        type.value = e.type;
-      },
-    };
-  },
-});
+const type = ref<string>("1");
+const handleCallback = (e: any) => {
+  type.value = e.type;
+};
 </script>
 
 <template>

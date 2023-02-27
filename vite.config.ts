@@ -13,6 +13,8 @@ export default defineConfig({
     vue(),
     AutoImport({
       resolvers: [ElementPlusResolver(),NaiveUiResolver()],
+      imports: ["vue",'vue-i18n','vue-router'],
+      dts: "src/auto-import.d.ts",
     }),
     Components({
       resolvers: [ElementPlusResolver(),NaiveUiResolver()],

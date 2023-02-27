@@ -15,7 +15,6 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, onUnmounted } from "vue";
 import { zhCN, dateZhCN, GlobalThemeOverrides } from "naive-ui";
 
 export default defineComponent({

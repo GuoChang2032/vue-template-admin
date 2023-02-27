@@ -1,19 +1,10 @@
-<script lang='ts'>
-import { defineComponent, ref, onMounted, onUnmounted } from "vue";
+<script lang="ts" setup>
 import lineChart from "@/components/chartComponents/lineCahrt.vue";
 import chart2 from "@/components/chartComponents/chart2.vue";
-import { useRouter } from "vue-router";
-export default defineComponent({
-  components: { lineChart, chart2 },
-  setup() {
-    const router = useRouter();
-    return {
-      goBack() {
-        router.go(-1);
-      },
-    };
-  },
-});
+const router = useRouter();
+const goBack = () => {
+  router.go(-1);
+};
 </script>
 
 <template>
@@ -30,7 +21,7 @@ export default defineComponent({
   </div>
 </template>
 
-<style scoped lang='less'>
+<style scoped lang="less">
 .main-container {
   padding: 20px 30px;
 }
