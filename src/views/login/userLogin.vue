@@ -99,7 +99,7 @@ const handleCallback = (e: any) => {
 }
 .container {
   width: 100%;
-  height: 100%;
+  height: 100vh;
 }
 .login-card {
   @media screen and (max-width: 900px) {
