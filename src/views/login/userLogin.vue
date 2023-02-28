@@ -31,7 +31,7 @@ const handleSelect = () => {
 </script>
 
 <template>
-  <div :class="['container', inverted ? 'black' : '']">
+  <div :class="['login-container', inverted ? 'black' : '']">
     <!-- <div class="container"> -->
     <div class="i18n-content">
       <n-button quaternary @click="handleSelect">
@@ -123,7 +123,7 @@ const handleSelect = () => {
     width: auto;
   }
 }
-.container {
+.login-container {
   position: relative;
   width: 100%;
   height: 100%;
