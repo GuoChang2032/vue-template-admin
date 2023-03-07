@@ -21,6 +21,7 @@ declare module '@vue/runtime-core' {
     IndexAddEditModal: typeof import('./src/components/indexAddEditModal.vue')['default']
     IndexTable: typeof import('./src/components/indexTable.vue')['default']
     LineCahrt: typeof import('./src/components/chartComponents/lineCahrt.vue')['default']
+    NAlert: typeof import('naive-ui')['NAlert']
     NAvatar: typeof import('naive-ui')['NAvatar']
     NBreadcrumb: typeof import('naive-ui')['NBreadcrumb']
     NBreadcrumbItem: typeof import('naive-ui')['NBreadcrumbItem']

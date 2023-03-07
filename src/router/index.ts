@@ -13,7 +13,7 @@ const routes: RouteRecordRaw[] = [
         meta: {
           title: "首页",
         },
-        component: () => import("@/views/listPage/list.vue"),
+        component: () => import("@/views/index.vue"),
       },
       {
         path: "/dashboard",
@@ -38,6 +38,14 @@ const routes: RouteRecordRaw[] = [
           title: "routeManage",
         },
         component: () => import("@/views/sys/menuManage.vue"),
+      },
+      {
+        path: "/chat",
+        name: "chat",
+        meta: {
+          title: "ChatGPT",
+        },
+        component: () => import("@/views/chat/chat.vue"),
       },
     ],
   },

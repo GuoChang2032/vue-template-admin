@@ -7,10 +7,11 @@ const messages = {
     },
     page: {
       index: "Index",
-      dashboard: "Dashboard",
+      dashboard: "List",
       system: "System manage",
       userManage: "User manage",
       routeManage: "Routing manage",
+      chat: "Chat",
     },
     header: {
       title: "The best system in the world",
@@ -51,10 +52,11 @@ const messages = {
     },
     page: {
       index: "首页",
-      dashboard: "仪表盘",
+      dashboard: "列表",
       system: "系统管理",
       userManage: "用户管理",
       routeManage: "路由管理",
+      chat: "聊天",
     },
     header: {
       title: "世界第一低代码平台",

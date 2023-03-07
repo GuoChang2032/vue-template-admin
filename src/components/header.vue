@@ -1,17 +1,16 @@
 <script lang="ts" setup>
 import { useIndex } from "@/stores/indexStore";
 import { onMounted, ref } from "vue";
-import { useRouter } from "vue-router";
 import m from "@/utils/mitt";
 import { useDark, useToggle } from "@vueuse/core";
-import { Message,logout } from "@/utils/utils";
+import { Message, logout } from "@/utils/utils";
 import { useI18n } from "vue-i18n";
 const isDark = useDark();
 const toggleDark = useToggle(isDark);
 
 const inver = useIndex();
-const router = useRouter();
 const theme = ref<boolean>(false);
+const isCollapsed = ref<boolean>(false);
 
 onMounted(() => {
   theme.value = inver.getInverted;
@@ -34,12 +33,16 @@ const handleSelect = (key: string) => {
   i18n.locale.value = key;
 };
 const logoutss = () => {
-  logout()
+  logout();
 };
 const themeChange = () => {
   inver.setInverted();
   m.emit("switch", { val: theme.value });
   toggleDark();
+};
+const collapseChange = () => {
+  isCollapsed.value = !isCollapsed.value;
+  m.emit("menuCollapsed", { val: isCollapsed.value });
 };
 </script>
 
@@ -48,14 +51,15 @@ const themeChange = () => {
     :class="['header', 'flex-between', theme ? 'theme-black' : 'theme-white']"
   >
     <div class="h-left flex-center-start">
-      <img src="@/assets/elogo-large.png" class="h-l-logo" alt="" />
-      <div class="h-l-topic">{{ t("header.title") }}</div>
+      <icon class="contract" v-if="isCollapsed" icon="ant-design:menu-unfold-outlined" size="26px" @click="collapseChange"/>
+      <icon class="contract" v-else icon="ant-design:menu-fold-outlined" size="26px" @click="collapseChange"/>
+      <n-breadcrumb>
+        <n-breadcrumb-item> {{ t("page.index") }} </n-breadcrumb-item>
+        <n-breadcrumb-item> pagename </n-breadcrumb-item>
+      </n-breadcrumb>
     </div>
     <div class="h-right">
       <div class="flex-center">
-        <!-- <div class="search-content">
-          <n-input type="text" placeholder="搜索..." clearable />
-        </div> -->
         <div class="theme-content">
           <n-switch v-model:value="theme" @update:value="themeChange">
             <template #checked-icon>
@@ -70,7 +74,7 @@ const themeChange = () => {
           <div class="n-c-wrap" title="通知">
             <icon
               icon="material-symbols:add-alert-outline-rounded"
-              size="26px"
+              size="24px"
             />
           </div>
         </div>
@@ -84,14 +88,13 @@ const themeChange = () => {
         <div class="user-content flex-center">
           <n-avatar
             round
-            size="large"
             src="https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg"
           />
           <div class="h-r-a-name">张三</div>
         </div>
         <div class="logout flex-center" @click="logoutss">
           <icon icon="teenyicons:logout-outline" size="18px" />
-          {{t('logout')}}
+          {{ t("logout") }}
         </div>
       </div>
     </div>
@@ -99,6 +102,16 @@ const themeChange = () => {
 </template>
 
 <style scoped lang="less">
+.contract {
+  padding: 5px;
+  margin-right: 5px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.2s;
+  &:hover {
+    background-color: rgba(65, 65, 65, 0.2);
+  }
+}
 .theme-white {
   color: #000;
   background-color: #fff;
@@ -117,6 +130,7 @@ const themeChange = () => {
 .theme-content,
 .logout {
   margin: 0 10px;
+  font-size: 18px;
   cursor: pointer;
 }
 .i18n-content,
@@ -141,7 +155,7 @@ const themeChange = () => {
   }
 }
 .h-r-a-name {
-  font-size: 17px;
+  font-size: 16px;
   margin-left: 10px;
   max-width: 100px;
   white-space: nowrap;
@@ -150,7 +164,7 @@ const themeChange = () => {
 }
 .header {
   min-width: 600px;
-  padding: 10px 30px;
+  padding: 10px 10px;
   box-sizing: content-box;
   transition: all 0.2s;
   .h-l-topic {

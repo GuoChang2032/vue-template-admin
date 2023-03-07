@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref, Component, h, onMounted, watch, onUnmounted } from "vue";
+import { Component } from "vue";
 // import Footer from "@/components/footer.vue";
 // import Header from "@/components/header.vue";
 import { NIcon } from "naive-ui";
@@ -22,6 +22,9 @@ const activeKey = ref<string>("1");
 m.on("switch", (e: any) => {
   inverted.value = e.val;
 });
+m.on('menuCollapsed',(e:any)=>{
+  collapsed.value = e.val;
+})
 
 watch(
   () => clientWidth.value,
@@ -79,6 +82,23 @@ const setMenuData = () => {
       icon: renderIcon(SettingsOutline),
       key: "2",
     },
+    // {
+    //   label: () =>
+    //     h(
+    //       RouterLink,
+    //       {
+    //         to: {
+    //           name: "chat",
+    //           params: {
+    //             lang: "zh-CN",
+    //           },
+    //         },
+    //       },
+    //       { default: () => t("page.chat") }
+    //     ),
+    //   icon: renderIcon(SettingsOutline),
+    //   key: "chat",
+    // },
     {
       label: () => {
         return t("page.system");
@@ -131,7 +151,6 @@ onUnmounted(() => {
 
 <template>
   <n-layout style="height: 100%">
-    <n-layout-header> <Header /> </n-layout-header>
     <n-layout class="heights" has-sider>
       <n-layout-sider
         bordered
@@ -143,6 +162,10 @@ onUnmounted(() => {
         @collapse="collapsed = true"
         @expand="collapsed = false"
       >
+        <div class="logo-center">
+          <img v-show="collapsed" src="@/assets/logo.png" class="h-l-logo" alt="" />
+          <img v-show="!collapsed" src="@/assets/elogo-large.png" class="h-l-logo" alt="" />
+        </div>
         <n-menu
           v-model:value="activeKey"
           :collapsed="collapsed"
@@ -151,18 +174,16 @@ onUnmounted(() => {
           :options="menuOptions"
         />
       </n-layout-sider>
-      <n-layout-content :class="[inverted ? 'n-l-c-b' : 'n-l-c-w']">
-        <n-breadcrumb>
-          <n-breadcrumb-item> {{ t("page.index") }} </n-breadcrumb-item>
-          <n-breadcrumb-item> 西巴龙 </n-breadcrumb-item>
-        </n-breadcrumb>
-        <!-- <div class="router-content"> -->
-        <div :class="['router-content', inverted ? 'bkb' : 'bkw']">
-          <n-scrollbar style="max-height: 100%">
-            <router-view />
-          </n-scrollbar>
-        </div>
-      </n-layout-content>
+      <n-layout>
+        <n-layout-header> <Header /> </n-layout-header>
+        <n-layout-content :class="['nlc',inverted ? 'n-l-c-b' : 'n-l-c-w']">
+          <div :class="['router-content', inverted ? 'bkb' : 'bkw']">
+            <n-scrollbar style="max-height: 100%;">
+              <router-view />
+            </n-scrollbar>
+          </div>
+        </n-layout-content>
+      </n-layout>
     </n-layout>
     <!-- <n-layout-footer>成府路</n-layout-footer> -->
   </n-layout>
@@ -171,20 +192,29 @@ onUnmounted(() => {
 </template>
 
 <style scoped lang="less">
+.h-l-logo {
+  height: 50px;
+}
+.logo-center {
+  text-align: center;
+  padding: 15px 0;
+  font-size: 22px;
+}
 .bkb {
   background-color: rgb(24, 24, 28);
 }
 .bkw {
   background: #fff;
 }
-.n-l-c-w {
+.nlc{
+  height: calc(100% - 71px);
   padding: 24px 12px;
-  height: 100%;
-  background-color: white;
+  background-color: #f5f5f5;
+}
+.n-l-c-w {
+  background-color: #f5f5f5;
 }
 .n-l-c-b {
-  padding: 24px 12px;
-  height: 100%;
   background-color: black;
 }
 .router-content {
@@ -197,6 +227,6 @@ onUnmounted(() => {
   height: 100%;
 }
 .heights {
-  height: calc(100% - 71px);
+  height: 100%;
 }
 </style>
