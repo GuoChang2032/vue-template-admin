@@ -3,14 +3,14 @@ import { useIndex } from "@/stores/indexStore";
 import { onMounted, ref } from "vue";
 import m from "@/utils/mitt";
 import { useDark, useToggle } from "@vueuse/core";
-import { Message, logout } from "@/utils/utils";
+import { Message, logout,routerNameMapping } from "@/utils/utils";
 import { useI18n } from "vue-i18n";
 const isDark = useDark();
 const toggleDark = useToggle(isDark);
 const inver = useIndex();
 const theme = ref<boolean>(false);
 const isCollapsed = ref<boolean>(false);
-const pagename = ref<string>(inver.getActiveKey);
+const pagename = ref<string>(inver.getActiveKey || '');
 const i18n = useI18n();
 const { t } = useI18n();
 const options = ref<any>([
@@ -74,7 +74,7 @@ const collapseChange = () => {
       />
       <n-breadcrumb>
         <n-breadcrumb-item> {{ t("page.index") }} </n-breadcrumb-item>
-        <n-breadcrumb-item> {{ pagename }} </n-breadcrumb-item>
+        <n-breadcrumb-item> {{ t(routerNameMapping(pagename)) }} </n-breadcrumb-item>
       </n-breadcrumb>
     </div>
     <div class="h-right">

@@ -7,6 +7,14 @@ const routes: RouteRecordRaw[] = [
     name: "home",
     component: IndexLayout,
     children: [
+      // {
+      //   path: "/testchart",
+      //   name: "testchart",
+      //   meta: {
+      //     title: "嘻嘻嘻嘻嘻嘻嘻嘻嘻",
+      //   },
+      //   component: () => import("@/views/charts/charts.vue"),
+      // },
       {
         path: "/statistics",
         name: "statistics",

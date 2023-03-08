@@ -132,6 +132,22 @@ export const setMenuData = () => {
         return t("page.dashboard");
       },
       children: [
+        // {
+        //   label: () =>
+        //     h(
+        //       RouterLink,
+        //       {
+        //         to: {
+        //           name: "testchart",
+        //           params: {
+        //             lang: "zh-CN",
+        //           },
+        //         },
+        //       },
+        //       { default: () => '草' }
+        //     ),
+        //   key: "testchart",
+        // },
         {
           label: () =>
             h(
@@ -212,3 +228,13 @@ export const setMenuData = () => {
   ];
   return m;
 };
+
+export function routerNameMapping(router:string){
+  let a:any = {
+    statistics:'page.statistics',
+    routeManage:'page.routeManage',
+    userManage:'page.userManage',
+    homepage:'page.index',
+  }
+  return a[router] || 'page.index'
+} 

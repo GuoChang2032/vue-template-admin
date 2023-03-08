@@ -136,10 +136,10 @@ onUnmounted(() => {
 .nlc {
   height: calc(100% - 71px);
   padding: 24px 12px;
-  background-color: #f5f5f5;
+  background-color: #f5f5f5c2;
 }
 .n-l-c-w {
-  background-color: #f5f5f5;
+  background-color: #f5f5f5c2;
 }
 .n-l-c-b {
   background-color: black;
