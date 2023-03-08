@@ -4,11 +4,19 @@ const routes: RouteRecordRaw[] = [
   {
     path: "/",
     redirect: "index",
-    name:'home',
+    name: "home",
     component: IndexLayout,
     children: [
       {
-        path: "/index", 
+        path: "/statistics",
+        name: "statistics",
+        meta: {
+          title: "数据统计",
+        },
+        component: () => import("@/views/statistics/statistics.vue"),
+      },
+      {
+        path: "/index",
         name: "index",
         meta: {
           title: "首页",

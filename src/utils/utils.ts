@@ -5,9 +5,8 @@ import i18n from "@/locales/i18n";
 import { RouterLink } from "vue-router";
 import { Component } from "vue";
 import { NIcon } from "naive-ui";
-import { SettingsOutline, HomeOutline } from "@vicons/ionicons5";
+import { SettingsOutline, HomeOutline, AppsOutline } from "@vicons/ionicons5";
 import { useI18n } from "vue-i18n";
-
 
 const LOCAL_NAME = "localStorageName";
 
@@ -124,60 +123,51 @@ export const judgePage = (r_page: any, route: string): boolean => {
   if (!r_page.getPage.reset && r_page.getPage.route === route) return true;
   return false;
 };
+
 export const setMenuData = () => {
   const { t } = useI18n();
   let m = [
     {
-      label: () =>
-        h(
-          RouterLink,
-          {
-            to: {
-              name: "index",
-              params: {
-                lang: "zh-CN",
+      label: () => {
+        return t("page.dashboard");
+      },
+      children: [
+        {
+          label: () =>
+            h(
+              RouterLink,
+              {
+                to: {
+                  name: "statistics",
+                  params: {
+                    lang: "zh-CN",
+                  },
+                },
               },
-            },
-          },
-          { default: () => t("page.index") }
-        ),
+              { default: () => t("page.statistics") }
+            ),
+          key: "statistics",
+        },
+        {
+          label: () =>
+            h(
+              RouterLink,
+              {
+                to: {
+                  name: "index",
+                  params: {
+                    lang: "zh-CN",
+                  },
+                },
+              },
+              { default: () => t("page.index") }
+            ),
+          key: "homepage",
+        },
+      ],
       key: "index",
-      icon: renderIcon(HomeOutline),
+      icon: renderIcon(AppsOutline),
     },
-    // {
-    //   label: () =>
-    //     h(
-    //       RouterLink,
-    //       {
-    //         to: {
-    //           name: "dashboard",
-    //           params: {
-    //             lang: "zh-CN",
-    //           },
-    //         },
-    //       },
-    //       { default: () => t("page.dashboard") }
-    //     ),
-    //   icon: renderIcon(SettingsOutline),
-    //   key: "2",
-    // },
-    // {
-    //   label: () =>
-    //     h(
-    //       RouterLink,
-    //       {
-    //         to: {
-    //           name: "chat",
-    //           params: {
-    //             lang: "zh-CN",
-    //           },
-    //         },
-    //       },
-    //       { default: () => t("page.chat") }
-    //     ),
-    //   icon: renderIcon(SettingsOutline),
-    //   key: "chat",
-    // },
     {
       label: () => {
         return t("page.system");

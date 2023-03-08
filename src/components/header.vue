@@ -7,17 +7,12 @@ import { Message, logout } from "@/utils/utils";
 import { useI18n } from "vue-i18n";
 const isDark = useDark();
 const toggleDark = useToggle(isDark);
-
 const inver = useIndex();
 const theme = ref<boolean>(false);
 const isCollapsed = ref<boolean>(false);
-
-onMounted(() => {
-  theme.value = inver.getInverted;
-});
+const pagename = ref<string>(inver.getActiveKey);
 const i18n = useI18n();
 const { t } = useI18n();
-
 const options = ref<any>([
   {
     label: "简体中文",
@@ -28,6 +23,18 @@ const options = ref<any>([
     key: "en",
   },
 ]);
+
+watch(
+  () => inver.getActiveKey,
+  (nv, ov) => {
+    pagename.value = nv;
+  }
+);
+
+onMounted(() => {
+  theme.value = inver.getInverted;
+});
+
 const handleSelect = (key: string) => {
   Message("success", `切换${key === "zh" ? "中文" : "英语"}成功`);
   i18n.locale.value = key;
@@ -51,11 +58,23 @@ const collapseChange = () => {
     :class="['header', 'flex-between', theme ? 'theme-black' : 'theme-white']"
   >
     <div class="h-left flex-center-start">
-      <icon class="contract" v-if="isCollapsed" icon="ant-design:menu-unfold-outlined" size="26px" @click="collapseChange"/>
-      <icon class="contract" v-else icon="ant-design:menu-fold-outlined" size="26px" @click="collapseChange"/>
+      <icon
+        class="contract"
+        v-if="isCollapsed"
+        icon="ant-design:menu-unfold-outlined"
+        size="26px"
+        @click="collapseChange"
+      />
+      <icon
+        class="contract"
+        v-else
+        icon="ant-design:menu-fold-outlined"
+        size="26px"
+        @click="collapseChange"
+      />
       <n-breadcrumb>
         <n-breadcrumb-item> {{ t("page.index") }} </n-breadcrumb-item>
-        <n-breadcrumb-item> pagename </n-breadcrumb-item>
+        <n-breadcrumb-item> {{ pagename }} </n-breadcrumb-item>
       </n-breadcrumb>
     </div>
     <div class="h-right">
@@ -131,7 +150,7 @@ const collapseChange = () => {
 .theme-content,
 .logout {
   margin: 0 10px;
-  font-size: 18px;
+  font-size: 16px;
   cursor: pointer;
 }
 .i18n-content,

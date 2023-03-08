@@ -6,8 +6,9 @@ const messages = {
       warn: "warning",
     },
     page: {
-      index: "Index",
-      dashboard: "List",
+      index: "Home",
+      statistics: "Statistics",
+      dashboard: "Dashboard",
       system: "System manage",
       userManage: "User manage",
       routeManage: "Routing manage",
@@ -52,7 +53,8 @@ const messages = {
     },
     page: {
       index: "首页",
-      dashboard: "列表",
+      dashboard: "dashboard",
+      statistics: "统计",
       system: "系统管理",
       userManage: "用户管理",
       routeManage: "路由管理",

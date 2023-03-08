@@ -68,19 +68,19 @@ onUnmounted(() => {
         @collapse="collapsed = true"
         @expand="collapsed = false"
       >
-        <div class="logo-center">
-          <img
-            v-show="collapsed"
-            src="@/assets/logo.png"
-            class="h-l-logo"
-            alt=""
-          />
-          <img
-            v-show="!collapsed"
-            src="@/assets/elogo-large.png"
-            class="h-l-logo"
-            alt=""
-          />
+        <div class="grid py-2 justify-items-center">
+            <img
+              v-show="collapsed"
+              src="@/assets/logo.png"
+              class="h-l-logo"
+              alt=""
+            />
+            <img
+              v-show="!collapsed"
+              src="@/assets/elogo-large.png"
+              class="h-l-logo"
+              alt=""
+            />
         </div>
         <n-menu
           ref="menuInstRef"
@@ -95,9 +95,12 @@ onUnmounted(() => {
       <n-layout>
         <n-layout-header> <Header /> </n-layout-header>
         <n-layout-content :class="['nlc', inverted ? 'n-l-c-b' : 'n-l-c-w']">
-          <div :class="['router-content', inverted ? 'bkb' : 'bkw']">
+          <!-- <div :class="['router-content', inverted ? 'bkb' : 'bkw']"> -->
+          <div class="router-content">
             <n-scrollbar style="max-height: 100%">
-              <router-view />
+              <transition name="slide-fade">
+                <router-view />
+              </transition>
             </n-scrollbar>
           </div>
         </n-layout-content>
@@ -107,13 +110,21 @@ onUnmounted(() => {
 </template>
 
 <style scoped lang="less">
-.h-l-logo {
-  height: 50px;
+.slide-fade-enter-active {
+  transition: all 0.5s ease-out;
 }
-.logo-center {
-  text-align: center;
-  padding: 15px 0;
-  font-size: 22px;
+
+.slide-fade-leave-active {
+  transition: all 0.5s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateX(20px);
+  opacity: 0;
+}
+.h-l-logo {
+  height: 45px;
 }
 .bkb {
   background-color: rgb(24, 24, 28);
@@ -121,6 +132,7 @@ onUnmounted(() => {
 .bkw {
   background: #fff;
 }
+
 .nlc {
   height: calc(100% - 71px);
   padding: 24px 12px;

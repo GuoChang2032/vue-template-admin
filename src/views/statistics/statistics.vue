@@ -4,7 +4,7 @@ onMounted(() => {});
 </script>
 
 <template>
-  <div class="p-4 bg-white">路由管理</div>
+  <div class="p-4">统计</div>
 </template>
 
 <style scoped lang="less"></style>
