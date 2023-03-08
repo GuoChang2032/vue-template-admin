@@ -87,6 +87,7 @@ const collapseChange = () => {
         </div>
         <div class="user-content flex-center">
           <n-avatar
+            size="small"
             round
             src="https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg"
           />
@@ -109,7 +110,7 @@ const collapseChange = () => {
   cursor: pointer;
   transition: all 0.2s;
   &:hover {
-    background-color: rgba(65, 65, 65, 0.2);
+    background-color: rgba(134, 134, 134, 0.2);
   }
 }
 .theme-white {
@@ -142,7 +143,7 @@ const collapseChange = () => {
   border-radius: 3px;
   transition: all 0.2s;
   &:hover {
-    background-color: rgba(65, 65, 65, 0.2);
+    background-color: rgba(134, 134, 134, 0.2);
   }
 }
 .logout {
@@ -151,7 +152,7 @@ const collapseChange = () => {
   transition: all 0.2s;
   border-radius: 3px;
   &:hover {
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(134, 134, 134, 0.2);
   }
 }
 .h-r-a-name {

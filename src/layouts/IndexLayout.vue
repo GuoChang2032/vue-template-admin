@@ -1,30 +1,25 @@
 <script lang="ts" setup>
-import { Component } from "vue";
-// import Footer from "@/components/footer.vue";
-// import Header from "@/components/header.vue";
-import { NIcon } from "naive-ui";
-import { SettingsOutline, HomeOutline } from "@vicons/ionicons5";
 import { useIndex } from "@/stores/indexStore";
 import m from "@/utils/mitt";
-import { RouterLink } from "vue-router";
-import { useI18n } from "vue-i18n";
-function renderIcon(icon: Component) {
-  return () => h(NIcon, null, { default: () => h(icon) });
-}
+import { setMenuData } from "@/utils/utils";
+import { MenuInst } from "naive-ui";
 
-const { t } = useI18n();
 const ui = useIndex();
 const collapsed = ref<boolean>(false);
 const inverted = ref<boolean>(ui.getInverted);
 const menuOptions = ref<any>([]);
 const clientWidth = ref<number>(document.body.clientWidth);
-const activeKey = ref<string>("1");
+const activeKey = ref<string>("");
+const menuInstRef = ref<MenuInst | null>(null);
+
+// 要改成动态路由的话,这也要动态生成菜单
+menuOptions.value = setMenuData();
 m.on("switch", (e: any) => {
   inverted.value = e.val;
 });
-m.on('menuCollapsed',(e:any)=>{
+m.on("menuCollapsed", (e: any) => {
   collapsed.value = e.val;
-})
+});
 
 watch(
   () => clientWidth.value,
@@ -37,112 +32,23 @@ watch(
   }
 );
 
+const menuSelect = (key: string) => {
+  ui.setActiveKey(key);
+};
+
+const expandMenuOpt = () => {
+  activeKey.value = ui.getActiveKey;
+  menuInstRef.value?.showOption(ui.getActiveKey);
+};
+
 onMounted(() => {
-  setMenuData();
   window.onresize = () => {
     return (() => {
       clientWidth.value = document.body.clientWidth;
     })();
   };
+  expandMenuOpt();
 });
-
-const setMenuData = () => {
-  let m = [
-    {
-      label: () =>
-        h(
-          RouterLink,
-          {
-            to: {
-              name: "index",
-              params: {
-                lang: "zh-CN",
-              },
-            },
-          },
-          { default: () => t("page.index") }
-        ),
-      key: "1",
-      icon: renderIcon(HomeOutline),
-    },
-    {
-      label: () =>
-        h(
-          RouterLink,
-          {
-            to: {
-              name: "dashboard",
-              params: {
-                lang: "zh-CN",
-              },
-            },
-          },
-          { default: () => t("page.dashboard") }
-        ),
-      icon: renderIcon(SettingsOutline),
-      key: "2",
-    },
-    // {
-    //   label: () =>
-    //     h(
-    //       RouterLink,
-    //       {
-    //         to: {
-    //           name: "chat",
-    //           params: {
-    //             lang: "zh-CN",
-    //           },
-    //         },
-    //       },
-    //       { default: () => t("page.chat") }
-    //     ),
-    //   icon: renderIcon(SettingsOutline),
-    //   key: "chat",
-    // },
-    {
-      label: () => {
-        return t("page.system");
-      },
-      icon: renderIcon(SettingsOutline),
-      key: "3",
-      children: [
-        {
-          label: () =>
-            h(
-              RouterLink,
-              {
-                to: {
-                  name: "userManage",
-                  params: {
-                    lang: "zh-CN",
-                  },
-                },
-              },
-              { default: () => t("page.userManage") }
-            ),
-          key: "userManage",
-        },
-        {
-          label: () =>
-            h(
-              RouterLink,
-              {
-                to: {
-                  name: "routeManage",
-                  params: {
-                    lang: "zh-CN",
-                  },
-                },
-              },
-              { default: () => t("page.routeManage") }
-            ),
-          key: "routeManage",
-        },
-      ],
-    },
-  ];
-  menuOptions.value = m;
-};
 
 onUnmounted(() => {
   m.off("switch");
@@ -163,32 +69,41 @@ onUnmounted(() => {
         @expand="collapsed = false"
       >
         <div class="logo-center">
-          <img v-show="collapsed" src="@/assets/logo.png" class="h-l-logo" alt="" />
-          <img v-show="!collapsed" src="@/assets/elogo-large.png" class="h-l-logo" alt="" />
+          <img
+            v-show="collapsed"
+            src="@/assets/logo.png"
+            class="h-l-logo"
+            alt=""
+          />
+          <img
+            v-show="!collapsed"
+            src="@/assets/elogo-large.png"
+            class="h-l-logo"
+            alt=""
+          />
         </div>
         <n-menu
+          ref="menuInstRef"
           v-model:value="activeKey"
           :collapsed="collapsed"
           :collapsed-width="64"
           :collapsed-icon-size="22"
           :options="menuOptions"
+          @update:value="menuSelect"
         />
       </n-layout-sider>
       <n-layout>
         <n-layout-header> <Header /> </n-layout-header>
-        <n-layout-content :class="['nlc',inverted ? 'n-l-c-b' : 'n-l-c-w']">
+        <n-layout-content :class="['nlc', inverted ? 'n-l-c-b' : 'n-l-c-w']">
           <div :class="['router-content', inverted ? 'bkb' : 'bkw']">
-            <n-scrollbar style="max-height: 100%;">
+            <n-scrollbar style="max-height: 100%">
               <router-view />
             </n-scrollbar>
           </div>
         </n-layout-content>
       </n-layout>
     </n-layout>
-    <!-- <n-layout-footer>成府路</n-layout-footer> -->
   </n-layout>
-
-  <!-- <Footer /> -->
 </template>
 
 <style scoped lang="less">
@@ -206,7 +121,7 @@ onUnmounted(() => {
 .bkw {
   background: #fff;
 }
-.nlc{
+.nlc {
   height: calc(100% - 71px);
   padding: 24px 12px;
   background-color: #f5f5f5;

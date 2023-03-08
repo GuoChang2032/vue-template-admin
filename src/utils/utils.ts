@@ -2,8 +2,19 @@
 import { createDiscreteApi } from "naive-ui";
 import router from "../router";
 import i18n from "@/locales/i18n";
+import { RouterLink } from "vue-router";
+import { Component } from "vue";
+import { NIcon } from "naive-ui";
+import { SettingsOutline, HomeOutline } from "@vicons/ionicons5";
+import { useI18n } from "vue-i18n";
+
 
 const LOCAL_NAME = "localStorageName";
+
+function renderIcon(icon: Component) {
+  return () => h(NIcon, null, { default: () => h(icon) });
+}
+
 export const backTop = (num = 0, duration = 50): void => {
   // document.documentElement.scrollTop = num === 0 ? document.body.scrollTop : num
   // 现在的位置
@@ -112,4 +123,102 @@ export const Message = (type: any, msg: string) => {
 export const judgePage = (r_page: any, route: string): boolean => {
   if (!r_page.getPage.reset && r_page.getPage.route === route) return true;
   return false;
+};
+export const setMenuData = () => {
+  const { t } = useI18n();
+  let m = [
+    {
+      label: () =>
+        h(
+          RouterLink,
+          {
+            to: {
+              name: "index",
+              params: {
+                lang: "zh-CN",
+              },
+            },
+          },
+          { default: () => t("page.index") }
+        ),
+      key: "index",
+      icon: renderIcon(HomeOutline),
+    },
+    // {
+    //   label: () =>
+    //     h(
+    //       RouterLink,
+    //       {
+    //         to: {
+    //           name: "dashboard",
+    //           params: {
+    //             lang: "zh-CN",
+    //           },
+    //         },
+    //       },
+    //       { default: () => t("page.dashboard") }
+    //     ),
+    //   icon: renderIcon(SettingsOutline),
+    //   key: "2",
+    // },
+    // {
+    //   label: () =>
+    //     h(
+    //       RouterLink,
+    //       {
+    //         to: {
+    //           name: "chat",
+    //           params: {
+    //             lang: "zh-CN",
+    //           },
+    //         },
+    //       },
+    //       { default: () => t("page.chat") }
+    //     ),
+    //   icon: renderIcon(SettingsOutline),
+    //   key: "chat",
+    // },
+    {
+      label: () => {
+        return t("page.system");
+      },
+      icon: renderIcon(SettingsOutline),
+      key: "userManage",
+      children: [
+        {
+          label: () =>
+            h(
+              RouterLink,
+              {
+                to: {
+                  name: "userManage",
+                  params: {
+                    lang: "zh-CN",
+                  },
+                },
+              },
+              { default: () => t("page.userManage") }
+            ),
+          key: "userManage",
+        },
+        {
+          label: () =>
+            h(
+              RouterLink,
+              {
+                to: {
+                  name: "routeManage",
+                  params: {
+                    lang: "zh-CN",
+                  },
+                },
+              },
+              { default: () => t("page.routeManage") }
+            ),
+          key: "routeManage",
+        },
+      ],
+    },
+  ];
+  return m;
 };
