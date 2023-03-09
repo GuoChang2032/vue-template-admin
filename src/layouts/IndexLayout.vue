@@ -69,18 +69,18 @@ onUnmounted(() => {
         @expand="collapsed = false"
       >
         <div class="grid py-2 justify-items-center">
-            <img
-              v-show="collapsed"
-              src="@/assets/logo.png"
-              class="h-l-logo"
-              alt=""
-            />
-            <img
-              v-show="!collapsed"
-              src="@/assets/elogo-large.png"
-              class="h-l-logo"
-              alt=""
-            />
+          <img
+            v-show="collapsed"
+            src="@/assets/logo.png"
+            class="h-l-logo"
+            alt=""
+          />
+          <img
+            v-show="!collapsed"
+            src="@/assets/elogo-large.png"
+            class="h-l-logo"
+            alt=""
+          />
         </div>
         <n-menu
           ref="menuInstRef"
@@ -104,6 +104,7 @@ onUnmounted(() => {
             </n-scrollbar>
           </div>
         </n-layout-content>
+        <!-- <Footer /> -->
       </n-layout>
     </n-layout>
   </n-layout>
@@ -135,7 +136,7 @@ onUnmounted(() => {
 
 .nlc {
   height: calc(100% - 71px);
-  padding: 24px 12px;
+  padding: 24px 12px 0;
   background-color: #f5f5f5c2;
 }
 .n-l-c-w {
@@ -145,7 +146,8 @@ onUnmounted(() => {
   background-color: black;
 }
 .router-content {
-  height: calc(100% - 25.5px);
+  // height: calc(100% - 25.5px);
+  height: 100%;
   min-height: 500px;
   border-radius: 3px;
   max-height: 100%;

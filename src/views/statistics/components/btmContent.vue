@@ -2,14 +2,21 @@
 import { onMounted } from "vue";
 onMounted(() => {});
 
-const data = ref<any>([]);
+const data = ref<any>([
+  {
+    title: "能不能记住登录?",
+    desc: "每次登录后过一天就要重新登录,就不能永久登录吗?垃圾",
+    source: "pc浏览器端",
+    user: "不破楼兰",
+  },
+]);
 </script>
 
 <template>
   <n-grid class="w-full" cols="3" :x-gap="15" :y-gap="20" item-responsive>
     <n-grid-item span="0:3 900:1 1200:1">
       <div class="p-4 bg-white rounded-lg shadow-md">
-        <div class="text-gray-900 m-1.5 xl">系统警告</div>
+        <div class="text-gray-900 m-1.5 text-lg">系统警告</div>
         <n-timeline>
           <n-timeline-item content="啊" />
           <n-timeline-item
@@ -42,11 +49,11 @@ const data = ref<any>([]);
     </n-grid-item>
     <n-grid-item span="0:3 900:2 1200:2">
       <div class="p-4 bg-white rounded-lg shadow-md">
-        <div class="text-gray-900 m-1.5 xl">用户反馈</div>
+        <div class="text-gray-900 m-1.5 text-lg">用户反馈</div>
         <el-table :data="data" style="width: 100%" max-height="550">
           <el-table-column prop="title" label="标题" />
           <el-table-column prop="desc" label="描述" />
-          <el-table-column prop="type" label="类型" />
+          <el-table-column prop="source" label="来源" />
           <el-table-column prop="user" label="反馈用户" />
         </el-table>
       </div>

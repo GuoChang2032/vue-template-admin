@@ -3,14 +3,15 @@ import { useIndex } from "@/stores/indexStore";
 import { onMounted, ref } from "vue";
 import m from "@/utils/mitt";
 import { useDark, useToggle } from "@vueuse/core";
-import { Message, logout,routerNameMapping } from "@/utils/utils";
+import { Message, logout, routerNameMapping } from "@/utils/utils";
+import {notice} from '@/components/noticeComponents'
 import { useI18n } from "vue-i18n";
 const isDark = useDark();
 const toggleDark = useToggle(isDark);
 const inver = useIndex();
 const theme = ref<boolean>(false);
 const isCollapsed = ref<boolean>(false);
-const pagename = ref<string>(inver.getActiveKey || '');
+const pagename = ref<string>(inver.getActiveKey || "");
 const i18n = useI18n();
 const { t } = useI18n();
 const options = ref<any>([
@@ -23,6 +24,7 @@ const options = ref<any>([
     key: "en",
   },
 ]);
+
 
 watch(
   () => inver.getActiveKey,
@@ -74,7 +76,9 @@ const collapseChange = () => {
       />
       <n-breadcrumb>
         <n-breadcrumb-item> {{ t("page.index") }} </n-breadcrumb-item>
-        <n-breadcrumb-item> {{ t(routerNameMapping(pagename)) }} </n-breadcrumb-item>
+        <n-breadcrumb-item>
+          {{ t(routerNameMapping(pagename)) }}
+        </n-breadcrumb-item>
       </n-breadcrumb>
     </div>
     <div class="h-right">
@@ -90,12 +94,7 @@ const collapseChange = () => {
           </n-switch>
         </div>
         <div class="notice-content">
-          <div class="n-c-wrap" title="通知">
-            <icon
-              icon="material-symbols:add-alert-outline-rounded"
-              size="24px"
-            />
-          </div>
+          <notice/>
         </div>
         <div class="i18n-content">
           <n-dropdown trigger="hover" :options="options" @select="handleSelect">
@@ -156,6 +155,7 @@ const collapseChange = () => {
 .i18n-content,
 .notice-content {
   cursor: pointer;
+  margin-right: 4px;
 }
 .n-c-wrap {
   padding: 8px;

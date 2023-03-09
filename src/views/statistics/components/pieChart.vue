@@ -51,7 +51,7 @@ const initChart = () => {
 
 <template>
   <div class="p-4 bg-white rounded-lg shadow-md">
-    <div class="text-gray-900 m-1.5 xl">接口数据访问方式</div>
+    <div class="text-gray-900 m-1.5 text-lg">接口数据访问方式</div>
     <div id="chart" ref="pieChart"></div>
   </div>
 </template>

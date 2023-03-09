@@ -5,7 +5,7 @@ onMounted(() => {});
 </script>
 
 <template>
-  <div>
+  <div class="pb-4">
     <n-space :size=[0,15] vertical>
       <topChart/>
       <btmContent />
