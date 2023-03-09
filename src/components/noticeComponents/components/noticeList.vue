@@ -1,10 +1,21 @@
 <script lang="ts" setup>
 import { onMounted } from "vue";
+import { useIndex } from "@/stores/indexStore";
+
 onMounted(() => {});
+
+const ui = useIndex();
+const inverted = ref<boolean>(ui.getInverted);
+watch(
+  () => ui.getInverted,
+  (nv, ov) => {
+    inverted.value = nv;
+  }
+);
 </script>
 
 <template>
-  <div class="flex w-full p-2 cursor-pointer hover:bg-gray-100">
+  <div class="flex w-full p-2 cursor-pointer" :class="inverted?'hover:bg-gray-400':'hover:bg-gray-100'">
     <div class="flex-1 flex-none mr-2">
       <n-avatar
         size="small"

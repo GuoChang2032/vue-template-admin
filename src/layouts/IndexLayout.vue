@@ -5,8 +5,8 @@ import { setMenuData } from "@/utils/utils";
 import { MenuInst } from "naive-ui";
 
 const ui = useIndex();
-const collapsed = ref<boolean>(false);
 const inverted = ref<boolean>(ui.getInverted);
+const collapsed = ref<boolean>(false);
 const menuOptions = ref<any>([]);
 const clientWidth = ref<number>(document.body.clientWidth);
 const activeKey = ref<string>("");

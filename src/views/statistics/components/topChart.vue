@@ -1,11 +1,26 @@
 <script lang="ts" setup>
 import { onMounted } from "vue";
 import { lineChart, pieChart } from "./index";
-onMounted(() => {});
+import { useIndex } from "@/stores/indexStore";
+
+const ui = useIndex();
+const inverted = ref<boolean>(ui.getInverted);
+
+onMounted(() => {
+
+});
+
+watch(
+  () => ui.getInverted,
+  (nv, ov) => {
+    inverted.value = nv;
+  }
+);
+
 </script>
 
 <template>
-  <div class="mb-6 rounded-lg bg-white p-4 shadow-md">
+  <div class="p-4 mb-6 rounded-lg shadow-md" :class="inverted?'bg-gray-800':'bg-white'">
     <n-page-header subtitle="让你的听觉更懂视觉">
       <n-grid :cols="5">
         <n-gi>

@@ -2,11 +2,23 @@
 import { Message } from "@/utils/utils";
 import { noticeList, emptyNotice } from "./components";
 import { onMounted } from "vue";
+import { useIndex } from "@/stores/indexStore";
+
 onMounted(() => {});
+
+const ui = useIndex();
+const inverted = ref<boolean>(ui.getInverted);
 const count = ref<number>(3);
 const msg = ref<number>(0);
 const dolist = ref<number>(0);
 const currentTab = ref<string>("1");
+
+watch(
+  () => ui.getInverted,
+  (nv, ov) => {
+    inverted.value = nv;
+  }
+);
 
 const handleClear = () => {
   Message("success", "清除成功");
@@ -22,7 +34,7 @@ const handleLoadMore = () => {};
     <template #trigger>
       <div class="n-c-wrap" :title="'通知(' + count + ')'">
         <n-badge :value="count" show-zero :max="99" :show="count > 0">
-          <icon icon="mdi:bell-outline" size="24px" class="text-gray-800" />
+          <icon icon="mdi:bell-outline" size="24px" :class="inverted?'text-gray-200':'text-gray-800'" />
         </n-badge>
       </div>
     </template>
