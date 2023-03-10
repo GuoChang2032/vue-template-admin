@@ -21,7 +21,7 @@ watch(
     class="p-4 mb-6 rounded-lg shadow-md"
     :class="inverted ? 'bg-gray-800' : 'bg-white'"
   >
-    <n-page-header subtitle="今日多云转晴，14℃ - 27℃！">
+    <n-page-header>
       <n-grid :cols="5">
         <n-gi>
           <n-statistic label="访问" value="1251 次" />
@@ -40,11 +40,12 @@ watch(
         </n-gi>
       </n-grid>
       <template #title>
-        <h3>早上好！张三，开始您一天的苦逼工作吧！</h3>
+        <h3 class="font-semibold">早上好！张三，开始您一天的苦逼工作吧！</h3>
       </template>
       <template #avatar>
         <n-avatar
           size="large"
+          round
           src="https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg"
         />
       </template>

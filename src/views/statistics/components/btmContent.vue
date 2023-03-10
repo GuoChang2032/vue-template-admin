@@ -21,13 +21,22 @@ const data = ref<any>([
     source: "pc浏览器端",
     user: "不破楼兰",
   },
+  {
+    title: "建议找个电子厂上班?",
+    desc: "写得什么破玩意,我呸!!",
+    source: "pc浏览器端",
+    user: "不以为然",
+  },
 ]);
 </script>
 
 <template>
   <n-grid class="w-full" cols="3" :x-gap="15" :y-gap="20" item-responsive>
     <n-grid-item span="0:3 900:1 1200:1">
-      <div class="p-4 rounded-lg shadow-md" :class="inverted?'bg-gray-800':'bg-white'">
+      <div
+        class="p-4 rounded-lg shadow-md"
+        :class="inverted ? 'bg-gray-800' : 'bg-white'"
+      >
         <div class="m-1.5 text-lg">系统警告</div>
         <n-timeline>
           <n-timeline-item content="啊" />
@@ -60,7 +69,10 @@ const data = ref<any>([
       </div>
     </n-grid-item>
     <n-grid-item span="0:3 900:2 1200:2">
-      <div class="p-4 rounded-lg shadow-md" :class="inverted?'bg-gray-800':'bg-white'">
+      <div
+        class="p-4 rounded-lg shadow-md"
+        :class="inverted ? 'bg-gray-800' : 'bg-white'"
+      >
         <div class="m-1.5 text-lg">用户反馈</div>
         <el-table :data="data" style="width: 100%" max-height="550">
           <el-table-column prop="title" label="标题" />
