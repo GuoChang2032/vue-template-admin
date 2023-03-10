@@ -5,6 +5,7 @@ import '@vue/runtime-core'
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    Banner: typeof import('./src/components/indexComponents/banner.vue')['default']
     Chart2: typeof import('./src/components/chartComponents/chart2.vue')['default']
     CodeMirror: typeof import('./src/components/codeMirror/codeMirror.vue')['default']
     ElCol: typeof import('element-plus/es')['ElCol']
@@ -58,6 +59,7 @@ declare module '@vue/runtime-core' {
     NPopover: typeof import('naive-ui')['NPopover']
     NScrollbar: typeof import('naive-ui')['NScrollbar']
     NSelect: typeof import('naive-ui')['NSelect']
+    NSkeleton: typeof import('naive-ui')['NSkeleton']
     NSpace: typeof import('naive-ui')['NSpace']
     NStatistic: typeof import('naive-ui')['NStatistic']
     NSwitch: typeof import('naive-ui')['NSwitch']

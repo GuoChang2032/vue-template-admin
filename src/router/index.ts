@@ -15,21 +15,21 @@ const routes: RouteRecordRaw[] = [
       //   },
       //   component: () => import("@/views/charts/charts.vue"),
       // },
-      {
-        path: "/statistics",
-        name: "statistics",
-        meta: {
-          title: "数据统计",
-        },
-        component: () => import("@/views/statistics/statistics.vue"),
-      },
+      // {
+      //   path: "/statistics",
+      //   name: "statistics",
+      //   meta: {
+      //     title: "统计",
+      //   },
+      //   component: () => import("@/views/statistics/statistics.vue"),
+      // },
       {
         path: "/index",
         name: "index",
         meta: {
           title: "首页",
         },
-        component: () => import("@/views/index.vue"),
+        component: () => import("@/views/statistics/statistics.vue"),
       },
       {
         path: "/dashboard",

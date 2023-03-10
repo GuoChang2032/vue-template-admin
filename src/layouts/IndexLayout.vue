@@ -24,11 +24,7 @@ m.on("menuCollapsed", (e: any) => {
 watch(
   () => clientWidth.value,
   (nv, ov) => {
-    if (nv < 900) {
-      collapsed.value = true;
-    } else {
-      collapsed.value = false;
-    }
+    collapsed.value = nv < 900 ? true : false;
   }
 );
 

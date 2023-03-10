@@ -148,22 +148,22 @@ export const setMenuData = () => {
         //     ),
         //   key: "testchart",
         // },
-        {
-          label: () =>
-            h(
-              RouterLink,
-              {
-                to: {
-                  name: "statistics",
-                  params: {
-                    lang: "zh-CN",
-                  },
-                },
-              },
-              { default: () => t("page.statistics") }
-            ),
-          key: "statistics",
-        },
+        // {
+        //   label: () =>
+        //     h(
+        //       RouterLink,
+        //       {
+        //         to: {
+        //           name: "statistics",
+        //           params: {
+        //             lang: "zh-CN",
+        //           },
+        //         },
+        //       },
+        //       { default: () => t("page.statistics") }
+        //     ),
+        //   key: "statistics",
+        // },
         {
           label: () =>
             h(

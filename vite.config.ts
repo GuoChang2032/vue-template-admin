@@ -17,7 +17,7 @@ export default defineConfig({
     vue(),
     AutoImport({
       resolvers: [ElementPlusResolver(), NaiveUiResolver()],
-      imports: ["vue",'vue-i18n','vue-router'],
+      imports: ["vue", "vue-i18n", "vue-router"],
       dts: "src/auto-import.d.ts",
     }),
     Components({
@@ -53,13 +53,22 @@ export default defineConfig({
     },
   },
   server: {
-    port: 9999,
     // proxy: {
-    //   "/": {
-    //     target: "https://c.elanginfo.com/elang-math",
+    //   "/weather": {
+    //     target: "https://devapi.qweather.com/v7",
     //     ws: true,
     //   },
     // },
+    proxy: {
+      // 接口地址代理
+      '/weather/3d': {
+        target: 'https://devapi.qweather.com/v7/weather/3d', // 接口的域名
+        secure: false, // 如果是https接口，需要配置这个参数
+        changeOrigin: true, // 如果接口跨域，需要进行这个参数配置
+        rewrite: path => path.replace(/^\/weather\/3d/, '')
+      },
+    }
+
   },
   esbuild: {
     pure: ["console.log", "console.info"],
