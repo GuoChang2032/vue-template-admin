@@ -96,7 +96,7 @@ const otherLogin = (type: string) => {
     <div class="l-c-btn">
       <n-button
         size="large"
-        type="info"
+        type="primary"
         block
         @click="handleLogin"
         :loading="loading"

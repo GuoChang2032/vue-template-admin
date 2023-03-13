@@ -4,6 +4,7 @@
     :locale="language"
     :date-locale="datelanguage"
     :theme="theme"
+    :theme-overrides="themeOverrides"
   >
     <n-notification-provider>
       <n-dialog-provider>
@@ -63,9 +64,9 @@ export default defineComponent({
 
     const themeOverrides: GlobalThemeOverrides = {
       common: {
-        primaryColor: "#5983b8",
-        primaryColorHover: "#79a4da",
-        primaryColorPressed: "#426897",
+        primaryColor: "#5A67BA",
+        primaryColorHover: "#6d77b5",
+        primaryColorPressed: "#4c5bb5",
       },
     };
 
