@@ -72,7 +72,6 @@ const other = (type: string) => {
     </div>
     <div class="mb-6">
       <n-button
-        class="btn-primary"
         type="primary"
         block
         size="large"
@@ -90,7 +89,4 @@ const other = (type: string) => {
 </template>
 
 <style scoped lang="less">
-.btn-primary {
-  background-color: #5a67ba;
-}
 </style>

@@ -113,7 +113,4 @@ const sendSys = () => {
 </template>
 
 <style scoped lang="less">
-.btn-primary {
-  background-color: #5a67ba;
-}
 </style>

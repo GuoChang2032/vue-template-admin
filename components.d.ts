@@ -6,6 +6,9 @@ import '@vue/runtime-core'
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     Banner: typeof import('./src/components/indexComponents/banner.vue')['default']
+    BtnComponents: typeof import('./src/components/btns/btnComponents.vue')['default']
+    Btns: typeof import('./src/components/btns/btns.vue')['default']
+    ButtonComponents: typeof import('./src/components/btns/buttonComponents.vue')['default']
     Chart2: typeof import('./src/components/chartComponents/chart2.vue')['default']
     CodeMirror: typeof import('./src/components/codeMirror/codeMirror.vue')['default']
     ElCol: typeof import('element-plus/es')['ElCol']
@@ -72,6 +75,8 @@ declare module '@vue/runtime-core' {
     RouterView: typeof import('vue-router')['RouterView']
     Search: typeof import('./src/components/list/component/Search.vue')['default']
     Table: typeof import('./src/components/list/component/Table.vue')['default']
+    TableComponent: typeof import('./src/components/tableComponent/tableComponent.vue')['default']
+    ThemeComponent: typeof import('./src/components/themeComponent/themeComponent.vue')['default']
     Upload: typeof import('./src/components/fileUploadCom/upload.vue')['default']
     WEditor: typeof import('./src/components/wangEditor/wEditor.vue')['default']
   }

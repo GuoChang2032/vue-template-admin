@@ -1,26 +1,14 @@
 <script lang="ts" setup>
 import { onMounted } from "vue";
 import { lineChart, pieChart } from "./index";
-import { useIndex } from "@/stores/indexStore";
-
-const ui = useIndex();
-const inverted = ref<boolean>(ui.getInverted);
 
 onMounted(() => {});
 
-watch(
-  () => ui.getInverted,
-  (nv, ov) => {
-    inverted.value = nv;
-  }
-);
 </script>
 
 <template>
-  <div
-    class="p-4 mb-6 rounded-lg shadow-md"
-    :class="inverted ? 'bg-gray-800' : 'bg-white'"
-  >
+  <div class="pb-4">
+  <themeComponent>
     <n-page-header>
       <n-grid :cols="5">
         <n-gi>
@@ -58,7 +46,8 @@ watch(
       </template>
       <template #footer> 截止到 2023-12-32 12:33</template>
     </n-page-header>
-  </div>
+  </themeComponent>
+</div>
   <n-grid class="w-full" cols="3" :x-gap="15" :y-gap="20" item-responsive>
     <n-grid-item span="0:3 900:2 1200:2">
       <lineChart />

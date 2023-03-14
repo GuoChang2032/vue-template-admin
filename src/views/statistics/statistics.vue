@@ -7,9 +7,9 @@ onMounted(() => {});
 <template>
   <div class="pb-4">
     <n-space :size=[0,15] vertical>
-      <weather/>
-      <topChart/>
-      <btmContent />
+      <!-- <weather/> -->
+      <topChart />
+      <btmContent/>
     </n-space>
   </div>
 </template>

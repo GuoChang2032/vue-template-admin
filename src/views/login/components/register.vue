@@ -102,7 +102,6 @@ const sendSys = () => {
     </div>
     <div class="mt-12 mb-6">
       <n-button
-        class="btn-primary"
         type="primary"
         block
         size="large"
@@ -120,9 +119,6 @@ const sendSys = () => {
 </template>
 
 <style scoped lang="less">
-.btn-primary {
-  background-color: #5a67ba;
-}
 </style>
 <style lang="less">
 .register-no-flex {
