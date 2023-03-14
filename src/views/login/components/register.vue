@@ -1,136 +1,133 @@
-<script lang="ts">
-import { defineComponent, ref } from "vue";
-import { FormInst, FormItemRule } from "naive-ui";
-import { useI18n } from "vue-i18n";
-export default defineComponent({
-  setup(props, { emit }) {
-    const registerForm = ref<FormInst | null>(null);
-    const { t } = useI18n();
-    const registerModel = ref<any>({
-      account: null,
-      phone: null,
-      code: null,
-      password: null,
-    });
-    const loading = ref<boolean>(false);
+<script lang="ts" setup>
+import { FormInst } from "naive-ui";
+import { useRouter } from "vue-router";
+import { useUserInfo } from "@/stores/user";
+import { Message } from "@/utils/utils";
 
-    return {
-      loading,
-      t,
-      registerForm,
-      registerModel,
-      loginRules: {
-        account: {
-          required: true,
-          trigger: ["blur", "input"],
-          message: t('form.login.account'),
-        },
-        phone: {
-          validator(rule: FormItemRule, value: number) {
-            return /^(?:(?:\+|00)86)?1(?:(?:3[\d])|(?:4[5-79])|(?:5[0-35-9])|(?:6[5-7])|(?:7[0-8])|(?:8[\d])|(?:9[1589]))\d{8}$/.test(
-              value.toString()
-            );
-          },
-          trigger: ["blur", "input"],
-          message: t('form.login.rightPhone'),
-        },
-        password: {
-          required: true,
-          trigger: ["blur", "input"],
-          message: t('form.login.password'),
-        },
-        code: {
-          required: true,
-          trigger: ["blur", "input"],
-          message: t('form.login.code'),
-        },
-      },
+const emit = defineEmits(["callback"]);
 
-      handleRegister() {},
-      back() {
-        emit("callback", { type: "1" });
-      },
-    };
-  },
+const loginForm = ref<FormInst | null>(null);
+const loginModel = ref<any>({
+  account: null,
+  password: null,
+  phone: null,
+  code: null,
 });
+const isRemembers = ref<boolean>(false);
+const loading = ref<boolean>(false);
+const router = useRouter();
+const us = useUserInfo();
+const { t } = useI18n();
+
+const handleLogin = () => {
+  Message("success", "注册成功");
+  setTimeout(() => {
+    other("0");
+  }, 800);
+};
+const other = (type: string) => {
+  emit("callback", { type });
+};
+
+const count = ref<number>(60);
+const timer = ref<any>();
+const sendSys = () => {
+  count.value--;
+  timer.value = setInterval(() => {
+    count.value--;
+    if (count.value <= 0) {
+      clearInterval(timer.value);
+      count.value = 60;
+    }
+  }, 1000);
+};
 </script>
 
 <template>
-  <div class="l-c-head">{{ t("form.login.register") }}</div>
-  <div class="l-c-form">
-    <n-form
-      ref="registerForm"
-      :model="registerModel"
-      :rules="loginRules"
-      label-placement="left"
-      label-width="auto"
-      :show-require-mark="false"
-      class="l-f"
-    >
-      <n-form-item label="" path="account">
-        <n-input
-          size="large"
-          v-model:value="registerModel.account"
-          :placeholder="t('form.login.account')"
-        />
-      </n-form-item>
-      <n-form-item label="" path="phone">
-        <n-input
-          size="large"
-          v-model:value="registerModel.phone"
-          :placeholder="t('form.login.phone')"
-        />
-      </n-form-item>
-      <n-form-item label="" path="code">
-        <div class="code-wrap flex-between" style="width: 100%">
-          <div style="width: 85%">
-            <n-input
-              size="large"
-              v-model:value="registerModel.code"
-              :placeholder="t('form.login.code')"
-            />
-          </div>
-          <div style="width: 10%"></div>
-          <n-button size="large"> {{t('form.login.sendCode')}} </n-button>
-        </div>
-      </n-form-item>
-      <n-form-item label="" path="password">
-        <n-input
-          type="password"
-          show-password-on="mousedown"
-          size="large"
-          v-model:value="registerModel.password"
-          :placeholder="t('form.login.password')"
-        />
-      </n-form-item>
-    </n-form>
-    <div class="l-c-btn">
-      <n-button size="large" type="info" block @click="handleRegister">
-        {{t('form.login.register')}}
-      </n-button>
+  <div class="ml-auto mr-auto 2xl:w-6/12 xl:w-8/12 lg:w-9/12 md:10/12 sm:9/12">
+    <div class="mb-6 mb-10 text-3xl">账号注册</div>
+    <div class="flex justify-around mx-4">
+      <div
+        class="flex px-4 py-2 text-base text-gray-800 border border-gray-200 cursor-pointer rounded-xl hover:bg-gray-200"
+      >
+        <img src="@/assets/google-icon.svg" class="w-6 mr-1.5" alt="" />
+        <span> Google 注册</span>
+      </div>
+      <div
+        class="flex px-4 py-2 text-base text-gray-800 border border-gray-200 cursor-pointer rounded-xl hover:bg-gray-200"
+      >
+        <img src="@/assets/facebook.svg" class="w-6 mr-1.5" alt="" />
+        <span> Facebook 注册</span>
+      </div>
     </div>
-    <div class="other-btn">
-      <n-button block @click="back"> {{t('form.login.return')}} </n-button>
+    <div class="mt-12 mb-8 text-lg font-extrabold text-center text-gray-600">
+      - OR -
+    </div>
+    <div class="register-no-flex">
+      <input
+        class="login-input"
+        v-model="loginModel.account"
+        placeholder="输入账号"
+        type="text"
+      />
+      <input
+        class="login-input"
+        v-model="loginModel.password"
+        placeholder="输入密码"
+        type="password"
+      />
+      <input
+        class="login-input"
+        v-model="loginModel.phone"
+        placeholder="输入手机号"
+        type="text"
+      />
+      <div class="flex">
+        <input
+          class="flex-grow mr-2 login-input"
+          v-model="loginModel.code"
+          placeholder="输入验证码"
+          type="text"
+        />
+        <n-button
+          :disabled="count < 60"
+          text
+          class="flex-1 w-2/6"
+          type="primary"
+          @click="sendSys"
+        >
+          {{ count >= 60 ? "发送验证码" : count + "秒后重新发送" }}
+        </n-button>
+      </div>
+    </div>
+    <div class="mt-12 mb-6">
+      <n-button
+        class="btn-primary"
+        type="primary"
+        block
+        size="large"
+        @click="handleLogin"
+        :loading="loading"
+        >注 册</n-button
+      >
+    </div>
+    <div class="">
+      已有账号,<n-button text type="primary" @click="other('0')">
+        点击登录
+      </n-button>
     </div>
   </div>
 </template>
 
 <style scoped lang="less">
-.l-c-operation {
-  padding: 5px 0;
+.btn-primary {
+  background-color: #5a67ba;
 }
-.l-c-btn {
-  margin: 10px 0 20px;
-}
-.l-c-head {
-  font-size: 28px;
-  margin: 15px 0;
-}
-.l-f {
-  width: 400px;
-}
-.code-img {
-  width: 100px;
-  margin-left: 10px;
+</style>
+<style lang="less">
+.register-no-flex {
+  .n-form-item-blank {
+    display: block;
+  }
 }
 </style>

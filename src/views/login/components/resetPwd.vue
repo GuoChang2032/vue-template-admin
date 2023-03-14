@@ -1,160 +1,119 @@
-<script lang="ts">
-import { defineComponent, ref } from "vue";
-import { FormInst, FormItemRule } from "naive-ui";
+<script lang="ts" setup>
+import { FormInst } from "naive-ui";
+import { useRouter } from "vue-router";
+import { useUserInfo } from "@/stores/user";
 import { Message } from "@/utils/utils";
-export default defineComponent({
-  setup(props, { emit }) {
-    const loginForm = ref<FormInst | null>(null);
-    const loginModel = ref<any>({
-      phone: null,
-      code: null,
-      password: null,
-      again: null,
-    });
-    const remember = ref<boolean>(false);
-    const loading = ref<boolean>(false);
-    const count = ref<number>(60);
-    return {
-      count,
-      loading,
-      remember,
-      loginForm,
-      loginModel,
-      loginRules: {
-        phone: {
-          validator(rule: FormItemRule, value: number) {
-            return /^(?:(?:\+|00)86)?1(?:(?:3[\d])|(?:4[5-79])|(?:5[0-35-9])|(?:6[5-7])|(?:7[0-8])|(?:8[\d])|(?:9[1589]))\d{8}$/.test(
-              value.toString()
-            );
-          },
-          trigger: ["blur", "input"],
-          message: "请输入正确的手机号",
-        },
-        code: {
-          required: true,
-          trigger: ["blur", "input"],
-          message: "请输入验证码",
-        },
-      },
 
-      handleLogin() {
-        Message('success','重置成功')
-        emit("callback", { type: "1" });
-      },
-      back() {
-        emit("callback", { type: "1" });
-      },
-      send() {
-        if (
-          !/^(?:(?:\+|00)86)?1(?:(?:3[\d])|(?:4[5-79])|(?:5[0-35-9])|(?:6[5-7])|(?:7[0-8])|(?:8[\d])|(?:9[1589]))\d{8}$/.test(
-            loginModel.value.phone
-          )
-        ) {
-          Message("warning", "请输入正确的手机号");
-          return;
-        }
-        let timer: any;
-        count.value--;
-        timer = setInterval(() => {
-          if (count.value <= 0) {
-            clearInterval(timer);
-            count.value = 60;
-            return;
-          }
-          count.value--;
-        }, 1000);
-      },
-    };
-  },
+const emit = defineEmits(["callback"]);
+
+const loginForm = ref<FormInst | null>(null);
+const loginModel = ref<any>({
+  account: null,
+  password: null,
+  code: null,
 });
+const isRemembers = ref<boolean>(false);
+const loading = ref<boolean>(false);
+const router = useRouter();
+const us = useUserInfo();
+const { t } = useI18n();
+const reset_type = ref<number>(1);
+
+const loginRules = {
+  account: {
+    required: true,
+    trigger: ["blur", "input"],
+    message: t("form.login.account"),
+  },
+  password: {
+    required: true,
+    trigger: ["blur", "input"],
+    message: t("form.login.password"),
+  },
+  code: {
+    required: true,
+    trigger: ["blur", "input"],
+    message: t("form.login.code"),
+  },
+};
+
+const other = (type: string) => {
+  emit("callback", { type });
+};
+
+const count = ref<number>(60);
+const timer = ref<any>();
+const sendSys = () => {
+  let msg =
+    reset_type.value === 1 ? "已发送验证码到手机" : "已发送验证码到邮箱";
+  Message("success", msg);
+  count.value--;
+  timer.value = setInterval(() => {
+    count.value--;
+    if (count.value <= 0) {
+      clearInterval(timer.value);
+      count.value = 60;
+    }
+  }, 1000);
+};
 </script>
 
 <template>
-  <div class="l-c-head">重置密码</div>
-  <div class="l-c-form">
-    <n-form
-      ref="loginForm"
-      :model="loginModel"
-      :rules="loginRules"
-      label-placement="left"
-      label-width="auto"
-      :show-require-mark="false"
-      class="l-f"
-    >
-      <n-form-item label="" path="phone">
-        <n-input
-          size="large"
-          v-model:value="loginModel.phone"
-          placeholder="输入手机号"
-        />
-      </n-form-item>
-      <n-form-item label="" path="code">
-        <div class="code-wrap flex-between">
-          <div style="width: 85%">
-            <n-input
-              size="large"
-              v-model:value="loginModel.code"
-              placeholder="输入验证码"
-            />
-          </div>
-          <div style="width: 10%"></div>
-          <n-button
-            size="large"
-            @click="send"
-            :disabled="count > 0 && count < 60"
-            >{{ count > 0 && count < 60 ? count + "秒后重发" : "发送验证码" }}
-          </n-button>
-        </div>
-      </n-form-item>
-      <n-form-item label="" path="password">
-        <n-input
-          size="large"
-          type="password"
-          show-password-on="mousedown"
-          v-model:value="loginModel.password"
-          placeholder="输入密码"
-        />
-      </n-form-item>
-      <n-form-item label="" path="again">
-        <n-input
-          size="large"
-          type="password"
-          show-password-on="mousedown"
-          v-model:value="loginModel.again"
-          placeholder="确认密码"
-        />
-      </n-form-item>
-    </n-form>
-    <div class="l-c-btn">
-      <n-button size="large" type="info" block @click="handleLogin">
-        确 定
-      </n-button>
+  <div class="ml-auto mr-auto 2xl:w-6/12 xl:w-8/12 lg:w-9/12 md:10/12 sm:9/12">
+    <div class="mb-6 mb-10 text-3xl">重置密码</div>
+    <div class="flex justify-start">
+      <div
+        v-if="reset_type === 1"
+        @click="reset_type = 2"
+        class="flex px-4 py-2 text-base text-gray-800 border border-gray-200 cursor-pointer rounded-xl hover:bg-gray-200"
+      >
+        <icon icon="material-symbols:mark-email-unread-outline-rounded" />
+        <span> 邮箱重置 </span>
+      </div>
+      <div
+        v-else
+        @click="reset_type = 1"
+        class="flex px-4 py-2 text-base text-gray-800 border border-gray-200 cursor-pointer rounded-xl hover:bg-gray-200"
+      >
+        <icon icon="material-symbols:phone-android-outline" />
+        <span> 手机重置 </span>
+      </div>
     </div>
-    <div class="other-btn">
-      <n-button block @click="back"> 返 回 </n-button>
+    <div class="mt-10 mb-6">
+      <input
+        class="login-input"
+        :placeholder="reset_type === 1 ? '输入手机号' : '输入邮箱'"
+        type="text"
+      />
+      <div class="flex">
+        <input
+          class="flex-grow mr-2 login-input"
+          placeholder="输入验证码"
+          type="text"
+        />
+        <n-button
+          :disabled="count < 60"
+          text
+          class="flex-1 w-2/6"
+          type="primary"
+          @click="sendSys"
+        >
+          {{ count >= 60 ? "发送验证码" : count + "秒后重新发送" }}
+        </n-button>
+      </div>
+      <input class="login-input" placeholder="输入新密码" type="password" />
+      <input class="login-input" placeholder="重复新密码" type="password" />
+    </div>
+    <div class="mt-12 mb-6">
+      <n-button block size="large" @click="other('0')" :loading="loading"
+        >返回登录</n-button
+      >
     </div>
   </div>
 </template>
 
 <style scoped lang="less">
-.code-wrap {
-  width: 100%;
-}
-.l-c-operation {
-  padding: 10px 0;
-}
-.l-c-btn {
-  margin: 20px 0;
-}
-.l-c-head {
-  font-size: 28px;
-  margin: 15px 0;
-}
-.l-f {
-  width: 400px;
-}
-.code-img {
-  width: 100px;
-  margin-left: 10px;
+.btn-primary {
+  background-color: #5a67ba;
 }
 </style>

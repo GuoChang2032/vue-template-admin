@@ -1,9 +1,25 @@
-@primary-color: #5984b8;
+@primary-color: #5A67BA;
 @second-color: #5984b886;
 @dark: #33353b;
 
-.btn-primary{
+.btn-primary {
     background-color: #5A67BA;
+}
+
+.login-input {
+    outline-style: none;
+    border: none;
+    padding: 6px 12px;
+    margin: 12px 0;
+    font-size: 16px;
+    color: #242424;
+    border-bottom: 1px solid #999999bd;
+    width: 100%;
+    transition: all .2s;
+
+    &:focus {
+        border-bottom: 1px solid @primary-color !important;
+    }
 }
 
 #app,
