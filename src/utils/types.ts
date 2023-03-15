@@ -17,23 +17,8 @@ export interface ResType<T> {
   success: Boolean;
 }
 
-export type Song = {
-  id: number;
-  querySource_dictText: string;
-  articleName: string;
-  authorComp: string;
-  articleAuthor: string;
-  articleSource: string;
-  articleDate: string;
-  sourceType: string;
-  beiyinNum: string;
-  beiyinNames: string;
-  beiyinQikans: string;
-  beiyinAuthors: string;
-  impactFactor: string;
-  downloadCount: string;
-  createTime: string;
-  processStatus: number;
-  processStatus_dictText: string;
-};
 
+export type pageType = {
+  page:number,
+  total:number
+}

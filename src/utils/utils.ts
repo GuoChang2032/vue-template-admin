@@ -238,3 +238,4 @@ export function routerNameMapping(router:string){
   }
   return a[router] || 'page.index'
 } 
+

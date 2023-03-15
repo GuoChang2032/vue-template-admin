@@ -1,8 +1,16 @@
 <script lang="ts" setup>
 import { Message } from "@/utils/utils";
+import { pageType } from "@/utils/types";
 import { onMounted } from "vue";
 import btnComponents from "@/components/btns/btnComponents.vue";
 onMounted(() => {});
+
+const pageObj = ref<pageType>({
+  total: 0,
+  page: 1,
+});
+const selectArr = ref<any>([]);
+
 const addHandle = () => {
   Message("success", "添加");
 };
@@ -19,6 +27,7 @@ const importHandle = () => {
   Message("success", "导入");
 };
 const operation = (val: any) => {
+  selectArr.value = val.selectItem;
   Message("success", val.type);
 };
 </script>
@@ -46,7 +55,12 @@ const operation = (val: any) => {
     <div class="mb-8">
       <n-space :size="[25, 5]" align="center">
         <btnComponents type="add" @callback="addHandle" text="新建用户" />
-        <btnComponents type="export" @callback="exportHandle" text="导出用户" />
+        <btnComponents
+          v-if="selectArr && selectArr.length > 0"
+          type="export"
+          @callback="exportHandle"
+          text="导出用户"
+        />
         <btnComponents type="import" @callback="importHandle" text="导入用户" />
       </n-space>
     </div>
@@ -55,6 +69,7 @@ const operation = (val: any) => {
         :editor="true"
         :delete="true"
         :detail="true"
+        :selection="true"
         @callback="operation"
         :data="[
           { name: 'giegie', age: 18, id: '001' },
@@ -62,16 +77,16 @@ const operation = (val: any) => {
           { name: 'giegie3', age: 18, id: '003' },
         ]"
         :column="[
-          { prop: 'name', label: '名称' },
-          { prop: 'age', label: '年龄' },
-          { prop: 'id', label: '编号' },
+          { prop: 'id', label: '编号', width: '80' },
+          { prop: 'name', label: '名称', width: '200' },
+          { prop: 'gender', label: '性别', width: '100' },
+          { prop: 'age', label: '年龄', width: '200' },
+          { prop: 'address', label: '地址', width: '200' },
+          { prop: 'status', label: '状态', width: '150' },
         ]"
       >
-        <!-- <template #href="nameProps">
-          <n-button text type="info">{{ nameProps.col.name }}</n-button>
-        </template> -->
-        <!-- <template #image></template> -->
       </tableComponent>
+      <pagination :total="pageObj.total" :current="pageObj.page" />
     </div>
   </themeComponent>
 </template>
