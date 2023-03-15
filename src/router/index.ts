@@ -43,7 +43,7 @@ const routes: RouteRecordRaw[] = [
         path: "/userManage",
         name: "userManage",
         meta: {
-          title: "userManage",
+          title: "用户管理",
         },
         component: () => import("@/views/sys/userManage.vue"),
       },
@@ -51,7 +51,7 @@ const routes: RouteRecordRaw[] = [
         path: "/routeManage",
         name: "routeManage",
         meta: {
-          title: "routeManage",
+          title: "路由管理",
         },
         component: () => import("@/views/sys/menuManage.vue"),
       },

@@ -2,12 +2,14 @@
 import { Message } from "@/utils/utils";
 import { onMounted } from "vue";
 import { pageType } from "@/utils/types";
-
+import menuDrawer from "@/views/sys/components/menuDrawer.vue";
 onMounted(() => {});
+
+const show = ref<boolean>(false);
 
 const tableData = ref<any>([
   {
-    id:'1',
+    id: "1",
     routeName: "dashboard",
     routeIcon: "add",
     routePath: "layout",
@@ -15,7 +17,7 @@ const tableData = ref<any>([
     status: 1,
     children: [
       {
-        id:'11',
+        id: "11",
         routeName: "首页",
         routeIcon: "",
         routePath: "/dashboard/index",
@@ -23,7 +25,7 @@ const tableData = ref<any>([
         status: 1,
       },
       {
-        id:'12',
+        id: "12",
         routeName: "统计",
         routeIcon: "statistics",
         routePath: "/dashboard/statistics",
@@ -44,7 +46,12 @@ const searchHandle = () => {
 const resetHandle = () => {
   Message("success", "重置");
 };
-const addHandle = () => {};
+const addHandle = () => {
+  show.value = true;
+};
+const confirmHandle = ()=>{
+  Message('success','confirm!')
+}
 </script>
 
 <template>
@@ -76,7 +83,11 @@ const addHandle = () => {};
           </template>
         </el-table-column>
       </el-table>
+      <pagination :total="pageObj.total" :current="pageObj.page" />
     </div>
+    
+        <menuDrawer :show="show" @cancel="show=false" @confirm="confirmHandle"/>
+      
   </themeComponent>
 </template>
 

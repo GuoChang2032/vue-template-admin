@@ -3,15 +3,12 @@ import { createDiscreteApi } from "naive-ui";
 import router from "../router";
 import i18n from "@/locales/i18n";
 import { RouterLink } from "vue-router";
-import { Component } from "vue";
-import { NIcon } from "naive-ui";
-import { SettingsOutline, HomeOutline, AppsOutline } from "@vicons/ionicons5";
 import { useI18n } from "vue-i18n";
-
+import Icon from '@/components/icon.vue'
 const LOCAL_NAME = "localStorageName";
 
-function renderIcon(icon: Component) {
-  return () => h(NIcon, null, { default: () => h(icon) });
+function renderIcon(icon: string) {
+  return () => h(Icon, {icon});
 }
 
 export const backTop = (num = 0, duration = 50): void => {
@@ -132,38 +129,6 @@ export const setMenuData = () => {
         return t("page.dashboard");
       },
       children: [
-        // {
-        //   label: () =>
-        //     h(
-        //       RouterLink,
-        //       {
-        //         to: {
-        //           name: "testchart",
-        //           params: {
-        //             lang: "zh-CN",
-        //           },
-        //         },
-        //       },
-        //       { default: () => '草' }
-        //     ),
-        //   key: "testchart",
-        // },
-        // {
-        //   label: () =>
-        //     h(
-        //       RouterLink,
-        //       {
-        //         to: {
-        //           name: "statistics",
-        //           params: {
-        //             lang: "zh-CN",
-        //           },
-        //         },
-        //       },
-        //       { default: () => t("page.statistics") }
-        //     ),
-        //   key: "statistics",
-        // },
         {
           label: () =>
             h(
@@ -171,9 +136,6 @@ export const setMenuData = () => {
               {
                 to: {
                   name: "index",
-                  params: {
-                    lang: "zh-CN",
-                  },
                 },
               },
               { default: () => t("page.index") }
@@ -182,13 +144,13 @@ export const setMenuData = () => {
         },
       ],
       key: "index",
-      icon: renderIcon(AppsOutline),
+      icon: renderIcon('material-symbols:dashboard-outline'),
     },
     {
       label: () => {
         return t("page.system");
       },
-      icon: renderIcon(SettingsOutline),
+      icon: renderIcon('material-symbols:blind'),
       key: "userManage",
       children: [
         {
@@ -198,9 +160,6 @@ export const setMenuData = () => {
               {
                 to: {
                   name: "userManage",
-                  params: {
-                    lang: "zh-CN",
-                  },
                 },
               },
               { default: () => t("page.userManage") }
@@ -214,9 +173,6 @@ export const setMenuData = () => {
               {
                 to: {
                   name: "routeManage",
-                  params: {
-                    lang: "zh-CN",
-                  },
                 },
               },
               { default: () => t("page.routeManage") }

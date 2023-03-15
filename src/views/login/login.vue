@@ -28,8 +28,8 @@ const cb = (val: any) => {
   <div class="flex w-full h-screen l-main">
     <div class="flex-1 hidden md:block sm:hidden" style="position: relative">
       <div class="px-8 font-serif text-5xl font-bold text-white my-28 l-wrap">
-        <div class="mb-4">Gi</div>
-        <div class="text-2xl">人生总是充满了失败和挫折。</div>
+        <div class="mb-4">人生如寄</div>
+        <div class="text-xl">很不幸，时间的流逝永远不会停止，时光荏苒，光阴如梭。你的过去在不停增多，你的未来在不断减少。末知的可能性只会越来越少，而无法改变的后悔在累积成山。你明白了吗?</div>
       </div>
     </div>
     <div class="flex-1 p-4 font-sans bg-white md:p-4 md:rounded-l-3xl sm:p-10 sm:w-full sm:rounded-none">
