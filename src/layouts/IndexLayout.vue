@@ -1,19 +1,23 @@
 <script lang="ts" setup>
 import { useIndex } from "@/stores/indexStore";
+import { useMenus } from "@/stores/menu";
 import m from "@/utils/mitt";
 import { setMenuData } from "@/utils/utils";
 import { MenuInst } from "naive-ui";
-
+// import headerCom from '@/components/headerCom'
 const ui = useIndex();
+const um = useMenus();
 const inverted = ref<boolean>(ui.getInverted);
 const collapsed = ref<boolean>(false);
+const isCached = ref<boolean>(false);
 const menuOptions = ref<any>([]);
 const clientWidth = ref<number>(document.body.clientWidth);
 const activeKey = ref<string>("");
 const menuInstRef = ref<MenuInst | null>(null);
+const menus = ref<any>(um.getMenus);
 
 // 要改成动态路由的话,这也要动态生成菜单
-menuOptions.value = setMenuData();
+menuOptions.value = setMenuData(um.getMenus);
 m.on("switch", (e: any) => {
   inverted.value = e.val;
 });
@@ -22,9 +26,10 @@ m.on("menuCollapsed", (e: any) => {
 });
 
 watch(
-  () => clientWidth.value,
+  () => [clientWidth.value, menus.value],
   (nv, ov) => {
-    collapsed.value = nv < 900 ? true : false;
+    collapsed.value = nv[0] < 900 ? true : false;
+    menuOptions.value = setMenuData(nv[1]);
   }
 );
 
@@ -89,18 +94,25 @@ onUnmounted(() => {
         />
       </n-layout-sider>
       <n-layout>
-        <n-layout-header> <Header /> </n-layout-header>
+        <n-layout-header> <headerCom /> </n-layout-header>
         <n-layout-content :class="['nlc', inverted ? 'n-l-c-b' : 'n-l-c-w']">
           <!-- <div :class="['router-content', inverted ? 'bkb' : 'bkw']"> -->
           <div class="router-content">
             <n-scrollbar style="max-height: 100%">
-              <transition name="slide-fade">
+              <!-- <transition name="slide-fade">
                 <router-view />
-              </transition>
+              </transition> -->
+              <router-view v-slot="{ Component }">
+                <transition name="slide-fade">
+                  <keep-alive>
+                    <component :is="Component" />
+                  </keep-alive>
+                </transition>
+              </router-view>
             </n-scrollbar>
           </div>
         </n-layout-content>
-        <!-- <Footer /> -->
+        <!-- <FooterCom /> -->
       </n-layout>
     </n-layout>
   </n-layout>
@@ -112,7 +124,7 @@ onUnmounted(() => {
 }
 
 .slide-fade-leave-active {
-  transition: all 0.5s cubic-bezier(1, 0.5, 0.8, 1);
+  // transition: all 0.1s cubic-bezier(1, 0.5, 0.8, 1);
 }
 
 .slide-fade-enter-from,

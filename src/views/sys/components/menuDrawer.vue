@@ -2,27 +2,47 @@
 import { onMounted } from "vue";
 import iconData from "@/utils/icon.data";
 import { FormInst } from "naive-ui";
-onMounted(() => {});
+import { useMenus } from "@/stores/menu";
+import _ from "super-tools-lib";
+onMounted(() => {
+  setParent();
+});
+
+watch(()=>props.itemData,(nv,ov)=>{
+  model.value = nv;
+})
+
+const setParent = () => {
+  let temp = _.cloneDeep(um.getMenus);
+  temp.unshift({
+    key: "layout",
+    routeName: "layout",
+  });
+  parentArr.value = temp;
+};
 
 const emits = defineEmits(["confirm", "cancel"]);
-const props = defineProps(["show"]);
+const props = defineProps(["show", "itemData"]);
+
 interface formType {
   parentMenu: string;
   routeName: string;
   routeIcon: string;
   path: string;
+  key: string;
   sort: number;
   status: number;
 }
 
+const um = useMenus();
 const opts = ref<any>([
   {
     label: "正常",
-    value: 0,
+    value: 1,
   },
   {
     label: "隐藏",
-    value: 1,
+    value: 2,
   },
 ]);
 const parentArr = ref<any>([]);
@@ -40,9 +60,9 @@ const rules = ref<any>({
     message: "请输入菜单路径",
     trigger: ["input", "blur"],
   },
-  sort: {
+  key: {
     required: true,
-    message: "请输入排序",
+    message: "请输入菜单Key",
     trigger: ["input", "blur"],
   },
 });
@@ -50,16 +70,34 @@ const model = ref<formType>({
   parentMenu: "layout",
   routeName: "",
   routeIcon: "",
+  key: "",
   path: "",
   sort: 1,
-  status: 0,
+  status: 1,
 });
 
 const confirm = () => {
-  emits("confirm", { value: model.value });
+  formRef.value?.validate((err) => {
+    if (!err) {
+      emits("confirm", { value: model.value });
+    }
+  });
 };
 const cancel = () => {
+  reset();
   emits("cancel", {});
+};
+
+const reset = () => {
+  model.value = {
+    parentMenu: "layout",
+    routeName: "",
+    routeIcon: "",
+    key: "",
+    path: "",
+    sort: 1,
+    status: 1,
+  };
 };
 
 const showIcon = () => {
@@ -87,17 +125,33 @@ const selectIcon = (icon: string) => {
         label-placement="left"
       >
         <n-form-item label="父级菜单" path="parentMenu">
-          <n-select
+          <!-- <n-select
             :options="parentArr"
             placeholder="选择父级菜单"
             v-model:value="model.parentMenu"
-          ></n-select>
+          ></n-select> -->
+          <n-tree-select
+            :options="parentArr"
+            placeholder="选择父级菜单"
+            default-value="dashboard"
+            label-field="routeName"
+            key-field="key"
+            children-field="children"
+            v-model:value="model.parentMenu"
+          />
         </n-form-item>
         <n-form-item label="菜单名称" path="routeName">
           <n-input
             class="w-full"
             v-model:value="model.routeName"
             placeholder="输入菜单名称"
+          ></n-input>
+        </n-form-item>
+        <n-form-item label="菜单Key" path="key">
+          <n-input
+            class="w-full"
+            v-model:value="model.key"
+            placeholder="输入菜单Key"
           ></n-input>
         </n-form-item>
 
@@ -112,6 +166,8 @@ const selectIcon = (icon: string) => {
           <n-input-number
             clearable
             class="w-full"
+            :min="1"
+            :max="99"
             v-model:value="model.sort"
             placeholder="输入排序"
           ></n-input-number>

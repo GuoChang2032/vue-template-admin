@@ -4,11 +4,12 @@ import router from "../router";
 import i18n from "@/locales/i18n";
 import { RouterLink } from "vue-router";
 import { useI18n } from "vue-i18n";
-import Icon from '@/components/icon.vue'
+import Icon from "@/components/icon.vue";
+import { useMenus } from "@/stores/menu";
 const LOCAL_NAME = "localStorageName";
 
 function renderIcon(icon: string) {
-  return () => h(Icon, {icon});
+  return () => h(Icon, { icon });
 }
 
 export const backTop = (num = 0, duration = 50): void => {
@@ -121,77 +122,117 @@ export const judgePage = (r_page: any, route: string): boolean => {
   return false;
 };
 
-export const setMenuData = () => {
+export const setMenuData = (data: any) => {
+  // 无法使用接口获取菜单数据的话用下面注释的吧...不然没意义
   const { t } = useI18n();
-  let m = [
-    {
-      label: () => {
-        return t("page.dashboard");
-      },
-      children: [
-        {
+  let ms: any = [];
+  data.forEach((item: any) => {
+    let c: any = [];
+    if (item.children && item.children.length > 0) {
+      item.children.forEach((_item: any) => {
+        c.push({
           label: () =>
             h(
               RouterLink,
               {
                 to: {
-                  name: "index",
+                  name: _item.key,
                 },
               },
-              { default: () => t("page.index") }
+              { default: () => _item.routeName }
             ),
-          key: "homepage",
-        },
-      ],
-      key: "index",
-      icon: renderIcon('material-symbols:dashboard-outline'),
-    },
-    {
-      label: () => {
-        return t("page.system");
-      },
-      icon: renderIcon('material-symbols:blind'),
-      key: "userManage",
-      children: [
-        {
-          label: () =>
-            h(
-              RouterLink,
-              {
-                to: {
-                  name: "userManage",
-                },
-              },
-              { default: () => t("page.userManage") }
-            ),
-          key: "userManage",
-        },
-        {
-          label: () =>
-            h(
-              RouterLink,
-              {
-                to: {
-                  name: "routeManage",
-                },
-              },
-              { default: () => t("page.routeManage") }
-            ),
-          key: "routeManage",
-        },
-      ],
-    },
-  ];
-  return m;
+          key: _item.key,
+        });
+      });
+    }
+    ms.push({
+      label: item.routeName,
+      key: item.key,
+      icon: renderIcon(item.routeIcon),
+      children: c,
+    });
+  });
+  // let ms = [
+  //   {
+  //     label: () => {
+  //       return t("page.dashboard");
+  //     },
+  //     children: [
+  //       {
+  //         label: () =>
+  //           h(
+  //             RouterLink,
+  //             {
+  //               to: {
+  //                 name: "index",
+  //               },
+  //             },
+  //             { default: () => t("page.index") }
+  //           ),
+  //         key: "homepage",
+  //       },
+  //     ],
+  //     key: "index",
+  //     icon: renderIcon("material-symbols:dashboard-outline"),
+  //   },
+  //   {
+  //     label: () => {
+  //       return t("page.system");
+  //     },
+  //     icon: renderIcon("material-symbols:blind"),
+  //     key: "sysMan",
+  //     children: [
+  //       {
+  //         label: () =>
+  //           h(
+  //             RouterLink,
+  //             {
+  //               to: {
+  //                 name: "userManage",
+  //               },
+  //             },
+  //             { default: () => t("page.userManage") }
+  //           ),
+  //         key: "userManage",
+  //       },
+  //       {
+  //         label: () =>
+  //           h(
+  //             RouterLink,
+  //             {
+  //               to: {
+  //                 name: "routeManage",
+  //               },
+  //             },
+  //             { default: () => t("page.routeManage") }
+  //           ),
+  //         key: "routeManage",
+  //       },
+  //     ],
+  //   },
+  // ];
+  return ms;
 };
 
-export function routerNameMapping(router:string){
-  let a:any = {
-    statistics:'page.statistics',
-    routeManage:'page.routeManage',
-    userManage:'page.userManage',
-    homepage:'page.index',
-  }
-  return a[router] || 'page.index'
-} 
+export function routerNameMapping(router: string) {
+  let a: any = {
+    statistics: "page.statistics",
+    routeManage: "page.routeManage",
+    userManage: "page.userManage",
+    homepage: "page.index",
+  };
+  return a[router] || "page.index";
+}
 
+export function routeMenuAdd(data: any, val: any) {
+  data.forEach((item: any, idx: number) => {
+    if (item.key === val.parentMenu) {
+      if(data[idx].children){
+        data[idx].children.push(val);
+      }else {
+        data[idx].children = [val];
+      }
+    }
+  });
+  return data;
+}

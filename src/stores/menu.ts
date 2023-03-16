@@ -5,8 +5,54 @@ export const useMenus = defineStore("menus", {
     return {
       menusData: [
         {
-            name:''
-        }
+          parentMenu: "layout",
+          path:'/',
+          routeName: "Dashboard",
+          key: "dashboard",
+          routeIcon: "material-symbols:dashboard-outline",
+          status: 1,
+          sort: 1,
+          children: [
+            {
+              parentMenu: "dashboard",
+              routeName: "首页",
+              path:'/index',
+              key: "index",
+              routeIcon: "",
+              status: 1,
+              sort: 1,
+            },
+          ],
+        },
+        {
+          parentMenu: "layout",
+          path:'/',
+          routeName: "系统管理",
+          key: "sysMan",
+          routeIcon: "material-symbols:blind",
+          status: 1,
+          sort: 2,
+          children: [
+            {
+              parentMenu: "sysMan",
+              routeName: "用户管理",
+              path:'/userManage',
+              key: "userManage",
+              routeIcon: "",
+              status: 1,
+              sort: 1,
+            },
+            {
+              parentMenu: "sysMan",
+              routeName: "路由管理",
+              path:'/routeManage',
+              key: "routeManage",
+              routeIcon: "",
+              status: 1,
+              sort: 1,
+            },
+          ],
+        },
       ],
     };
   },

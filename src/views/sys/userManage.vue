@@ -28,7 +28,6 @@ const importHandle = () => {
 };
 const operation = (val: any) => {
   selectArr.value = val.selectItem;
-  Message("success", val.type);
 };
 </script>
 
@@ -78,10 +77,10 @@ const operation = (val: any) => {
         ]"
         :column="[
           { prop: 'id', label: '编号', width: '80' },
-          { prop: 'name', label: '名称', width: '200' },
+          { prop: 'name', label: '名称' },
           { prop: 'gender', label: '性别', width: '100' },
           { prop: 'age', label: '年龄', width: '200' },
-          { prop: 'address', label: '地址', width: '200' },
+          { prop: 'address', label: '地址' },
           { prop: 'status', label: '状态', width: '150' },
         ]"
       >

@@ -7,22 +7,6 @@ const routes: RouteRecordRaw[] = [
     name: "home",
     component: IndexLayout,
     children: [
-      // {
-      //   path: "/testchart",
-      //   name: "testchart",
-      //   meta: {
-      //     title: "嘻嘻嘻嘻嘻嘻嘻嘻嘻",
-      //   },
-      //   component: () => import("@/views/charts/charts.vue"),
-      // },
-      // {
-      //   path: "/statistics",
-      //   name: "statistics",
-      //   meta: {
-      //     title: "统计",
-      //   },
-      //   component: () => import("@/views/statistics/statistics.vue"),
-      // },
       {
         path: "/index",
         name: "index",
@@ -55,6 +39,7 @@ const routes: RouteRecordRaw[] = [
         },
         component: () => import("@/views/sys/menuManage.vue"),
       },
+      
       {
         path: "/chat",
         name: "chat",
@@ -62,6 +47,14 @@ const routes: RouteRecordRaw[] = [
           title: "ChatGPT",
         },
         component: () => import("@/views/chat/chat.vue"),
+      },
+      {
+        path: "/stats",
+        name: "stats",
+        meta: {
+          title: "统计",
+        },
+        component: () => import("@/views/sys/menuManage.vue"),
       },
     ],
   },
@@ -80,13 +73,13 @@ const routes: RouteRecordRaw[] = [
 const router = createRouter({
   history: createWebHistory(),
   routes,
-  scrollBehavior(to, from, savedPosition) {
-    if (savedPosition) {
-      return savedPosition;
-    } else {
-      return { top: 0, behavior: "smooth" };
-    }
-  },
+  // scrollBehavior(to, from, savedPosition) {
+  //   if (savedPosition) {
+  //     return savedPosition;
+  //   } else {
+  //     return { top: 0, behavior: "smooth" };
+  //   }
+  // },
 });
 
 export default router;
