@@ -8,7 +8,14 @@
   >
     <n-notification-provider>
       <n-dialog-provider>
-        <router-view />
+        <router-view v-slot="{ Component }">
+          <transition name="slide-fade-app">
+            <keep-alive>
+              <component :is="Component" />
+            </keep-alive>
+          </transition>
+        </router-view>
+        <!-- <router-view /> -->
       </n-dialog-provider>
     </n-notification-provider>
   </n-config-provider>
@@ -89,4 +96,15 @@ export default defineComponent({
   },
 });
 </script>
-<style></style>
+<style>
+.slide-fade-app-enter-active {
+  transition: all 0.5s ease-out;
+}
+.slide-fade-leave-active {
+}
+
+.slide-fade-app-enter-from,
+.slide-fade-app-leave-to {
+  opacity: 0;
+}
+</style>

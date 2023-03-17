@@ -5,11 +5,12 @@
   <meta charset="UTF-8" />
   <link rel="icon" href="/atom.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>无代码平台</title>
+  <title>vue-template-admin</title>
 </head>
 <script type="module" src="/src/main.ts"></script>
 <script src="/config.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/qweather-icons@1.3.1/font/qweather-icons.css">
+
 <body>
   <div id="app">
     <div class="loader">
@@ -29,7 +30,7 @@
         <div class="loader-line-wrap">
           <div class="loader-line"></div>
         </div>
-        <div class="txt">正在加载,请稍后...</div>
+        <div class="txt">正在加载，请稍后...</div>
       </div>
     </div>
   </div>
@@ -51,17 +52,17 @@
 
   .txt {
     font-size: 18px;
-    color: #222;
+    color: #fff;
     margin: 10px 0;
     text-align: center;
     position: absolute;
     top: 100px;
+    letter-spacing: 1px;
     left: 0;
   }
 
   .loader {
-    background: #fff;
-    background: radial-gradient(#fff, #e9e9e9);
+    background-image: linear-gradient(to top, #ebc0fd 0%, #d9ded8 100%);
     bottom: 0;
     left: 0;
     overflow: hidden;
