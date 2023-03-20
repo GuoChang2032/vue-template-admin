@@ -227,12 +227,52 @@ export function routerNameMapping(router: string) {
 export function routeMenuAdd(data: any, val: any) {
   data.forEach((item: any, idx: number) => {
     if (item.key === val.parentMenu) {
-      if(data[idx].children){
+      if (data[idx].children) {
         data[idx].children.push(val);
-      }else {
+      } else {
         data[idx].children = [val];
       }
     }
   });
   return data;
+}
+
+// 判断tab菜单中是否有重复
+export function judgeTab(name: string, data: any): boolean {
+  let flag: boolean = false;
+  data.forEach((item: any) => {
+    if (item.name === name) {
+      flag = true;
+    }
+  });
+  return flag;
+}
+
+// 深拷贝
+export function deepCopy(data: any) {
+  if (typeof data !== "object" || data === null) {
+    throw new TypeError("传入参数不是对象");
+  }
+  let newData: any = {};
+  const dataKeys = Object.keys(data);
+  dataKeys.forEach((value) => {
+    const currentDataValue = data[value];
+    // 基本数据类型的值和函数直接赋值拷贝
+    if (typeof currentDataValue !== "object" || currentDataValue === null) {
+      newData[value] = currentDataValue;
+    } else if (Array.isArray(currentDataValue)) {
+      // 实现数组的深拷贝
+      newData[value] = [...currentDataValue];
+    } else if (currentDataValue instanceof Set) {
+      // 实现set数据的深拷贝
+      newData[value] = new Set([...currentDataValue]);
+    } else if (currentDataValue instanceof Map) {
+      // 实现map数据的深拷贝
+      newData[value] = new Map([...currentDataValue]);
+    } else {
+      // 普通对象则递归赋值
+      newData[value] = deepCopy(currentDataValue);
+    }
+  });
+  return newData;
 }

@@ -16,7 +16,7 @@ const activeKey = ref<string>("");
 const menuInstRef = ref<MenuInst | null>(null);
 const menus = ref<any>(um.getMenus);
 
-// 要改成动态路由的话,这也要动态生成菜单
+// 动态生成菜单,或者手动...
 menuOptions.value = setMenuData(um.getMenus);
 m.on("switch", (e: any) => {
   inverted.value = e.val;
@@ -24,17 +24,28 @@ m.on("switch", (e: any) => {
 m.on("menuCollapsed", (e: any) => {
   collapsed.value = e.val;
 });
+m.on("pageTabChange", (e: any) => {
+  activeKey.value = e.val;
+  menuInstRef.value?.showOption(activeKey.value);
+});
 
 watch(
-  () => [clientWidth.value, menus.value],
+  () => clientWidth.value,
   (nv, ov) => {
-    collapsed.value = nv[0] < 900 ? true : false;
-    menuOptions.value = setMenuData(nv[1]);
+    collapsed.value = nv < 900 ? true : false;
+  }
+);
+
+watch(
+  () => menus.value,
+  (nv, ov) => {
+    menuOptions.value = setMenuData(nv);
   }
 );
 
 const menuSelect = (key: string) => {
   ui.setActiveKey(key);
+  m.emit("layoutTabChange", { val: key });
 };
 
 const expandMenuOpt = () => {
@@ -53,6 +64,8 @@ onMounted(() => {
 
 onUnmounted(() => {
   m.off("switch");
+  m.off("menuCollapsed");
+  m.off("pageTabChange");
 });
 </script>
 
@@ -93,15 +106,13 @@ onUnmounted(() => {
           @update:value="menuSelect"
         />
       </n-layout-sider>
-      <n-layout>
-        <n-layout-header> <headerCom /> </n-layout-header>
-        <n-layout-content :class="['nlc', inverted ? 'n-l-c-b' : 'n-l-c-w']">
-          <!-- <div :class="['router-content', inverted ? 'bkb' : 'bkw']"> -->
-          <div class="router-content">
+      <n-layout :class="['flex flex-col', inverted ? 'n-l-c-b' : 'n-l-c-w']">
+        <!-- <n-layout-header> <headerCom /> </n-layout-header> -->
+        <div class="flex-none"><headerCom /></div>
+        <!-- <n-layout-content> -->
+        <div class="flex-auto">
+          <div class="p-4" >
             <n-scrollbar style="max-height: 100%">
-              <!-- <transition name="slide-fade">
-                <router-view />
-              </transition> -->
               <router-view v-slot="{ Component }">
                 <transition name="slide-fade">
                   <keep-alive>
@@ -111,7 +122,8 @@ onUnmounted(() => {
               </router-view>
             </n-scrollbar>
           </div>
-        </n-layout-content>
+        </div>
+        <!-- </n-layout-content> -->
         <!-- <FooterCom /> -->
       </n-layout>
     </n-layout>
@@ -142,8 +154,7 @@ onUnmounted(() => {
 }
 
 .nlc {
-  height: calc(100% - 71px);
-  padding: 15px;
+  // height: calc(100% - 71px);
   background-color: #f5f5f5c2;
 }
 .n-l-c-w {

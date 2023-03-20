@@ -4,8 +4,11 @@ import { onMounted, ref } from "vue";
 import m from "@/utils/mitt";
 import { useDark, useToggle } from "@vueuse/core";
 import { Message, logout, routerNameMapping } from "@/utils/utils";
-import {notice} from '@/components/noticeComponents'
+import { notice } from "@/components/noticeComponents";
 import { useI18n } from "vue-i18n";
+
+
+
 const isDark = useDark();
 const toggleDark = useToggle(isDark);
 const inver = useIndex();
@@ -56,67 +59,72 @@ const collapseChange = () => {
 </script>
 
 <template>
-  <div
-    :class="['header', 'flex-between', theme ? 'theme-black' : 'theme-white']"
-  >
-    <div class="h-left flex-center-start">
-      <icon
-        class="contract"
-        v-if="isCollapsed"
-        icon="ant-design:menu-unfold-outlined"
-        size="26px"
-        @click="collapseChange"
-      />
-      <icon
-        class="contract"
-        v-else
-        icon="ant-design:menu-fold-outlined"
-        size="26px"
-        @click="collapseChange"
-      />
-      <n-breadcrumb>
-        <n-breadcrumb-item> {{ t("page.index") }} </n-breadcrumb-item>
-        <n-breadcrumb-item>
-          {{ t(routerNameMapping(pagename)) }}
-        </n-breadcrumb-item>
-      </n-breadcrumb>
-    </div>
-    <div class="h-right">
-      <div class="flex-center">
-        <div class="theme-content">
-          <n-switch v-model:value="theme" @update:value="themeChange">
-            <template #checked-icon>
-              <icon icon="material-symbols:nights-stay-rounded" />
-            </template>
-            <template #unchecked-icon>
-              <icon icon="material-symbols:partly-cloudy-day-outline" />
-            </template>
-          </n-switch>
-        </div>
-        <div class="notice-content">
-          <notice/>
-        </div>
-        <div class="i18n-content">
-          <n-dropdown trigger="hover" :options="options" @select="handleSelect">
-            <div class="n-c-wrap" title="语言">
-              <icon icon="mdi:language" size="23px" />
-            </div>
-          </n-dropdown>
-        </div>
-        <div class="user-content flex-center">
-          <n-avatar
-            size="small"
-            round
-            src="https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg"
-          />
-          <div class="h-r-a-name">张三</div>
-        </div>
-        <div class="logout flex-center" @click="logoutss">
-          <icon icon="teenyicons:logout-outline" size="18px" />
-          {{ t("logout") }}
+  <div :class="['header-wrap', theme ? 'theme-black' : 'theme-white']">
+    <div class="header flex-between">
+      <div class="h-left flex-center-start">
+        <icon
+          class="contract"
+          v-if="isCollapsed"
+          icon="ant-design:menu-unfold-outlined"
+          size="26px"
+          @click="collapseChange"
+        />
+        <icon
+          class="contract"
+          v-else
+          icon="ant-design:menu-fold-outlined"
+          size="26px"
+          @click="collapseChange"
+        />
+        <n-breadcrumb>
+          <n-breadcrumb-item> {{ t("page.index") }} </n-breadcrumb-item>
+          <n-breadcrumb-item>
+            {{ t(routerNameMapping(pagename)) }}
+          </n-breadcrumb-item>
+        </n-breadcrumb>
+      </div>
+      <div class="h-right">
+        <div class="flex-center">
+          <div class="theme-content">
+            <n-switch v-model:value="theme" @update:value="themeChange">
+              <template #checked-icon>
+                <icon icon="material-symbols:nights-stay-rounded" />
+              </template>
+              <template #unchecked-icon>
+                <icon icon="material-symbols:partly-cloudy-day-outline" />
+              </template>
+            </n-switch>
+          </div>
+          <div class="notice-content">
+            <notice />
+          </div>
+          <div class="i18n-content">
+            <n-dropdown
+              trigger="hover"
+              :options="options"
+              @select="handleSelect"
+            >
+              <div class="n-c-wrap" title="语言">
+                <icon icon="mdi:language" size="23px" />
+              </div>
+            </n-dropdown>
+          </div>
+          <div class="user-content flex-center">
+            <n-avatar
+              size="small"
+              round
+              src="https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg"
+            />
+            <div class="h-r-a-name">张三</div>
+          </div>
+          <div class="logout flex-center" @click="logoutss">
+            <icon icon="teenyicons:logout-outline" size="18px" />
+            {{ t("logout") }}
+          </div>
         </div>
       </div>
     </div>
+    <pageTab />
   </div>
 </template>
 
@@ -134,12 +142,12 @@ const collapseChange = () => {
 .theme-white {
   color: #000;
   background-color: #fff;
-  border-bottom: 1px solid rgb(241, 241, 241);
+  // border-bottom: 1px solid rgb(241, 241, 241);
 }
 .theme-black {
   color: #fff;
   background-color: #333536;
-  border-bottom: 1px solid rgb(88, 87, 87);
+  // border-bottom: 1px solid rgb(88, 87, 87);
 }
 .h-l-logo {
   height: 50px;
@@ -183,8 +191,9 @@ const collapseChange = () => {
   overflow: hidden;
 }
 .header {
+  border-bottom: 1px solid #eee;
   min-width: 600px;
-  padding: 10px 10px;
+  padding: 10px;
   box-sizing: content-box;
   transition: all 0.2s;
   .h-l-topic {

@@ -1,6 +1,8 @@
 import router from './router'
 import { start, done } from '@/utils/nprogress.js'
 import { useUserInfo } from "@/stores/user"
+import { useMenuTag } from "@/stores/menu";
+import { judgeTab, deepCopy } from '@/utils/utils'
 
 const whiteList = ['/login'] // no redirect whitelist
 const APP_NAME = 'template admin'
@@ -26,6 +28,12 @@ router.beforeEach((to, from, next) => {
     next()
 })
 // 路由跳转后
-router.afterEach(() => {
+router.afterEach((to) => {
+    const umt = useMenuTag()
+    if (!judgeTab(to.name, umt.tabs)) {
+        let x = deepCopy(to)
+        delete x.matched
+        umt.setTab(x)
+    }
     done()
 })
