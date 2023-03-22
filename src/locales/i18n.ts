@@ -45,7 +45,8 @@ const messages = {
         rightPhone: "Please enter the correct phone number",
       },
     },
-    logout: "logout",
+    logout: "Logout",
+    userCenter: "Personal Center",
   },
   zh: {
     message: {
@@ -91,7 +92,8 @@ const messages = {
         rightPhone: "请输入正确的手机号",
       },
     },
-    logout: "注销",
+    logout: "退出登录",
+    userCenter: "个人中心",
   },
 };
 const i18n = createI18n({

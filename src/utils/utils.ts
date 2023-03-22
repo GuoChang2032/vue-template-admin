@@ -8,7 +8,7 @@ import Icon from "@/components/icon.vue";
 import { useMenus } from "@/stores/menu";
 const LOCAL_NAME = "localStorageName";
 
-function renderIcon(icon: string) {
+export function renderIconCustom(icon: string) {
   return () => h(Icon, { icon });
 }
 
@@ -148,7 +148,7 @@ export const setMenuData = (data: any) => {
     ms.push({
       label: item.routeName,
       key: item.key,
-      icon: renderIcon(item.routeIcon),
+      icon: renderIconCustom(item.routeIcon),
       children: c,
     });
   });
@@ -173,13 +173,13 @@ export const setMenuData = (data: any) => {
   //       },
   //     ],
   //     key: "index",
-  //     icon: renderIcon("material-symbols:dashboard-outline"),
+  //     icon: renderIconCustom("material-symbols:dashboard-outline"),
   //   },
   //   {
   //     label: () => {
   //       return t("page.system");
   //     },
-  //     icon: renderIcon("material-symbols:blind"),
+  //     icon: renderIconCustom("material-symbols:blind"),
   //     key: "sysMan",
   //     children: [
   //       {

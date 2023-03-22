@@ -3,11 +3,14 @@ import { useIndex } from "@/stores/indexStore";
 import { onMounted, ref } from "vue";
 import m from "@/utils/mitt";
 import { useDark, useToggle } from "@vueuse/core";
-import { Message, logout, routerNameMapping } from "@/utils/utils";
+import {
+  Message,
+  logout,
+  routerNameMapping,
+  renderIconCustom,
+} from "@/utils/utils";
 import { notice } from "@/components/noticeComponents";
 import { useI18n } from "vue-i18n";
-
-
 
 const isDark = useDark();
 const toggleDark = useToggle(isDark);
@@ -17,6 +20,7 @@ const isCollapsed = ref<boolean>(false);
 const pagename = ref<string>(inver.getActiveKey || "");
 const i18n = useI18n();
 const { t } = useI18n();
+
 const options = ref<any>([
   {
     label: "简体中文",
@@ -27,7 +31,18 @@ const options = ref<any>([
     key: "en",
   },
 ]);
-
+const userMenu = ref<any>([
+  {
+    label: t("userCenter"),
+    key: "userCenter",
+    icon: renderIconCustom("ph:user"),
+  },
+  {
+    label: t("logout"),
+    key: "logout",
+    icon: renderIconCustom("teenyicons:logout-outline"),
+  },
+]);
 
 watch(
   () => inver.getActiveKey,
@@ -44,9 +59,6 @@ const handleSelect = (key: string) => {
   Message("success", `切换${key === "zh" ? "中文" : "英语"}成功`);
   i18n.locale.value = key;
 };
-const logoutss = () => {
-  logout();
-};
 const themeChange = () => {
   inver.setInverted();
   m.emit("switch", { val: theme.value });
@@ -55,6 +67,11 @@ const themeChange = () => {
 const collapseChange = () => {
   isCollapsed.value = !isCollapsed.value;
   m.emit("menuCollapsed", { val: isCollapsed.value });
+};
+const userMenuSelect = (key: string) => {
+  if (key === "logout") {
+    logout();
+  }
 };
 </script>
 
@@ -109,18 +126,17 @@ const collapseChange = () => {
               </div>
             </n-dropdown>
           </div>
-          <div class="user-content flex-center">
-            <n-avatar
-              size="small"
-              round
-              src="https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg"
-            />
-            <div class="h-r-a-name">张三</div>
-          </div>
-          <div class="logout flex-center" @click="logoutss">
-            <icon icon="teenyicons:logout-outline" size="18px" />
-            {{ t("logout") }}
-          </div>
+
+          <n-dropdown :options="userMenu" @select="userMenuSelect">
+            <div class="user-content flex-center">
+              <n-avatar
+                size="small"
+                round
+                src="https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg"
+              />
+              <div class="h-r-a-name">张三</div>
+            </div>
+          </n-dropdown>
         </div>
       </div>
     </div>
@@ -193,7 +209,7 @@ const collapseChange = () => {
 .header {
   border-bottom: 1px solid #eee;
   min-width: 600px;
-  padding: 10px;
+  padding: 10px 30px 10px 10px;
   box-sizing: content-box;
   transition: all 0.2s;
   .h-l-topic {
