@@ -56,6 +56,22 @@ const routes: RouteRecordRaw[] = [
         },
         component: () => import("@/views/sys/menuManage.vue"),
       },
+      {
+        path: "/chart",
+        name: "chart",
+        meta: {
+          title: "图表",
+        },
+        component: () => import("@/views/charts/charts.vue"),
+      },
+      {
+        path: "/editor",
+        name: "editor",
+        meta: {
+          title: "富文本编辑",
+        },
+        component: () => import("@/views/editor/editor.vue"),
+      },
     ],
   },
 

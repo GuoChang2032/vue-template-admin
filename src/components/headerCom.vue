@@ -145,6 +145,9 @@ const userMenuSelect = (key: string) => {
 </template>
 
 <style scoped lang="less">
+.header-wrap{
+  border-bottom: 1px solid #f1f1f1;
+}
 .contract {
   padding: 5px;
   margin-right: 5px;
@@ -162,7 +165,7 @@ const userMenuSelect = (key: string) => {
 }
 .theme-black {
   color: #fff;
-  background-color: #333536;
+  background-color: #1f2022;
   // border-bottom: 1px solid rgb(88, 87, 87);
 }
 .h-l-logo {

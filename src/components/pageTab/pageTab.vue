@@ -55,7 +55,6 @@ const closeTab = (path: string, selectName: string) => {
       tab.splice(idx, 1);
       p = tab[idx - 1].path;
       pname = tab[idx - 1].name;
-      //   umt.removeTab(tab);
     }
   });
   if (activeKey.value === selectName) {

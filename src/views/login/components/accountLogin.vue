@@ -81,7 +81,7 @@ const other = (type: string) => {
       >
     </div>
     <div class="">
-      没有账号?<n-button text type="primary" @click="other('2')">
+      没有账号？<n-button text type="primary" @click="other('2')">
         点击注册
       </n-button>
     </div>

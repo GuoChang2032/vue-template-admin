@@ -125,92 +125,127 @@ export const judgePage = (r_page: any, route: string): boolean => {
 export const setMenuData = (data: any) => {
   // 无法使用接口获取菜单数据的话用下面注释的吧...不然没意义
   const { t } = useI18n();
-  let ms: any = [];
-  data.forEach((item: any) => {
-    let c: any = [];
-    if (item.children && item.children.length > 0) {
-      item.children.forEach((_item: any) => {
-        c.push({
+  // let ms: any = [];
+  // data.forEach((item: any) => {
+  //   let c: any = [];
+  //   if (item.children && item.children.length > 0) {
+  //     item.children.forEach((_item: any) => {
+  //       c.push({
+  //         label: () =>
+  //           h(
+  //             RouterLink,
+  //             {
+  //               to: {
+  //                 name: _item.key,
+  //               },
+  //             },
+  //             { default: () => _item.routeName }
+  //           ),
+  //         key: _item.key,
+  //       });
+  //     });
+  //   }
+  //   ms.push({
+  //     label: item.routeName,
+  //     key: item.key,
+  //     icon: renderIconCustom(item.routeIcon),
+  //     children: c,
+  //   });
+  // });
+  let ms = [
+    {
+      label: () => {
+        return t("page.dashboard");
+      },
+      children: [
+        {
           label: () =>
             h(
               RouterLink,
               {
                 to: {
-                  name: _item.key,
+                  name: "index",
                 },
               },
-              { default: () => _item.routeName }
+              { default: () => t("page.index") }
             ),
-          key: _item.key,
-        });
-      });
-    }
-    ms.push({
-      label: item.routeName,
-      key: item.key,
-      icon: renderIconCustom(item.routeIcon),
-      children: c,
-    });
-  });
-  // let ms = [
-  //   {
-  //     label: () => {
-  //       return t("page.dashboard");
-  //     },
-  //     children: [
-  //       {
-  //         label: () =>
-  //           h(
-  //             RouterLink,
-  //             {
-  //               to: {
-  //                 name: "index",
-  //               },
-  //             },
-  //             { default: () => t("page.index") }
-  //           ),
-  //         key: "homepage",
-  //       },
-  //     ],
-  //     key: "index",
-  //     icon: renderIconCustom("material-symbols:dashboard-outline"),
-  //   },
-  //   {
-  //     label: () => {
-  //       return t("page.system");
-  //     },
-  //     icon: renderIconCustom("material-symbols:blind"),
-  //     key: "sysMan",
-  //     children: [
-  //       {
-  //         label: () =>
-  //           h(
-  //             RouterLink,
-  //             {
-  //               to: {
-  //                 name: "userManage",
-  //               },
-  //             },
-  //             { default: () => t("page.userManage") }
-  //           ),
-  //         key: "userManage",
-  //       },
-  //       {
-  //         label: () =>
-  //           h(
-  //             RouterLink,
-  //             {
-  //               to: {
-  //                 name: "routeManage",
-  //               },
-  //             },
-  //             { default: () => t("page.routeManage") }
-  //           ),
-  //         key: "routeManage",
-  //       },
-  //     ],
-  //   },
-  // ];
+          key: "index",
+        },
+      ],
+      key: "index",
+      icon: renderIconCustom("material-symbols:dashboard-outline"),
+    },
+    {
+      label: () => {
+        return '工具';
+      },
+      children: [
+        {
+          label: () =>
+            h(
+              RouterLink,
+              {
+                to: {
+                  name: "editor",
+                },
+              },
+              { default: () => '编辑工具' }
+            ),
+          key: "editor",
+        },
+        {
+          label: () =>
+            h(
+              RouterLink,
+              {
+                to: {
+                  name: "chart",
+                },
+              },
+              { default: () => '可视化图表' }
+            ),
+          key: "chart",
+        },
+      ],
+      key: "tools",
+      icon: renderIconCustom("mingcute:tool-line"),
+    },
+    {
+      label: () => {
+        return t("page.system");
+      },
+      icon: renderIconCustom("material-symbols:blind"),
+      key: "sysMan",
+      children: [
+        {
+          label: () =>
+            h(
+              RouterLink,
+              {
+                to: {
+                  name: "userManage",
+                },
+              },
+              { default: () => t("page.userManage") }
+            ),
+          key: "userManage",
+        },
+        {
+          label: () =>
+            h(
+              RouterLink,
+              {
+                to: {
+                  name: "routeManage",
+                },
+              },
+              { default: () => t("page.routeManage") }
+            ),
+          key: "routeManage",
+        },
+      ],
+    },
+  ];
   return ms;
 };
 

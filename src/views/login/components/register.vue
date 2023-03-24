@@ -111,7 +111,7 @@ const sendSys = () => {
       >
     </div>
     <div class="">
-      已有账号,<n-button text type="primary" @click="other('0')">
+      已有账号，<n-button text type="primary" @click="other('0')">
         点击登录
       </n-button>
     </div>

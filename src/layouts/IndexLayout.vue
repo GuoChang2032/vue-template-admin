@@ -108,11 +108,11 @@ onUnmounted(() => {
       </n-layout-sider>
       <n-layout :class="['flex flex-col', inverted ? 'n-l-c-b' : 'n-l-c-w']">
         <!-- <n-layout-header> <headerCom /> </n-layout-header> -->
-        <div class="flex-none"><headerCom /></div>
+        <div class="fixed-head"><headerCom /></div>
         <!-- <n-layout-content> -->
         <div class="flex-auto">
-          <div class="p-4" >
-            <n-scrollbar style="max-height: 100%">
+          <div class="p-4">
+            <!-- <n-scrollbar style="max-height: 100%"> -->
               <router-view v-slot="{ Component }">
                 <transition name="slide-fade">
                   <keep-alive>
@@ -120,7 +120,7 @@ onUnmounted(() => {
                   </keep-alive>
                 </transition>
               </router-view>
-            </n-scrollbar>
+            <!-- </n-scrollbar> -->
           </div>
         </div>
         <!-- </n-layout-content> -->
@@ -131,6 +131,16 @@ onUnmounted(() => {
 </template>
 
 <style scoped lang="less">
+.fixed-head {
+  position: sticky;
+  right: 0;
+  top: 0;
+  left: 0;
+  z-index: 999;
+}
+.place-content {
+  height: 104px;
+}
 .slide-fade-enter-active {
   transition: all 0.5s ease-out;
 }

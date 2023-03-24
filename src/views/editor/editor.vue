@@ -4,11 +4,11 @@ onMounted(() => {});
 </script>
 
 <template>
-  <n-card class="mb-4" title="折线图表">
-    <lineChart />
+  <n-card class="mb-3" title="富文本编辑器">
+    <w-editor />
   </n-card>
-  <n-card class="mb-4" title="折线柱状">
-    <lineChart2 />
+  <n-card class="mb-3" title="代码编辑器">
+    <code-mirror />
   </n-card>
 </template>
 

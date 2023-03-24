@@ -64,14 +64,22 @@ export default defineComponent({
     const editorConfig: Partial<IEditorConfig> = {
       placeholder: prop.placeholderTxt,
       MENU_CONF: {
+        color:{
+          colors:['#f1f1f1', '#f1f1f1', '#f1f1f1']
+        },
+        bgColor:{
+          colors:['#00ffff', '#00ffff', '#00ffff']
+        },
         uploadImage: {
           fieldName:'file',
-          server: import.meta.env.VITE_APP_API_BASE_URL + "sys/common/upload",
+          // 上传图片的地址
+          // server: import.meta.env.VITE_APP_API_BASE_URL + "sys/common/upload",
           maxFileSize: 1 * 1024 * 1024,
           allowedFileTypes: ["image/*"],
-          headers: {
-            "x-access-token": getUserInfo().token,
-          },
+          // 上传图片需要token
+          // headers: {
+          //   "x-access-token": getUserInfo().token,
+          // },
           customInsert(res: any, insertFn: InsertFnType) {
             let url = res.message;
             let alt = '图片';

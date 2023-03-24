@@ -54,7 +54,7 @@ const messages = {
     },
     page: {
       index: "首页",
-      dashboard: "dashboard",
+      dashboard: "仪表盘",
       statistics: "统计",
       system: "系统管理",
       userManage: "用户管理",

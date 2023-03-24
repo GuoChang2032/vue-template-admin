@@ -18,6 +18,8 @@ declare module '@vue/runtime-core' {
     Icon: typeof import('./src/components/icon.vue')['default']
     IndexAddEditModal: typeof import('./src/components/indexAddEditModal.vue')['default']
     LineCahrt: typeof import('./src/components/chartComponents/lineCahrt.vue')['default']
+    LineChart: typeof import('./src/components/chartComponents/lineChart.vue')['default']
+    LineChart2: typeof import('./src/components/chartComponents/lineChart2.vue')['default']
     NAlert: typeof import('naive-ui')['NAlert']
     NAvatar: typeof import('naive-ui')['NAvatar']
     NBadge: typeof import('naive-ui')['NBadge']
