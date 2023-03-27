@@ -2,24 +2,49 @@
 import { FormInst } from "naive-ui";
 import { useRouter } from "vue-router";
 import { useUserInfo } from "@/stores/user";
+import { useMenuTag } from "@/stores/menu";
+import { Message } from "@/utils/utils";
+import m from "@/utils/mitt";
+import { useIndex } from "@/stores/indexStore";
 
 const emit = defineEmits(["callback"]);
 
+const ui = useIndex();
 const loginForm = ref<FormInst | null>(null);
 const formValue = ref<any>({
-  username: null,
-  password: null,
+  username: "admin",
+  password: "123123",
 });
 const isRemembers = ref<boolean>(false);
 const loading = ref<boolean>(false);
 const router = useRouter();
 const us = useUserInfo();
+const umt = useMenuTag();
 const { t } = useI18n();
 
 const handleLogin = () => {
   loading.value = true;
+  let account = "admin";
+  let pwd = "123123";
+  let f = formValue.value;
+  if (
+    f.username !== account &&
+    f.username !== "student" &&
+    f.username !== "teacher"
+  ) {
+    Message("warning", "用户名错误");
+    return;
+  } else if (f.password !== pwd) {
+    Message("warning", "密码错误");
+    return;
+  }
   setTimeout(() => {
     loading.value = false;
+    us.setUserInfo({ role: f.username, token: "xxx" });
+    umt.resetTab();
+    m.emit("pageTabChange", { val: "index" });
+    ui.setActiveKey("index");
+    m.emit('login',{})
     router.push({ path: "/index" });
   }, 800);
 };
@@ -48,7 +73,7 @@ const other = (type: string) => {
     <div class="mt-12 mb-8 text-lg font-extrabold text-center text-gray-600">
       - OR -
     </div>
-    <div class="">
+    <div class="" @keypress.enter="handleLogin">
       <input
         class="login-input"
         v-model="formValue.username"
@@ -88,5 +113,4 @@ const other = (type: string) => {
   </div>
 </template>
 
-<style scoped lang="less">
-</style>
+<style scoped lang="less"></style>

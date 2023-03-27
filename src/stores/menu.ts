@@ -1,5 +1,9 @@
 import { defineStore } from "pinia";
+import m from "@/utils/mitt";
 
+
+
+// 菜单栏
 export const useMenus = defineStore("menus", {
   state: () => {
     return {
@@ -69,6 +73,7 @@ export const useMenus = defineStore("menus", {
   persist: true,
 });
 
+// tab栏
 export const useMenuTag = defineStore("tabs", {
   state: () => {
     return {
@@ -99,6 +104,22 @@ export const useMenuTag = defineStore("tabs", {
     },
     removeTab(nd: any) {
       this.tabs = nd;
+    },
+    resetTab() {
+      this.tabs = [
+        {
+          fullPath: "/index",
+          path: "/index",
+          query: {},
+          hash: "",
+          name: "index",
+          params: {},
+          meta: {
+            title: "首页",
+          },
+          href: "/index",
+        },
+      ];
     },
   },
   persist: true,

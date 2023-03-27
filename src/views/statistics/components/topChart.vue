@@ -34,7 +34,7 @@ onMounted(() => {});
         <n-avatar
           size="large"
           round
-          src="https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg"
+          src="public/atom.svg"
         />
       </template>
       <template #extra>

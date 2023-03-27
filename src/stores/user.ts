@@ -1,18 +1,23 @@
 import { defineStore } from "pinia";
 
+// 记录用户信息
 export const useUserInfo = defineStore("user", {
   state: () => {
     return {
-      info: {},
+      info: {
+        role: "",
+        token: "",
+      },
     };
   },
   getters: {
-    getInfo(){
+    getInfo(): any {
+      return this.info;
     },
   },
   actions: {
     setUserInfo(res: any) {
-      this.info = res
+      this.info = res;
     },
   },
   persist: true,

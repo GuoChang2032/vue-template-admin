@@ -76,8 +76,8 @@ const userMenuSelect = (key: string) => {
 </script>
 
 <template>
-  <div :class="['header-wrap', theme ? 'theme-black' : 'theme-white']">
-    <div class="header flex-between">
+  <div :class="[theme ? 'theme-black' : 'theme-white']">
+    <div class="header flex-between" :class="[theme ? 'bm-black' : 'bm-white']">
       <div class="h-left flex-center-start">
         <icon
           class="contract"
@@ -132,7 +132,7 @@ const userMenuSelect = (key: string) => {
               <n-avatar
                 size="small"
                 round
-                src="https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg"
+                src="public/atom.svg"
               />
               <div class="h-r-a-name">张三</div>
             </div>
@@ -145,8 +145,11 @@ const userMenuSelect = (key: string) => {
 </template>
 
 <style scoped lang="less">
-.header-wrap{
+.bm-white {
   border-bottom: 1px solid #f1f1f1;
+}
+.bm-black {
+  border-bottom: 1px solid #404040;
 }
 .contract {
   padding: 5px;
@@ -161,12 +164,12 @@ const userMenuSelect = (key: string) => {
 .theme-white {
   color: #000;
   background-color: #fff;
-  // border-bottom: 1px solid rgb(241, 241, 241);
+  border-bottom: 1px solid #f1f1f1;
 }
 .theme-black {
   color: #fff;
   background-color: #1f2022;
-  // border-bottom: 1px solid rgb(88, 87, 87);
+  border-bottom: 1px solid #404040;
 }
 .h-l-logo {
   height: 50px;
@@ -210,7 +213,6 @@ const userMenuSelect = (key: string) => {
   overflow: hidden;
 }
 .header {
-  border-bottom: 1px solid #eee;
   min-width: 600px;
   padding: 10px 30px 10px 10px;
   box-sizing: content-box;

@@ -17,10 +17,14 @@ onMounted(() => {});
 
 onUnmounted(() => {
   m.off("layoutTabChange");
+  m.off("login");
 });
 
 m.on("layoutTabChange", (e: any) => {
   activeKey.value = e.val;
+});
+m.on("login", () => {
+  tabs.value=umt.getTabs
 });
 
 watch(

@@ -39,7 +39,6 @@ const routes: RouteRecordRaw[] = [
         },
         component: () => import("@/views/sys/menuManage.vue"),
       },
-      
       {
         path: "/chat",
         name: "chat",
@@ -74,16 +73,22 @@ const routes: RouteRecordRaw[] = [
       },
     ],
   },
-
   {
     path: "/login",
     name: "Login",
     meta: {
       title: "登录",
     },
-    // component: () => import("@/views/login/userLogin.vue"),
     component: () => import("@/views/login/login.vue"),
   },
+  // {
+  //   path: "/:pathMatch(.*)*",
+  //   name: "404",
+  //   meta: {
+  //     title: "页面不存在",
+  //   },
+  //   component: () => import("@/views/abnormal/404.vue"),
+  // },
 ];
 
 const router = createRouter({

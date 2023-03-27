@@ -3,9 +3,12 @@ import { createDiscreteApi } from "naive-ui";
 import router from "../router";
 import i18n from "@/locales/i18n";
 import { RouterLink } from "vue-router";
-import { useI18n } from "vue-i18n";
 import Icon from "@/components/icon.vue";
 import { useMenus } from "@/stores/menu";
+import { usePermission } from "@/hooks/common/business";
+import { useUserInfo } from "@/stores/user";
+
+
 const LOCAL_NAME = "localStorageName";
 
 export function renderIconCustom(icon: string) {
@@ -97,6 +100,8 @@ export const setUserInfo = (data: any): void => {
 
 // 登出
 export const logout = () => {
+  const us = useUserInfo()
+  us.setUserInfo({})
   router.push({ path: "/login", replace: true });
   // localStorage.removeItem("user_login_info");
   // Message("warning", "登录过期,请重新登录!");
@@ -122,9 +127,9 @@ export const judgePage = (r_page: any, route: string): boolean => {
   return false;
 };
 
-export const setMenuData = (data: any) => {
-  // 无法使用接口获取菜单数据的话用下面注释的吧...不然没意义
-  const { t } = useI18n();
+export const setMenuData = (data: any = null) => {
+  const { t } = i18n.global;
+  const {hasPermission} = usePermission()
   // let ms: any = [];
   // data.forEach((item: any) => {
   //   let c: any = [];
@@ -216,6 +221,7 @@ export const setMenuData = (data: any) => {
       },
       icon: renderIconCustom("material-symbols:blind"),
       key: "sysMan",
+      show:hasPermission('sys'),
       children: [
         {
           label: () =>

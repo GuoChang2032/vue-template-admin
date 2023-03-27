@@ -3,6 +3,7 @@ import { useIndex } from "@/stores/indexStore";
 import { useMenus } from "@/stores/menu";
 import m from "@/utils/mitt";
 import { setMenuData } from "@/utils/utils";
+import { useUserInfo } from "@/stores/user";
 import { MenuInst } from "naive-ui";
 // import headerCom from '@/components/headerCom'
 const ui = useIndex();
@@ -14,10 +15,9 @@ const menuOptions = ref<any>([]);
 const clientWidth = ref<number>(document.body.clientWidth);
 const activeKey = ref<string>("");
 const menuInstRef = ref<MenuInst | null>(null);
-const menus = ref<any>(um.getMenus);
+const us = useUserInfo();
+// const menus = ref<any>(um.getMenus);
 
-// 动态生成菜单,或者手动...
-menuOptions.value = setMenuData(um.getMenus);
 m.on("switch", (e: any) => {
   inverted.value = e.val;
 });
@@ -28,7 +28,16 @@ m.on("pageTabChange", (e: any) => {
   activeKey.value = e.val;
   menuInstRef.value?.showOption(activeKey.value);
 });
+// m.on("login", (e: any) => {
+  
+// });
 
+watch(
+  () => us.getInfo,
+  (nv, ov) => {
+    menuOptions.value = setMenuData();
+  }
+);
 watch(
   () => clientWidth.value,
   (nv, ov) => {
@@ -36,12 +45,9 @@ watch(
   }
 );
 
-watch(
-  () => menus.value,
-  (nv, ov) => {
-    menuOptions.value = setMenuData(nv);
-  }
-);
+const setMenu = () => {
+  menuOptions.value = setMenuData();
+};
 
 const menuSelect = (key: string) => {
   ui.setActiveKey(key);
@@ -60,6 +66,7 @@ onMounted(() => {
     })();
   };
   expandMenuOpt();
+  setMenu();
 });
 
 onUnmounted(() => {
@@ -107,24 +114,18 @@ onUnmounted(() => {
         />
       </n-layout-sider>
       <n-layout :class="['flex flex-col', inverted ? 'n-l-c-b' : 'n-l-c-w']">
-        <!-- <n-layout-header> <headerCom /> </n-layout-header> -->
         <div class="fixed-head"><headerCom /></div>
-        <!-- <n-layout-content> -->
         <div class="flex-auto">
           <div class="p-4">
-            <!-- <n-scrollbar style="max-height: 100%"> -->
-              <router-view v-slot="{ Component }">
-                <transition name="slide-fade">
-                  <keep-alive>
-                    <component :is="Component" />
-                  </keep-alive>
-                </transition>
-              </router-view>
-            <!-- </n-scrollbar> -->
+            <router-view v-slot="{ Component }">
+              <transition name="slide-fade">
+                <keep-alive>
+                  <component :is="Component" />
+                </keep-alive>
+              </transition>
+            </router-view>
           </div>
         </div>
-        <!-- </n-layout-content> -->
-        <!-- <FooterCom /> -->
       </n-layout>
     </n-layout>
   </n-layout>
