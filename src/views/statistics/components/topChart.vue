@@ -34,7 +34,7 @@ onMounted(() => {});
         <n-avatar
           size="large"
           round
-          src="public/atom.svg"
+          src="/atom.svg"
         />
       </template>
       <template #extra>

@@ -15,6 +15,7 @@ const APP_NAME = 'template admin'
 // 路由守卫,路由跳转前
 router.beforeEach((to, from, next) => {
     start()
+    console.log('zxc,',to)
     const user = useUserInfo()
     const { hasPermission } = usePermission()
     document.title = to.meta.title ? to.meta.title + ' - ' + APP_NAME : '前端模板' + ' - ' + APP_NAME
@@ -36,13 +37,12 @@ router.beforeEach((to, from, next) => {
     } else if (role !== 'admin' && !hasPermission(to.name)) {
         // 禁止没有权限的角色进入某个页面
         done()
-        Message('warning', '没有权限进入')
-        next({ path: '/' })
+        next({ path: '/403' })
         return
     }
     const umt = useMenuTag()
-    // 不在非显示列表,没有重复,
-    if (hideTabList.every((x) => x !== to.path) && !judgeTab(to.name, umt.tabs)) {
+    // 不是异常页,不在非显示列表,没有重复,就加入tab标签显示
+    if (to.meta.key !== 'exception' && hideTabList.every((x) => x !== to.path) && !judgeTab(to.name, umt.tabs)) {
         let x = deepCopy(to)
         delete x.matched
         umt.setTab(x)

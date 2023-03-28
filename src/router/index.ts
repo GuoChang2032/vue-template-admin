@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import IndexLayout from "@/layouts/IndexLayout.vue";
+import BlankLayout from "@/layouts/BlankLayout.vue";
 const routes: RouteRecordRaw[] = [
   {
     path: "/",
@@ -81,14 +82,22 @@ const routes: RouteRecordRaw[] = [
     },
     component: () => import("@/views/login/login.vue"),
   },
-  // {
-  //   path: "/:pathMatch(.*)*",
-  //   name: "404",
-  //   meta: {
-  //     title: "页面不存在",
-  //   },
-  //   component: () => import("@/views/abnormal/404.vue"),
-  // },
+  {
+    path: "/403",
+    name: "403",
+    meta: {
+      key: "exception",
+    },
+    component: () => import("@/views/abnormal/403.vue"),
+  },
+  {
+    path: "/:path(.*)",
+    name: "404",
+    meta: {
+      key: "exception",
+    },
+    component: () => import("@/views/abnormal/404.vue"),
+  },
 ];
 
 const router = createRouter({

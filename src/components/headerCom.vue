@@ -79,7 +79,7 @@ const userMenuSelect = (key: string) => {
   <div :class="[theme ? 'theme-black' : 'theme-white']">
     <div class="header flex-between" :class="[theme ? 'bm-black' : 'bm-white']">
       <div class="h-left flex-center-start">
-        <icon
+        <!-- <icon
           class="contract"
           v-if="isCollapsed"
           icon="ant-design:menu-unfold-outlined"
@@ -92,7 +92,7 @@ const userMenuSelect = (key: string) => {
           icon="ant-design:menu-fold-outlined"
           size="26px"
           @click="collapseChange"
-        />
+        /> -->
         <n-breadcrumb>
           <n-breadcrumb-item> {{ t("page.index") }} </n-breadcrumb-item>
           <n-breadcrumb-item>
@@ -132,7 +132,7 @@ const userMenuSelect = (key: string) => {
               <n-avatar
                 size="small"
                 round
-                src="public/atom.svg"
+                src="/atom.svg"
               />
               <div class="h-r-a-name">张三</div>
             </div>

@@ -15,8 +15,8 @@ const goback = ()=>{
     class="container flex items-center justify-center h-full justify-items-center"
   >
     <div class="text-center">
-      <img class="h-96" src="@/assets/not-found.svg" alt="" />
-      <div class="mt-6 mb-8 text-base font-semibold text-gray-700">页面不存在  :( </div>
+      <img class="h-96" src="@/assets/no-permission.svg" alt="" />
+      <div class="mt-6 mb-8 text-base font-semibold text-gray-700">你没有权限访问该页面  :( </div>
 
       <n-button type="primary" @click="goback">返回首页</n-button>
     </div>

@@ -5,6 +5,7 @@ import { useMenuTag } from "@/stores/menu";
 import { useRouter } from "vue-router";
 import _ from "super-tools-lib";
 import m from "@/utils/mitt";
+import { renderIconCustom } from "@/utils/utils";
 
 const ui = useIndex();
 const ur = useRouter();
@@ -12,7 +13,18 @@ const umt = useMenuTag();
 const inverted = ref<boolean>(ui.getInverted);
 const activeKey = ref<string>(ui.getActiveKey);
 const tabs = ref<any>(umt.getTabs);
-
+const options = ref<any>([
+  {
+    label: "重新加载",
+    key: "reload",
+    icon: renderIconCustom("bytesize:reload"),
+  },
+  {
+    label: "关闭所有",
+    key: "close",
+    icon: renderIconCustom("carbon:close-outline"),
+  },
+]);
 onMounted(() => {});
 
 onUnmounted(() => {
@@ -24,9 +36,15 @@ m.on("layoutTabChange", (e: any) => {
   activeKey.value = e.val;
 });
 m.on("login", () => {
-  tabs.value=umt.getTabs
+  tabs.value = umt.getTabs;
 });
 
+watch(
+  () => umt.getTabs,
+  (nv, ov) => {
+    tabs.value = nv;
+  }
+);
 watch(
   () => ui.getInverted,
   (nv, ov) => {
@@ -68,10 +86,32 @@ const closeTab = (path: string, selectName: string) => {
     ur.push({ path: p });
   }
 };
+
+const onSelect = (key: string) => {
+  if (key === "reload") {
+    location.reload();
+  } else if (key === "close") {
+    m.emit("pageTabChange", { val: "index" });
+    ui.setActiveKey("index");
+    ur.push({ path: "/index" });
+    activeKey.value = 'index';
+    umt.resetTab();
+  }
+};
 </script>
 
 <template>
   <div class="flex flex-wrap px-2">
+    <div class="flex items-center justify-center mr-2 cursor-pointer">
+      <n-dropdown
+        :options="options"
+        @select="onSelect"
+        trigger="click"
+        placement="bottom-start"
+      >
+        <icon icon="ic:round-menu" size="26px" />
+      </n-dropdown>
+    </div>
     <div
       v-for="item in tabs"
       :key="item.name"
