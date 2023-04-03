@@ -219,7 +219,7 @@ export const setMenuData = (data: any = null) => {
       label: () => {
         return t("page.system");
       },
-      icon: renderIconCustom("material-symbols:blind"),
+      icon: renderIconCustom("ph:gear"),
       key: "sysMan",
       show:hasPermission('sys'),
       children: [

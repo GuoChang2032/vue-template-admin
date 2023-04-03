@@ -69,6 +69,7 @@ export default defineComponent({
       }
     });
 
+    // naive组件的主题颜色
     const themeOverrides: GlobalThemeOverrides = {
       common: {
         primaryColor: "#5A67BA",
@@ -76,14 +77,6 @@ export default defineComponent({
         primaryColorPressed: "#4c5bb5",
       },
     };
-
-    // m.on("switch", (e: any) => {
-    //   if (e.val) {
-    //     theme.value = darkTheme;
-    //   } else {
-    //     theme.value = null;
-    //   }
-    // });
 
     return {
       language,

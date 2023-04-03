@@ -15,7 +15,6 @@ const APP_NAME = 'template admin'
 // 路由守卫,路由跳转前
 router.beforeEach((to, from, next) => {
     start()
-    console.log('zxc,',to)
     const user = useUserInfo()
     const { hasPermission } = usePermission()
     document.title = to.meta.title ? to.meta.title + ' - ' + APP_NAME : '前端模板' + ' - ' + APP_NAME

@@ -3,12 +3,13 @@ import { FormInst } from "naive-ui";
 import { useRouter } from "vue-router";
 import { useUserInfo } from "@/stores/user";
 import { Message } from "@/utils/utils";
-
+import http from "@/service/http";
 const emit = defineEmits(["callback"]);
 
 const loginForm = ref<FormInst | null>(null);
 const loginModel = ref<any>({
   account: null,
+  nickName: null,
   password: null,
   phone: null,
   code: null,
@@ -20,10 +21,24 @@ const us = useUserInfo();
 const { t } = useI18n();
 
 const handleLogin = () => {
-  Message("success", "注册成功");
-  setTimeout(() => {
-    other("0");
-  }, 800);
+  let f = loginModel.value;
+  delete f.code;
+  loading.value = true;
+  http
+    .post("/register", f)
+    .then((res) => {
+      console.log("rrr", res);
+      if(res.success){
+        Message("success", "注册成功");
+        other("0");
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+    })
+    .finally(() => {
+      loading.value = false;
+    });
 };
 const other = (type: string) => {
   emit("callback", { type });
@@ -64,6 +79,12 @@ const sendSys = () => {
       - OR -
     </div>
     <div class="register-no-flex">
+      <input
+        class="login-input"
+        v-model="loginModel.nickName"
+        placeholder="输入用户名"
+        type="text"
+      />
       <input
         class="login-input"
         v-model="loginModel.account"
@@ -118,8 +139,7 @@ const sendSys = () => {
   </div>
 </template>
 
-<style scoped lang="less">
-</style>
+<style scoped lang="less"></style>
 <style lang="less">
 .register-no-flex {
   .n-form-item-blank {

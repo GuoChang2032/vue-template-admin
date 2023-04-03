@@ -31,7 +31,7 @@ m.on("pageTabChange", (e: any) => {
 // m.on("login", (e: any) => {
   
 // });
-
+// 用户角色变化,重新获取菜单
 watch(
   () => us.getInfo,
   (nv, ov) => {

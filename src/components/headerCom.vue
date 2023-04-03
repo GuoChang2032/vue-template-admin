@@ -213,7 +213,6 @@ const userMenuSelect = (key: string) => {
   overflow: hidden;
 }
 .header {
-  min-width: 600px;
   padding: 10px 30px 10px 10px;
   box-sizing: content-box;
   transition: all 0.2s;

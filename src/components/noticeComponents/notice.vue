@@ -22,6 +22,7 @@ watch(
 
 const handleClear = () => {
   Message("success", "清除成功");
+  count.value = 0;
 };
 const handleAllRead = () => {
   Message("success", "已读");
@@ -34,7 +35,11 @@ const handleLoadMore = () => {};
     <template #trigger>
       <div class="n-c-wrap" :title="'通知(' + count + ')'">
         <n-badge :value="count" show-zero :max="99" :show="count > 0">
-          <icon icon="mdi:bell-outline" size="24px" :class="inverted?'text-gray-200':'text-gray-800'" />
+          <icon
+            icon="mdi:bell-outline"
+            size="24px"
+            :class="inverted ? 'text-gray-200' : 'text-gray-800'"
+          />
         </n-badge>
       </div>
     </template>
@@ -46,9 +51,14 @@ const handleLoadMore = () => {};
     >
       <n-tab-pane name="1" :tab="'通知(' + count + ')'">
         <n-scrollbar style="max-height: 350px">
-          <div v-for="(item, idx) in count" :key="idx">
-            <noticeList />
-          </div>
+          <template v-if="count">
+            <div v-for="(item, idx) in count" :key="idx">
+              <noticeList />
+            </div>
+          </template>
+          <template v-else>
+            <emptyNotice desc="暂无通知" />
+          </template>
         </n-scrollbar>
       </n-tab-pane>
       <n-tab-pane name="2" tab="消息">
