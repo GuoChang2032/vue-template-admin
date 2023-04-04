@@ -27,8 +27,8 @@ const handleLogin = () => {
   http
     .post("/register", f)
     .then((res) => {
-      console.log("rrr", res);
-      if(res.success){
+      if (res.success) {
+        reset()
         Message("success", "注册成功");
         other("0");
       }
@@ -41,7 +41,18 @@ const handleLogin = () => {
     });
 };
 const other = (type: string) => {
+  reset()
   emit("callback", { type });
+};
+
+const reset = () => {
+  loginModel.value = {
+    account: null,
+    nickName: null,
+    password: null,
+    phone: null,
+    code: null,
+  };
 };
 
 const count = ref<number>(60);
@@ -82,7 +93,7 @@ const sendSys = () => {
       <input
         class="login-input"
         v-model="loginModel.nickName"
-        placeholder="输入用户名"
+        placeholder="输入昵称"
         type="text"
       />
       <input

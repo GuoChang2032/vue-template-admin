@@ -33,7 +33,7 @@ m.on("pageTabChange", (e: any) => {
 // });
 // 用户角色变化,重新获取菜单
 watch(
-  () => us.getInfo,
+  () => us.info,
   (nv, ov) => {
     menuOptions.value = setMenuData();
   }

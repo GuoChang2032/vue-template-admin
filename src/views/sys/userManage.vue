@@ -1,9 +1,28 @@
 <script lang="ts" setup>
 import { Message } from "@/utils/utils";
-import { pageType } from "@/utils/types";
+import { pageType, ApiReturnType } from "@/utils/types";
 import { onMounted } from "vue";
 import btnComponents from "@/components/btns/btnComponents.vue";
-onMounted(() => {});
+import http from "@/service/http";
+
+onMounted(() => {
+  getList();
+});
+
+const tableData = ref<any>();
+
+const getList = () => {
+  http
+    .get("/user")
+    .then((res: ApiReturnType) => {
+      if (res.success) {
+        tableData.value = res.data;
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+};
 
 const pageObj = ref<pageType>({
   total: 0,
@@ -70,18 +89,13 @@ const operation = (val: any) => {
         :detail="true"
         :selection="true"
         @callback="operation"
-        :data="[
-          { name: 'giegie', age: 18, id: '001' },
-          { name: 'giegie2', age: 18, id: '002' },
-          { name: 'giegie3', age: 18, id: '003' },
-        ]"
+        :data="tableData"
         :column="[
           { prop: 'id', label: '编号', width: '80' },
-          { prop: 'name', label: '名称' },
-          { prop: 'gender', label: '性别', width: '100' },
-          { prop: 'age', label: '年龄', width: '200' },
-          { prop: 'address', label: '地址' },
-          { prop: 'status', label: '状态', width: '150' },
+          { prop: 'nickName', label: '用户名' },
+          { prop: 'account', label: '账户名', width: '100' },
+          { prop: 'phone', label: '电话', width: '200' },
+          { prop: 'role', label: '角色' },
         ]"
       >
       </tableComponent>

@@ -10,12 +10,11 @@
       <n-dialog-provider>
         <router-view v-slot="{ Component }">
           <transition name="slide-fade-app">
-            <keep-alive>
+            <keep-alive include="keepLive">
               <component :is="Component" />
             </keep-alive>
           </transition>
         </router-view>
-        <!-- <router-view /> -->
       </n-dialog-provider>
     </n-notification-provider>
   </n-config-provider>

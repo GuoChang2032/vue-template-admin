@@ -7,6 +7,7 @@ import { Message } from "@/utils/utils";
 import m from "@/utils/mitt";
 import { useIndex } from "@/stores/indexStore";
 import http from "@/service/http";
+import { UserInfoType } from "@/utils/types";
 
 const emit = defineEmits(["callback"]);
 
@@ -27,9 +28,11 @@ const handleLogin = () => {
   let f = formValue.value;
   http
     .post("/login", f)
-    .then((res) => {
+    .then((res:any) => {
       if (res.success) {
-        us.setUserInfo({ role: f.account, token: "xxx" });
+        let info: UserInfoType = res.data;
+        info.token = "xixixixixixixixxix";
+        us.setUserInfo(info);
         umt.resetTab();
         m.emit("pageTabChange", { val: "index" });
         ui.setActiveKey("index");

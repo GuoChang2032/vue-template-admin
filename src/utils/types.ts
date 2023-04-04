@@ -10,15 +10,28 @@ export type queryParams = {
 };
 
 export interface ResType<T> {
-  code: number;
-  data?: T;
+  status: number;
   message: string;
-  timestamp?: string;
-  success: Boolean;
+  success: boolean;
+  data?: any;
 }
-
 
 export type pageType = {
-  page:number,
-  total:number
-}
+  page: number;
+  total: number;
+};
+
+export type UserInfoType = {
+  account: string;
+  nickName: string;
+  phone: string;
+  role: string;
+  token: string;
+};
+
+export interface ApiReturnType{
+  status: number;
+  message: string;
+  success: boolean;
+  data?: any;
+};

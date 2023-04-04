@@ -11,6 +11,7 @@ import {
 } from "@/utils/utils";
 import { notice } from "@/components/noticeComponents";
 import { useI18n } from "vue-i18n";
+import { useUserInfo } from "@/stores/user";
 
 const isDark = useDark();
 const toggleDark = useToggle(isDark);
@@ -20,7 +21,8 @@ const isCollapsed = ref<boolean>(false);
 const pagename = ref<string>(inver.getActiveKey || "");
 const i18n = useI18n();
 const { t } = useI18n();
-
+const us = useUserInfo();
+const user_info = ref<any>(us.info);
 const options = ref<any>([
   {
     label: "简体中文",
@@ -44,6 +46,12 @@ const userMenu = ref<any>([
   },
 ]);
 
+watch(
+  () => us.info,
+  (nv, ov) => {
+    user_info.value = nv;
+  }
+);
 watch(
   () => inver.getActiveKey,
   (nv, ov) => {
@@ -129,12 +137,10 @@ const userMenuSelect = (key: string) => {
 
           <n-dropdown :options="userMenu" @select="userMenuSelect">
             <div class="user-content flex-center">
-              <n-avatar
-                size="small"
-                round
-                src="/atom.svg"
-              />
-              <div class="h-r-a-name">张三</div>
+              <n-avatar size="small" round src="/atom.svg" />
+              <div class="h-r-a-name">
+                {{ user_info.nickName || "未知名称" }}
+              </div>
             </div>
           </n-dropdown>
         </div>

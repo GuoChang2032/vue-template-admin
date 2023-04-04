@@ -47,6 +47,11 @@
 - ### 一些常用插件集成
 
 
+--- 
+
+## 接口数据
+用的自己写得go,替换mock数据
+[https://github.com/Gi2032/vue-template-admin-backstage](https://github.com/Gi2032/vue-template-admin-backstage)
 ---
 
 ## vscode 插件 🔥
