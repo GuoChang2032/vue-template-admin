@@ -13,6 +13,7 @@ const messages = {
       userManage: "User manage",
       routeManage: "Routing manage",
       chat: "Chat",
+      noticeCenter: "Notice",
     },
     header: {
       title: "The best system in the world",
@@ -60,6 +61,7 @@ const messages = {
       userManage: "用户管理",
       routeManage: "路由管理",
       chat: "聊天",
+      noticeCenter: "通知",
     },
     header: {
       title: "世界第一低代码平台",

@@ -12,7 +12,7 @@ const count = ref<number>(3);
 const msg = ref<number>(0);
 const dolist = ref<number>(0);
 const currentTab = ref<string>("1");
-
+const ur = useRouter();
 watch(
   () => ui.getInverted,
   (nv, ov) => {
@@ -27,7 +27,9 @@ const handleClear = () => {
 const handleAllRead = () => {
   Message("success", "已读");
 };
-const handleLoadMore = () => {};
+const handleLoadMore = () => {
+  ur.push({ path: "/noticeCenter" });
+};
 </script>
 
 <template>

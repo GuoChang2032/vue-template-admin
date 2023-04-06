@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 import { onMounted } from "vue";
-onMounted(() => {});
+onMounted(() => {
+  console.log('一给我里giao')
+});
 </script>
 
 <template>

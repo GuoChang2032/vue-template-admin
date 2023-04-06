@@ -5,7 +5,7 @@ import { useMenuTag } from "@/stores/menu";
 import { useRouter } from "vue-router";
 import _ from "super-tools-lib";
 import m from "@/utils/mitt";
-import { renderIconCustom } from "@/utils/utils";
+import { renderIconCustom, switchTab } from "@/utils/utils";
 
 const ui = useIndex();
 const ur = useRouter();
@@ -51,6 +51,12 @@ watch(
     inverted.value = nv;
   }
 );
+watch(
+  () => ui.getActiveKey,
+  (nv, ov) => {
+    activeKey.value = nv;
+  }
+);
 
 const judge = (name: string): string => {
   // 选中
@@ -62,8 +68,7 @@ const judge = (name: string): string => {
   }
 };
 const choose = (path: string, pname: string) => {
-  m.emit("pageTabChange", { val: pname });
-  ui.setActiveKey(pname);
+  switchTab(pname);
   activeKey.value = pname;
   ur.push({ path });
 };
@@ -80,8 +85,7 @@ const closeTab = (path: string, selectName: string) => {
     }
   });
   if (activeKey.value === selectName) {
-    ui.setActiveKey(pname);
-    m.emit("pageTabChange", { val: pname });
+    switchTab(pname);
     activeKey.value = pname;
     ur.push({ path: p });
   }
@@ -91,10 +95,9 @@ const onSelect = (key: string) => {
   if (key === "reload") {
     location.reload();
   } else if (key === "close") {
-    m.emit("pageTabChange", { val: "index" });
-    ui.setActiveKey("index");
+    switchTab("index");
     ur.push({ path: "/index" });
-    activeKey.value = 'index';
+    activeKey.value = "index";
     umt.resetTab();
   }
 };

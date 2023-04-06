@@ -7,7 +7,8 @@ import Icon from "@/components/icon.vue";
 import { useMenus } from "@/stores/menu";
 import { usePermission } from "@/hooks/common/business";
 import { useUserInfo } from "@/stores/user";
-
+import m from "@/utils/mitt";
+import { useIndex } from "@/stores/indexStore";
 
 const LOCAL_NAME = "localStorageName";
 
@@ -100,8 +101,8 @@ export const setUserInfo = (data: any): void => {
 
 // 登出
 export const logout = () => {
-  const us = useUserInfo()
-  us.setUserInfo({})
+  const us = useUserInfo();
+  us.setUserInfo({});
   router.push({ path: "/login", replace: true });
   // localStorage.removeItem("user_login_info");
   // Message("warning", "登录过期,请重新登录!");
@@ -129,7 +130,7 @@ export const judgePage = (r_page: any, route: string): boolean => {
 
 export const setMenuData = (data: any = null) => {
   const { t } = i18n.global;
-  const {hasPermission} = usePermission()
+  const { hasPermission } = usePermission();
   // let ms: any = [];
   // data.forEach((item: any) => {
   //   let c: any = [];
@@ -182,7 +183,7 @@ export const setMenuData = (data: any = null) => {
     },
     {
       label: () => {
-        return '工具';
+        return "工具";
       },
       children: [
         {
@@ -194,7 +195,7 @@ export const setMenuData = (data: any = null) => {
                   name: "editor",
                 },
               },
-              { default: () => '编辑工具' }
+              { default: () => "编辑工具" }
             ),
           key: "editor",
         },
@@ -207,7 +208,7 @@ export const setMenuData = (data: any = null) => {
                   name: "chart",
                 },
               },
-              { default: () => '可视化图表' }
+              { default: () => "可视化图表" }
             ),
           key: "chart",
         },
@@ -216,12 +217,26 @@ export const setMenuData = (data: any = null) => {
       icon: renderIconCustom("mingcute:tool-line"),
     },
     {
+      label: () =>
+        h(
+          RouterLink,
+          {
+            to: {
+              name: "noticeCenter",
+            },
+          },
+          { default: () => t("page.noticeCenter") }
+        ),
+      key: "noticeCenter",
+      icon: renderIconCustom("ph:bell-ringing-light"),
+    },
+    {
       label: () => {
         return t("page.system");
       },
       icon: renderIconCustom("ph:gear"),
       key: "sysMan",
-      show:hasPermission('sys'),
+      show: hasPermission("sys"),
       children: [
         {
           label: () =>
@@ -316,4 +331,15 @@ export function deepCopy(data: any) {
     }
   });
   return newData;
+}
+
+
+export function switchTab(name:string){
+  if(!name){
+    Message('warning','未知tab name')
+    return
+  }
+  const ui = useIndex();
+  m.emit("pageTabChange", { val: name });
+  ui.setActiveKey(name);
 }

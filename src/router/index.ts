@@ -72,6 +72,14 @@ const routes: RouteRecordRaw[] = [
         },
         component: () => import("@/views/editor/editor.vue"),
       },
+      {
+        path: "/noticeCenter",
+        name: "noticeCenter",
+        meta: {
+          title: "通知",
+        },
+        component: () => import("@/views/noticeCenter/noticeCenter.vue"),
+      },
     ],
   },
   {

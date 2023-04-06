@@ -65,7 +65,7 @@ const editMenu = (item: any) => {
 
 <template>
   <themeComponent>
-    <div class="mb-8">
+    <div>
       <n-space :size="[25, 10]">
         <div class="flex items-center">
           <div class="w-20" for="">菜单名称</div>
@@ -75,7 +75,7 @@ const editMenu = (item: any) => {
         <btnComponents type="reset" @callback="resetHandle" text="重置" />
       </n-space>
     </div>
-    <div class="mb-8">
+    <div class="my-4">
       <btnComponents type="add" @callback="addHandle" text="新建路由" />
     </div>
     <n-alert class="mb-6" title="提示" type="info" closeable>

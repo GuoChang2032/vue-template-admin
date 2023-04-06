@@ -1,13 +1,13 @@
 <script lang="ts" setup>
 import { onMounted } from "vue";
+import {switchTab} from '@/utils/utils'
 onMounted(() => {});
 
-const ur = useRouter()
-
-const goback = ()=>{
-  ur.push({path:'/index',replace:true})
-}
-
+const ur = useRouter();
+const goBack = () => {
+  switchTab('index')
+  ur.push({ path: "/index", replace: true });
+};
 </script>
 
 <template>
@@ -16,9 +16,11 @@ const goback = ()=>{
   >
     <div class="text-center">
       <img class="h-96" src="@/assets/not-found.svg" alt="" />
-      <div class="mt-6 mb-8 text-base font-semibold text-gray-700">页面不存在  :( </div>
+      <div class="mt-6 mb-8 text-base font-semibold text-gray-700">
+        页面不存在 :(
+      </div>
 
-      <n-button type="primary" @click="goback">返回首页</n-button>
+      <n-button type="primary" @click="goBack">返回首页</n-button>
     </div>
   </div>
 </template>

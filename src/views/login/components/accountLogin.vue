@@ -3,7 +3,7 @@ import { FormInst } from "naive-ui";
 import { useRouter } from "vue-router";
 import { useUserInfo } from "@/stores/user";
 import { useMenuTag } from "@/stores/menu";
-import { Message } from "@/utils/utils";
+import { Message,switchTab } from "@/utils/utils";
 import m from "@/utils/mitt";
 import { useIndex } from "@/stores/indexStore";
 import http from "@/service/http";
@@ -28,14 +28,13 @@ const handleLogin = () => {
   let f = formValue.value;
   http
     .post("/login", f)
-    .then((res:any) => {
+    .then((res: any) => {
       if (res.success) {
         let info: UserInfoType = res.data;
         info.token = "xixixixixixixixxix";
         us.setUserInfo(info);
         umt.resetTab();
-        m.emit("pageTabChange", { val: "index" });
-        ui.setActiveKey("index");
+        switchTab("index");
         m.emit("login", {});
         router.push({ path: "/index" });
       }

@@ -29,7 +29,7 @@ m.on("pageTabChange", (e: any) => {
   menuInstRef.value?.showOption(activeKey.value);
 });
 // m.on("login", (e: any) => {
-  
+
 // });
 // 用户角色变化,重新获取菜单
 watch(
@@ -119,7 +119,8 @@ onUnmounted(() => {
           <div class="p-4">
             <router-view v-slot="{ Component }">
               <transition name="slide-fade">
-                <keep-alive>
+                <!-- 哪些页面需要缓存 -->
+                <keep-alive :include="['editor', 'chart']">
                   <component :is="Component" />
                 </keep-alive>
               </transition>
