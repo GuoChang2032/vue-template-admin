@@ -59,7 +59,7 @@ const getWeather = () => {
   <template v-if="wd">
     <div
       class="px-4 py-2 mb-2"
-      :class="inverted ? 'bg-gray-800' : 'bg-blue-100'"
+      :class="inverted ? 'bg-gray-900' : 'bg-blue-100'"
     >
       <n-skeleton v-if="loading" text :repeat="2" />
       <template v-else>

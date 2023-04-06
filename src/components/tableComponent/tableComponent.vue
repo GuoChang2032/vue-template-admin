@@ -11,14 +11,14 @@ const props = defineProps([
   "editor",
   "selection",
 ]);
-const cb = (type: number) => {
+const cb = (type: number, data?: any) => {
   // 1编辑,2详情,3删除
-  emits("callback", { type });
+  emits("callback", { type,data });
 };
 
 const handleSelectionChange = (val: []) => {
-  emits('callback',{selectItem:val})
-}
+  emits("callback", { selectItem: val });
+};
 </script>
 <!-- 简单的table可以用这个组件 -->
 <template>
@@ -41,30 +41,32 @@ const handleSelectionChange = (val: []) => {
         label="操作"
         v-if="props.delete || props.detail || props.editor"
       >
-        <n-button
-          v-if="props.editor"
-          class="mr-3"
-          text
-          type="info"
-          @click="cb(1)"
-          >编辑</n-button
-        >
-        <n-button
-          v-if="props.detail"
-          class="mr-3"
-          text
-          type="info"
-          @click="cb(2)"
-          >详情</n-button
-        >
-        <n-button
-          v-if="props.delete"
-          class="mr-3"
-          text
-          type="error"
-          @click="cb(3)"
-          >删除</n-button
-        >
+        <template #default="scope">
+          <n-button
+            v-if="props.editor"
+            class="mr-3"
+            text
+            type="info"
+            @click="cb(1,scope.row)"
+            >编辑</n-button
+          >
+          <n-button
+            v-if="props.detail"
+            class="mr-3"
+            text
+            type="info"
+            @click="cb(2)"
+            >详情</n-button
+          >
+          <n-button
+            v-if="props.delete"
+            class="mr-3"
+            text
+            type="error"
+            @click="cb(3, scope.row.id)"
+            >删除</n-button
+          >
+        </template>
       </el-table-column>
     </template>
   </el-table>

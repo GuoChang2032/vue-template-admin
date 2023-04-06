@@ -16,7 +16,7 @@ watch(
 <template>
   <div
     class="p-4 rounded-lg"
-    :class="inverted ? 'bg-gray-800' : 'bg-white'"
+    :class="inverted ? 'bg-gray-900' : 'bg-white'"
   >
     <slot></slot>
   </div>
