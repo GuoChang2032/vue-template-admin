@@ -14,10 +14,11 @@ const tableData = ref<any>();
 
 const getList = () => {
   http
-    .get("/user")
+    .get(`/user?pageNo=${pageObj.value.page}&pageSize=10`)
     .then((res: ApiReturnType) => {
       if (res.success) {
-        tableData.value = res.data;
+        tableData.value = res.records.data;
+        pageObj.value.total = res.records.total;
       }
     })
     .catch((err) => {
@@ -37,12 +38,16 @@ const show = ref<boolean>(false);
 const confirmHandle = (e: any) => {
   let d = e.value;
   loading.value = true;
+  let url: string = "/addUser";
+  if (d.id) {
+    url = "/updateUser";
+  }
   http
-    .post("/addUser", d)
+    .post(url, d)
     .then((res) => {
       if (res.success) {
         show.value = false;
-        Message("success", "添加成功");
+        Message("success", d.id?"编辑成功":"添加成功");
         getList();
       }
     })
@@ -97,6 +102,11 @@ const deleteItem = (id: string) => {
       loading.value = false;
     });
 };
+
+const pc = (e: any) => {
+  pageObj.value.page = e.page;
+  getList();
+};
 </script>
 
 <template>
@@ -148,11 +158,16 @@ const deleteItem = (id: string) => {
             { prop: 'nickName', label: '用户名' },
             { prop: 'account', label: '账户名', width: '100' },
             { prop: 'phone', label: '电话', width: '200' },
+            { prop: 'password', label: '密码', width: '200' },
             { prop: 'role', label: '角色' },
           ]"
         >
         </tableComponent>
-        <pagination :total="pageObj.total" :current="pageObj.page" />
+        <pagination
+          :total="pageObj.total"
+          :current="pageObj.page"
+          @pageChange="pc"
+        />
       </div>
     </n-spin>
     <addUserModal

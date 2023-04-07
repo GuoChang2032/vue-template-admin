@@ -29,9 +29,10 @@ export type UserInfoType = {
   token: string;
 };
 
-export interface ApiReturnType{
+export interface ApiReturnType {
   status: number;
   message: string;
   success: boolean;
   data?: any;
-};
+  records?: any;
+}

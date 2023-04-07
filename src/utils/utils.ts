@@ -195,7 +195,7 @@ export const setMenuData = (data: any = null) => {
                   name: "editor",
                 },
               },
-              { default: () => "编辑工具" }
+              { default: () =>  t("page.editor") }
             ),
           key: "editor",
         },
@@ -208,7 +208,7 @@ export const setMenuData = (data: any = null) => {
                   name: "chart",
                 },
               },
-              { default: () => "可视化图表" }
+              { default: () => t("page.chart") }
             ),
           key: "chart",
         },
@@ -276,6 +276,9 @@ export function routerNameMapping(router: string) {
     routeManage: "page.routeManage",
     userManage: "page.userManage",
     homepage: "page.index",
+    editor: "page.editor",
+    chart: "page.chart",
+    noticeCenter: "page.noticeCenter",
   };
   return a[router] || "page.index";
 }

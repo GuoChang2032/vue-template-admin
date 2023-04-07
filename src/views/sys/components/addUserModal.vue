@@ -11,7 +11,7 @@ onMounted(() => {
 watch(
   () => props.itemData,
   (nv, ov) => {
-    model.value = nv;
+    model.value = _.cloneDeep(nv);
   }
 );
 
@@ -28,6 +28,7 @@ const emits = defineEmits(["confirm", "cancel"]);
 const props = defineProps(["show", "itemData"]);
 
 interface formType {
+  id: string;
   account: string;
   password: string;
   phone: string;
@@ -57,6 +58,7 @@ const rules = ref<any>({
   },
 });
 const model = ref<formType>({
+  id: "",
   account: "",
   password: "",
   phone: "",
@@ -68,7 +70,7 @@ const confirm = () => {
   formRef.value?.validate((err) => {
     if (!err) {
       emits("confirm", { value: model.value });
-      reset()
+      reset();
     }
   });
 };
@@ -79,6 +81,7 @@ const cancel = () => {
 
 const reset = () => {
   model.value = {
+    id: "",
     account: "",
     password: "",
     phone: "",
