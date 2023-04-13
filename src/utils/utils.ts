@@ -9,6 +9,7 @@ import { usePermission } from "@/hooks/common/business";
 import { useUserInfo } from "@/stores/user";
 import m from "@/utils/mitt";
 import { useIndex } from "@/stores/indexStore";
+import { UserLoginInfoType,MenuDataType,TabsType} from "@/utils/types";
 
 const LOCAL_NAME = "localStorageName";
 
@@ -94,7 +95,7 @@ export const getUserInfo = () => {
 };
 
 // 设置用户信息
-export const setUserInfo = (data: any): void => {
+export const setUserInfo = (data: UserLoginInfoType): void => {
   const str = toCode(JSON.stringify(data));
   localStorage.setItem(LOCAL_NAME, str);
 };
@@ -102,14 +103,14 @@ export const setUserInfo = (data: any): void => {
 // 登出
 export const logout = () => {
   const us = useUserInfo();
-  us.setUserInfo({});
+  us.setUserInfo({ role: "", token: "" });
   router.push({ path: "/login", replace: true });
   // localStorage.removeItem("user_login_info");
   // Message("warning", "登录过期,请重新登录!");
 };
 
 // 消息
-export const Message = (type: any, msg: string) => {
+export const Message = (type: string, msg: string) => {
   const { message } = createDiscreteApi(["message"]);
   if (type === "info") {
     message.info(msg);
@@ -128,7 +129,7 @@ export const judgePage = (r_page: any, route: string): boolean => {
   return false;
 };
 
-export const setMenuData = (data: any = null) => {
+export const setMenuData = () => {
   const { t } = i18n.global;
   const { hasPermission } = usePermission();
   // let ms: any = [];
@@ -183,7 +184,7 @@ export const setMenuData = (data: any = null) => {
     },
     {
       label: () => {
-        return "工具";
+        return t("page.tool");
       },
       children: [
         {
@@ -195,7 +196,7 @@ export const setMenuData = (data: any = null) => {
                   name: "editor",
                 },
               },
-              { default: () =>  t("page.editor") }
+              { default: () => t("page.editor") }
             ),
           key: "editor",
         },
@@ -270,8 +271,12 @@ export const setMenuData = (data: any = null) => {
   return ms;
 };
 
+interface RouterNameMappingType {
+  [propName: string]: string;
+}
+
 export function routerNameMapping(router: string) {
-  let a: any = {
+  let a: RouterNameMappingType = {
     statistics: "page.statistics",
     routeManage: "page.routeManage",
     userManage: "page.userManage",
@@ -283,7 +288,7 @@ export function routerNameMapping(router: string) {
   return a[router] || "page.index";
 }
 
-export function routeMenuAdd(data: any, val: any) {
+export function routeMenuAdd(data: MenuDataType[], val: any) {
   data.forEach((item: any, idx: number) => {
     if (item.key === val.parentMenu) {
       if (data[idx].children) {
@@ -297,9 +302,9 @@ export function routeMenuAdd(data: any, val: any) {
 }
 
 // 判断tab菜单中是否有重复
-export function judgeTab(name: string, data: any): boolean {
+export function judgeTab(name: string, data: TabsType[]): boolean {
   let flag: boolean = false;
-  data.forEach((item: any) => {
+  data.forEach((item: TabsType) => {
     if (item.name === name) {
       flag = true;
     }
@@ -336,11 +341,10 @@ export function deepCopy(data: any) {
   return newData;
 }
 
-
-export function switchTab(name:string){
-  if(!name){
-    Message('warning','未知tab name')
-    return
+export function switchTab(name: string) {
+  if (!name) {
+    Message("warning", "未知tab name");
+    return;
   }
   const ui = useIndex();
   m.emit("pageTabChange", { val: name });

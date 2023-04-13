@@ -16,6 +16,7 @@ const messages = {
       noticeCenter: "Notice",
       editor: "Editor",
       chart: "Chart",
+      tool:"Tools"
     },
     header: {
       title: "The best system in the world",
@@ -65,6 +66,7 @@ const messages = {
       chat: "聊天",
       noticeCenter: "通知",
       editor: "编辑工具",
+      tool:"工具",
       chart: "可视化图表",
     },
     header: {

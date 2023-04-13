@@ -1,7 +1,6 @@
 import { defineStore } from "pinia";
 import m from "@/utils/mitt";
-
-
+import { TabsType, MenuDataType } from "@/utils/types";
 
 // 菜单栏
 export const useMenus = defineStore("menus", {
@@ -61,12 +60,12 @@ export const useMenus = defineStore("menus", {
     };
   },
   getters: {
-    getMenus(): any {
+    getMenus(): MenuDataType[] {
       return this.menusData;
     },
   },
   actions: {
-    setMenus(data: any) {
+    setMenus(data: MenuDataType[]) {
       this.menusData = data;
     },
   },
@@ -94,15 +93,15 @@ export const useMenuTag = defineStore("tabs", {
     };
   },
   getters: {
-    getTabs(): any {
+    getTabs(): Array<TabsType> {
       return this.tabs;
     },
   },
   actions: {
-    setTab(data: any) {
+    setTab(data: TabsType) {
       this.tabs.push(data);
     },
-    removeTab(nd: any) {
+    removeTab(nd: Array<TabsType>) {
       this.tabs = nd;
     },
     resetTab() {

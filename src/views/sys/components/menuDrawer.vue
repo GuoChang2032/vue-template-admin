@@ -4,13 +4,23 @@ import iconData from "@/utils/icon.data";
 import { FormInst } from "naive-ui";
 import { useMenus } from "@/stores/menu";
 import _ from "super-tools-lib";
+import { MenuDataType } from "@/utils/types";
+
+interface optsType {
+  label: string;
+  value: number;
+}
+
 onMounted(() => {
   setParent();
 });
 
-watch(()=>props.itemData,(nv,ov)=>{
-  model.value = nv;
-})
+watch(
+  () => props.itemData,
+  (nv, ov) => {
+    model.value = nv;
+  }
+);
 
 const setParent = () => {
   let temp = _.cloneDeep(um.getMenus);
@@ -24,18 +34,8 @@ const setParent = () => {
 const emits = defineEmits(["confirm", "cancel"]);
 const props = defineProps(["show", "itemData"]);
 
-interface formType {
-  parentMenu: string;
-  routeName: string;
-  routeIcon: string;
-  path: string;
-  key: string;
-  sort: number;
-  status: number;
-}
-
 const um = useMenus();
-const opts = ref<any>([
+const opts = ref<optsType[]>([
   {
     label: "正常",
     value: 1,
@@ -45,11 +45,11 @@ const opts = ref<any>([
     value: 2,
   },
 ]);
-const parentArr = ref<any>([]);
+const parentArr = ref<MenuDataType[]>([]);
 const formRef = ref<FormInst | null>(null);
 const iconModal = ref<boolean>(false);
 const loading = ref<boolean>(false);
-const rules = ref<any>({
+const rules = ref({
   routeName: {
     required: true,
     message: "请输入菜单名称",
@@ -66,7 +66,7 @@ const rules = ref<any>({
     trigger: ["input", "blur"],
   },
 });
-const model = ref<formType>({
+const model = ref<MenuDataType>({
   parentMenu: "layout",
   routeName: "",
   routeIcon: "",
@@ -74,6 +74,7 @@ const model = ref<formType>({
   path: "",
   sort: 1,
   status: 1,
+  children: [],
 });
 
 const confirm = () => {
@@ -97,6 +98,7 @@ const reset = () => {
     path: "",
     sort: 1,
     status: 1,
+    children: [],
   };
 };
 

@@ -12,6 +12,7 @@ import {
 import { notice } from "@/components/noticeComponents";
 import { useI18n } from "vue-i18n";
 import { useUserInfo } from "@/stores/user";
+import { UserLoginInfoType, LanguageType, IndexUserMenu } from "@/utils/types";
 
 const isDark = useDark();
 const toggleDark = useToggle(isDark);
@@ -22,8 +23,8 @@ const pagename = ref<string>(inver.getActiveKey || "");
 const i18n = useI18n();
 const { t } = useI18n();
 const us = useUserInfo();
-const user_info = ref<any>(us.info);
-const options = ref<any>([
+const user_info = ref<UserLoginInfoType>(us.info);
+const options = ref<Array<LanguageType>>([
   {
     label: "简体中文",
     key: "zh",
@@ -33,7 +34,7 @@ const options = ref<any>([
     key: "en",
   },
 ]);
-const userMenu = ref<any>([
+const userMenu = ref<Array<IndexUserMenu>>([
   {
     label: t("userCenter"),
     key: "userCenter",

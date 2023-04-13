@@ -5,18 +5,19 @@ import m from "@/utils/mitt";
 import { setMenuData } from "@/utils/utils";
 import { useUserInfo } from "@/stores/user";
 import { MenuInst } from "naive-ui";
+import type { MenuOption } from 'naive-ui'
+
 // import headerCom from '@/components/headerCom'
 const ui = useIndex();
 const um = useMenus();
 const inverted = ref<boolean>(ui.getInverted);
 const collapsed = ref<boolean>(false);
 const isCached = ref<boolean>(false);
-const menuOptions = ref<any>([]);
+const menuOptions = ref<MenuOption[]>([]);
 const clientWidth = ref<number>(document.body.clientWidth);
 const activeKey = ref<string>("");
 const menuInstRef = ref<MenuInst | null>(null);
 const us = useUserInfo();
-// const menus = ref<any>(um.getMenus);
 
 m.on("switch", (e: any) => {
   inverted.value = e.val;
@@ -28,9 +29,6 @@ m.on("pageTabChange", (e: any) => {
   activeKey.value = e.val;
   menuInstRef.value?.showOption(activeKey.value);
 });
-// m.on("login", (e: any) => {
-
-// });
 // 用户角色变化,重新获取菜单
 watch(
   () => us.info,
@@ -51,7 +49,7 @@ const setMenu = () => {
 
 const menuSelect = (key: string) => {
   ui.setActiveKey(key);
-  m.emit("layoutTabChange", { val: key });
+  m.emit("layoutTabChange", {val:key});
 };
 
 const expandMenuOpt = () => {

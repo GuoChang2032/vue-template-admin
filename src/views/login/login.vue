@@ -19,7 +19,12 @@ const handleSelect = () => {
     i18n.locale.value = "zh";
   }
 };
-const cb = (val: any) => {
+
+interface valType {
+  type: string;
+}
+
+const cb = (val: valType) => {
   type.value = val.type;
 };
 </script>
@@ -29,10 +34,14 @@ const cb = (val: any) => {
     <div class="flex-1 hidden md:block sm:hidden" style="position: relative">
       <div class="px-8 font-serif text-5xl font-bold text-white my-28 l-wrap">
         <div class="mb-4">人生如寄</div>
-        <div class="text-xl">很不幸，时间的流逝永远不会停止，时光荏苒，光阴如梭。你的过去在不停增多，你的未来在不断减少。末知的可能性只会越来越少，而无法改变的后悔在累积成山。你明白了吗?</div>
+        <div class="text-xl">
+          很不幸，时间的流逝永远不会停止，时光荏苒，光阴如梭。你的过去在不停增多，你的未来在不断减少。末知的可能性只会越来越少，而无法改变的后悔在累积成山。你明白了吗?
+        </div>
       </div>
     </div>
-    <div class="flex-1 p-4 font-sans bg-white md:p-4 md:rounded-l-3xl sm:p-10 sm:w-full sm:rounded-none">
+    <div
+      class="flex-1 p-4 font-sans bg-white md:p-4 md:rounded-l-3xl sm:p-10 sm:w-full sm:rounded-none"
+    >
       <div class="mt-4 mb-10 text-right">
         <n-button quaternary @click="handleSelect">
           <template #icon><icon icon="mdi:language" size="23px" /></template>
@@ -43,8 +52,14 @@ const cb = (val: any) => {
         :class="type === '0' ? 'fadeInRight animated' : 'none-block'"
         @callback="cb"
       />
-      <resetPwd :class="type === '1' ? 'fadeInRight animated' : 'none-block'" @callback="cb" />
-      <register :class="type === '2' ? 'fadeInRight animated' : 'none-block'" @callback="cb" />
+      <resetPwd
+        :class="type === '1' ? 'fadeInRight animated' : 'none-block'"
+        @callback="cb"
+      />
+      <register
+        :class="type === '2' ? 'fadeInRight animated' : 'none-block'"
+        @callback="cb"
+      />
     </div>
   </div>
 </template>
@@ -60,14 +75,14 @@ const cb = (val: any) => {
   text-shadow: 1px 1px 10px rgb(0, 0, 0);
 }
 
-.none-block{
-    display: none;
+.none-block {
+  display: none;
 }
 
 /*base code*/
 .animated {
-  -webkit-animation-duration: .8s;
-  animation-duration: .8s;
+  -webkit-animation-duration: 0.8s;
+  animation-duration: 0.8s;
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
 }

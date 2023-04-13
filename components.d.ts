@@ -6,7 +6,6 @@ import '@vue/runtime-core'
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     BtnComponents: typeof import('./src/components/btns/btnComponents.vue')['default']
-    Chart2: typeof import('./src/components/chartComponents/chart2.vue')['default']
     CodeMirror: typeof import('./src/components/codeMirror/codeMirror.vue')['default']
     ElPagination: typeof import('element-plus/es')['ElPagination']
     ElRow: typeof import('element-plus/es')['ElRow']
@@ -17,7 +16,6 @@ declare module '@vue/runtime-core' {
     HeaderCom: typeof import('./src/components/headerCom.vue')['default']
     Icon: typeof import('./src/components/icon.vue')['default']
     IndexAddEditModal: typeof import('./src/components/indexAddEditModal.vue')['default']
-    LineCahrt: typeof import('./src/components/chartComponents/lineCahrt.vue')['default']
     LineChart: typeof import('./src/components/chartComponents/lineChart.vue')['default']
     LineChart2: typeof import('./src/components/chartComponents/lineChart2.vue')['default']
     NAlert: typeof import('naive-ui')['NAlert']
@@ -46,8 +44,6 @@ declare module '@vue/runtime-core' {
     NInputGroup: typeof import('naive-ui')['NInputGroup']
     NInputNumber: typeof import('naive-ui')['NInputNumber']
     NLayout: typeof import('naive-ui')['NLayout']
-    NLayoutContent: typeof import('naive-ui')['NLayoutContent']
-    NLayoutHeader: typeof import('naive-ui')['NLayoutHeader']
     NLayoutSider: typeof import('naive-ui')['NLayoutSider']
     NMenu: typeof import('naive-ui')['NMenu']
     NModal: typeof import('naive-ui')['NModal']

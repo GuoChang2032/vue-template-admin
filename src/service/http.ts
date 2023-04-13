@@ -2,14 +2,15 @@
 import axios, { AxiosRequestConfig } from "axios";
 import { Message } from "@/utils/utils";
 import { start, done } from "@/utils/nprogress.js";
-import { ResType } from "@/utils/types";
+import { ApiReturnType, ResType, UserLoginInfoType } from "@/utils/types";
 import { useUserInfo } from "@/stores/user";
+import { request } from "./api";
 // import {start,close} from '@/utils/nprogress'
 // 设置请求头和请求路径
 
-// 请求url
+// 请求urlignore
 //@ts-ignore
-axios.defaults.baseURL = window.config.open?window.config.base:import.meta.env.VITE_APP_API_BASE_URL;
+axios.defaults.baseURL = window.config.open  ? window.config.base  : import.meta.env.VITE_APP_API_BASE_URL;
 axios.defaults.timeout = 10000;
 axios.defaults.headers.post["Content-Type"] = "application/json;charset=UTF-8";
 
@@ -17,8 +18,8 @@ axios.defaults.headers.post["Content-Type"] = "application/json;charset=UTF-8";
 axios.interceptors.request.use(
   (config): AxiosRequestConfig<any> => {
     // 请求token或其他鉴权
-    let user:any = useUserInfo();
-    let token = user.tokens;
+    let user: UserLoginInfoType = useUserInfo().info;
+    let token = user.token;
     if (token) {
       //@ts-ignore
       config.headers["x-access-token"] = token;
@@ -48,74 +49,29 @@ axios.interceptors.response.use(
 );
 
 interface Http {
-  get<T>(url: string, params?: unknown): Promise<ResType<T>>;
-  post<T>(url: string, params?: unknown): Promise<ResType<T>>;
-  delete<T>(url: string, params?: unknown): Promise<ResType<T>>;
-  action<T>(type: string, url: string, params?: unknown): Promise<ResType<T>>;
-  upload<T>(url: string, params: unknown): Promise<ResType<T>>;
+  get<T = ApiReturnType>(url: string, params?: unknown): Promise<T>;
+  post<T = ApiReturnType>(url: string, params?: unknown): Promise<T>;
+  delete<T = ApiReturnType>(url: string, params?: unknown): Promise<T>;
+  action<T = ApiReturnType>(type: string, url: string, params?: unknown): Promise<T>;
+  upload<T>(url: string, params: unknown): Promise<T>;
   downFile<T>(url: string, params: unknown): Promise<T>;
   download(url: string): void;
 }
-
+type method = 'get'|'post'|'delete'|'patch'|'put'
 const http: Http = {
-  get(url, params) {
-    return new Promise((resolve, reject) => {
-      start();
-      axios
-        .get(url, { params })
-        .then((res) => {
-          done();
-          if (!res.data.success) {
-            Message("success", res.data.message);
-          }
-          resolve(res.data);
-        })
-        .catch((err) => {
-          done();
-          reject(err.data);
-        });
-    });
+  get<T>(url: string, params?: unknown): Promise<T> {
+    return this.action("get", url, params);
   },
 
-  post(url, params) {
-    return new Promise((resolve, reject) => {
-      start();
-      axios
-        .post(url, JSON.stringify(params))
-        .then((res) => {
-          done();
-          if (!res.data.success) {
-            Message("error", res.data.message);
-          }
-          resolve(res.data);
-        })
-        .catch((err) => {
-          done();
-          reject(err.data);
-        });
-    });
+  post<T>(url: string, params?: unknown): Promise<T> {
+    return this.action("post", url, params);
   },
 
-  delete(url, params) {
-    return new Promise((resolve, reject) => {
-      start();
-      axios
-        .delete(url, { params })
-        .then((res) => {
-          done();
-          if (!res.data.success) {
-            Message("error", res.data.message);
-          }
-          resolve(res.data);
-        })
-        .catch((err) => {
-          done();
-          reject(err.data);
-        });
-    });
+  delete<T>(url: string, params?: unknown): Promise<T> {
+    return this.action("delete", url, params);
   },
 
-  action(type, url, params) {
+  action<T>(type: method, url: string, params?: unknown): Promise<T> {
     return new Promise((resolve, reject) => {
       start();
       axios({
@@ -128,7 +84,8 @@ const http: Http = {
           if (!res.data.success) {
             Message("error", res.data.message);
           }
-          resolve(res.data);
+          const d: T = res.data;
+          resolve(d);
         })
         .catch((err) => {
           done();
@@ -137,7 +94,7 @@ const http: Http = {
     });
   },
 
-  upload(url, file) {
+  upload<T>(url: string, file: any): Promise<T> {
     return new Promise((resolve, reject) => {
       start();
       axios
@@ -146,7 +103,8 @@ const http: Http = {
         })
         .then((res) => {
           done();
-          resolve(res.data);
+          const d: T = res.data;
+          resolve(d);
         })
         .catch((err) => {
           done();

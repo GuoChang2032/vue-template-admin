@@ -12,7 +12,7 @@ const goback = ()=>{
 
 <template>
   <div
-    class="container flex items-center justify-center h-full justify-items-center"
+    class="container flex items-center justify-center h-full  justify-items-center"
   >
     <div class="text-center">
       <img class="h-96" src="@/assets/no-permission.svg" alt="" />

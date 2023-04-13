@@ -17,7 +17,6 @@ export default defineComponent({
         foldGutter: true, // 启用行槽中的代码折叠
         styleActiveLine: true, // 显示选中行的样式
       },
-      onChange(val: any, cm: any) {},
     };
   },
 });
@@ -30,7 +29,6 @@ export default defineComponent({
     border
     placeholder="测试 placeholder"
     :height="350"
-    @change="onChange"
   />
 </template>
 

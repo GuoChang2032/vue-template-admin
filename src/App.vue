@@ -32,23 +32,25 @@ import {
 } from "naive-ui";
 import { useIndex } from "@/stores/indexStore";
 import { useI18n } from "vue-i18n";
+import type { NLocale, NDateLocale, GlobalTheme } from "naive-ui";
+
 // import m from "@/utils/mitt";
 export default defineComponent({
   setup() {
     const loading = ref(false);
     const inver = useIndex();
-    const theme = ref<any>(null);
+    const theme = ref<GlobalTheme>();
     const tips = ref("");
     const i18n = useI18n();
-    const language = ref<any>(zhCN);
-    const datelanguage = ref<any>(dateZhCN);
+    const language = ref<NLocale>(zhCN);
+    const datelanguage = ref<NDateLocale>(dateZhCN);
     watch(
       () => [inver.getInverted, i18n.locale.value],
       (nv, ov) => {
         if (nv[0]) {
           theme.value = darkTheme;
         } else {
-          theme.value = null;
+          theme.value = undefined;
         }
         if (i18n.locale.value === "zh") {
           language.value = zhCN;
@@ -64,7 +66,7 @@ export default defineComponent({
       if (inver.getInverted) {
         theme.value = darkTheme;
       } else {
-        theme.value = null;
+        theme.value = undefined;
       }
     });
 

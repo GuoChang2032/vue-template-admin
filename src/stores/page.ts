@@ -1,29 +1,5 @@
 import { defineStore } from "pinia";
-import { UserLoginInfoType } from "@/utils/types";
-// 记录用户信息
-export const useUserInfo = defineStore("user", {
-  state: () => {
-    return {
-      info: {
-        role: "",
-        token: "",
-      },
-    };
-  },
-  getters: {
-    getInfo(): UserLoginInfoType {
-      return this.info;
-    },
-  },
-  actions: {
-    setUserInfo(res: UserLoginInfoType) {
-      this.info = res;
-    },
-  },
-  persist: true,
-});
-
-// 用于分页记忆页码
+// 用于记录分页或其他状态
 export const usePage = defineStore("pagination", {
   state: () => {
     return {

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { Message, routeMenuAdd } from "@/utils/utils";
 import { onMounted } from "vue";
-import { pageType } from "@/utils/types";
+import { pageType, MenuDataType } from "@/utils/types";
 import menuDrawer from "@/views/sys/components/menuDrawer.vue";
 import { useMenus } from "@/stores/menu";
 import { useRouter } from "vue-router";
@@ -11,12 +11,12 @@ const router = useRouter();
 const um = useMenus();
 const show = ref<boolean>(false);
 
-const tableData = ref<any>(um.getMenus);
+const tableData = ref<MenuDataType[]>(um.getMenus);
 const pageObj = ref<pageType>({
   total: 0,
   page: 1,
 });
-const menuItem = ref<any>();
+const menuItem = ref<MenuDataType>();
 
 watch(
   () => um.getMenus,
@@ -35,7 +35,11 @@ const addHandle = () => {
   show.value = true;
 };
 
-const confirmHandle = (params: any) => {
+interface confirmType {
+  value: MenuDataType;
+}
+
+const confirmHandle = (params: confirmType) => {
   // 暂时无法动态生成路由,还是要手动添加,
   let temp = _.cloneDeep(um.getMenus);
   let val = params.value;
@@ -57,7 +61,7 @@ const confirmHandle = (params: any) => {
 const deleteMenu = (id: string) => {
   Message("success", "delete " + id);
 };
-const editMenu = (item: any) => {
+const editMenu = (item: MenuDataType) => {
   menuItem.value = item;
   show.value = true;
 };

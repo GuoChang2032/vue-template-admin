@@ -3,16 +3,21 @@ import { FormInst } from "naive-ui";
 import { useRouter } from "vue-router";
 import { useUserInfo } from "@/stores/user";
 import { useMenuTag } from "@/stores/menu";
-import { Message,switchTab } from "@/utils/utils";
+import { Message, switchTab } from "@/utils/utils";
 import m from "@/utils/mitt";
 import { useIndex } from "@/stores/indexStore";
 import http from "@/service/http";
-import { UserInfoType } from "@/utils/types";
+import { UserLoginReturnType, ApiReturnType } from "@/utils/types";
+
+interface fvType {
+  account: string;
+  password: string;
+}
 
 const emit = defineEmits(["callback"]);
 
 const ui = useIndex();
-const formValue = ref<any>({
+const formValue = ref<fvType>({
   account: "admin",
   password: "123123",
 });
@@ -28,9 +33,9 @@ const handleLogin = () => {
   let f = formValue.value;
   http
     .post("/login", f)
-    .then((res: any) => {
+    .then((res: ApiReturnType) => {
       if (res.success) {
-        let info: UserInfoType = res.data;
+        let info: UserLoginReturnType = res.data;
         info.token = "xixixixixixixixxix";
         us.setUserInfo(info);
         umt.resetTab();

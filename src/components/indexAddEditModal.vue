@@ -1,5 +1,14 @@
-<script lang='ts'>
+<script lang="ts">
 import { defineComponent, ref, watch, reactive } from "vue";
+import type { PropType } from 'vue'
+
+interface ItemDataType {
+  querySource: string;
+  articleName: string;
+  authorComp: string;
+  articleAuthor: string;
+}
+
 export default defineComponent({
   name: "indexAddEditModal",
   props: {
@@ -12,27 +21,33 @@ export default defineComponent({
       required: false,
     },
     itemData: {
-      type: Object,
+      type:Object as PropType<ItemDataType>,
       required: false,
     },
   },
   setup(props, context) {
     watch(
-      () => [props.show, props.modalType, props.itemData],
-      (state: any, prevState) => {
-        isShow.value = state[0];
-        modalType.value = state[1];
-        // 如果是编辑,回显
-        if (state[2]) {
-          model.value = state[2];
-        }
+      () => props.show,
+      (state, prevState) => {
+        isShow.value = state;
       }
     );
+    watch(
+      () => props.modalType,
+      (state, prevState) => {
+        modalType.value = state;
+      }
+    );
+    watch(()=>props.itemData, (state, prevState) => {
+      if (state) {
+        model.value = state;
+      }
+    });
 
     const isShow = ref(props.show);
     // 1添加 2编辑
     const modalType = ref(props.modalType);
-    const model = ref({
+    const model = ref<ItemDataType>({
       querySource: "",
       articleName: "",
       authorComp: "",
@@ -100,7 +115,7 @@ export default defineComponent({
   </div>
 </template>
 
-<style scoped lang='less'>
+<style scoped lang="less">
 .add-btn-content {
   text-align: right;
   button {

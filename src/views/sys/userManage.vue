@@ -5,12 +5,13 @@ import { onMounted } from "vue";
 import btnComponents from "@/components/btns/btnComponents.vue";
 import http from "@/service/http";
 import addUserModal from "@/views/sys/components/addUserModal.vue";
+import { UserManageListDataType, pageChangeDataType } from "@/utils/types";
 
 onMounted(() => {
   getList();
 });
 
-const tableData = ref<any>();
+const tableData = ref<UserManageListDataType>();
 
 const getList = () => {
   http
@@ -30,8 +31,8 @@ const pageObj = ref<pageType>({
   total: 0,
   page: 1,
 });
-const userItem = ref<any>([]);
-const selectArr = ref<any>([]);
+const userItem = ref<UserManageListDataType>();
+const selectArr = ref<string[]>([]);
 const loading = ref<boolean>(false);
 const show = ref<boolean>(false);
 
@@ -44,10 +45,10 @@ const confirmHandle = (e: any) => {
   }
   http
     .post(url, d)
-    .then((res) => {
+    .then((res: ApiReturnType) => {
       if (res.success) {
         show.value = false;
-        Message("success", d.id?"编辑成功":"添加成功");
+        Message("success", d.id ? "编辑成功" : "添加成功");
         getList();
       }
     })
@@ -75,13 +76,18 @@ const exportHandle = () => {
 const importHandle = () => {
   Message("success", "导入");
 };
-const operation = (val: any) => {
+interface operationType {
+  selectItem: string[];
+  type: number;
+  data: UserManageListDataType;
+}
+const operation = (val: operationType) => {
   selectArr.value = val.selectItem;
   if (val.type === 1) {
     userItem.value = val.data;
     show.value = true;
   } else if (val.type === 3) {
-    deleteItem(val.data);
+    deleteItem(val.data.id);
   }
 };
 const deleteItem = (id: string) => {
@@ -103,7 +109,7 @@ const deleteItem = (id: string) => {
     });
 };
 
-const pc = (e: any) => {
+const pc = (e: pageChangeDataType) => {
   pageObj.value.page = e.page;
   getList();
 };

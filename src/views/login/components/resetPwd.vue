@@ -6,12 +6,8 @@ import { Message } from "@/utils/utils";
 
 const emit = defineEmits(["callback"]);
 
+
 const loginForm = ref<FormInst | null>(null);
-const loginModel = ref<any>({
-  account: null,
-  password: null,
-  code: null,
-});
 const isRemembers = ref<boolean>(false);
 const loading = ref<boolean>(false);
 const router = useRouter();

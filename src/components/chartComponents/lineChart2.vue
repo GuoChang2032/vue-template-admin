@@ -68,7 +68,7 @@ const initChart = () => {
         name: "Evaporation",
         type: "bar",
         tooltip: {
-          valueFormatter: function (value:any) {
+          valueFormatter: function (value:string) {
             return value + " ml";
           },
         },
@@ -80,7 +80,7 @@ const initChart = () => {
         name: "Precipitation",
         type: "bar",
         tooltip: {
-          valueFormatter: function (value:any) {
+          valueFormatter: function (value:string) {
             return value + " ml";
           },
         },
@@ -93,7 +93,7 @@ const initChart = () => {
         type: "line",
         yAxisIndex: 1,
         tooltip: {
-          valueFormatter: function (value:any) {
+          valueFormatter: function (value:string) {
             return value + " °C";
           },
         },

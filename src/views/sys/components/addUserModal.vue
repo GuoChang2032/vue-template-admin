@@ -4,6 +4,8 @@ import iconData from "@/utils/icon.data";
 import { FormInst } from "naive-ui";
 import { useMenus } from "@/stores/menu";
 import _ from "super-tools-lib";
+import { MenuDataType } from "@/utils/types";
+
 onMounted(() => {
   setParent();
 });
@@ -37,10 +39,10 @@ interface formType {
 }
 
 const um = useMenus();
-const parentArr = ref<any>([]);
+const parentArr = ref<MenuDataType[]>([]);
 const formRef = ref<FormInst | null>(null);
 const loading = ref<boolean>(false);
-const rules = ref<any>({
+const rules = ref({
   account: {
     required: true,
     message: "请输入账户名",

@@ -3,7 +3,14 @@ import { onMounted } from "vue";
 
 onMounted(() => {});
 
-const data = ref<any>([
+interface dataType {
+  title: string;
+  desc: string;
+  source: string;
+  user: string;
+}
+
+const data = ref<dataType[]>([
   {
     title: "能不能记住登录?",
     desc: "每次登录后过一天就要重新登录,就不能永久登录吗?垃圾",

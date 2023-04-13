@@ -6,14 +6,21 @@ import { useRouter } from "vue-router";
 import _ from "super-tools-lib";
 import m from "@/utils/mitt";
 import { renderIconCustom, switchTab } from "@/utils/utils";
+import { TabsType, EmitDataType } from "@/utils/types";
+
+interface TabMenuType {
+  label: string;
+  key: string;
+  icon: Function;
+}
 
 const ui = useIndex();
 const ur = useRouter();
 const umt = useMenuTag();
 const inverted = ref<boolean>(ui.getInverted);
 const activeKey = ref<string>(ui.getActiveKey);
-const tabs = ref<any>(umt.getTabs);
-const options = ref<any>([
+const tabs = ref<Array<TabsType>>(umt.getTabs);
+const options = ref<Array<TabMenuType>>([
   {
     label: "重新加载",
     key: "reload",
@@ -33,7 +40,7 @@ onUnmounted(() => {
 });
 
 m.on("layoutTabChange", (e: any) => {
-  activeKey.value = e.val;
+  activeKey.value = e.val ? e.val : "";
 });
 m.on("login", () => {
   tabs.value = umt.getTabs;
@@ -77,7 +84,7 @@ const closeTab = (path: string, selectName: string) => {
   let tab = tabs.value;
   let p: string = "/";
   let pname: string = "";
-  tab.forEach((item: any, idx: number) => {
+  tab.forEach((item: TabsType, idx: number) => {
     if (item.path === path) {
       tab.splice(idx, 1);
       p = tab[idx - 1].path;

@@ -4,12 +4,17 @@ import { FormInst, FormItemRule } from "naive-ui";
 import { Message } from "@/utils/utils";
 import { useI18n } from "vue-i18n";
 
+interface loginModelType{
+  phone:string,
+  code:string
+}
+
 export default defineComponent({
   setup(props, { emit }) {
     const loginForm = ref<FormInst | null>(null);
-    const loginModel = ref<any>({
-      phone: null,
-      code: null,
+    const loginModel = ref<loginModelType>({
+      phone: '',
+      code: '',
     });
     const remember = ref<boolean>(false);
     const loading = ref<boolean>(false);

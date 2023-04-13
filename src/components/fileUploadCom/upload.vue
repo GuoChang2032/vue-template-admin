@@ -9,6 +9,12 @@ import type {
   UploadRawFile,
 } from "element-plus";
 import icon from "@/components/icon.vue";
+
+interface FileListType {
+  name: string;
+  url: string;
+}
+
 export default defineComponent({
   components: { icon },
   props: {
@@ -35,7 +41,7 @@ export default defineComponent({
   },
   setup(prop, context) {
     const token = ref<string>("");
-    const fileList = ref<any>([]);
+    const fileList = ref<Array<FileListType>>([]);
     const dialogVisible = ref(false);
     token.value = getUserInfo()?.token;
     const handlePictureCardPreview = (file: UploadFile) => {

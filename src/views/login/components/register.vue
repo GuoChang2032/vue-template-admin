@@ -6,13 +6,20 @@ import { Message } from "@/utils/utils";
 import http from "@/service/http";
 const emit = defineEmits(["callback"]);
 
+interface loginType {
+  account: string;
+  nickName: string;
+  password: string;
+  phone: string;
+  code?: string;
+}
 const loginForm = ref<FormInst | null>(null);
-const loginModel = ref<any>({
-  account: null,
-  nickName: null,
-  password: null,
-  phone: null,
-  code: null,
+const loginModel = ref<loginType>({
+  account: "",
+  nickName: "",
+  password: "",
+  phone: "",
+  code: "",
 });
 const isRemembers = ref<boolean>(false);
 const loading = ref<boolean>(false);
@@ -28,7 +35,7 @@ const handleLogin = () => {
     .post("/register", f)
     .then((res) => {
       if (res.success) {
-        reset()
+        reset();
         Message("success", "注册成功");
         other("0");
       }
@@ -41,17 +48,17 @@ const handleLogin = () => {
     });
 };
 const other = (type: string) => {
-  reset()
+  reset();
   emit("callback", { type });
 };
 
 const reset = () => {
   loginModel.value = {
-    account: null,
-    nickName: null,
-    password: null,
-    phone: null,
-    code: null,
+    account: "",
+    nickName: "",
+    password: "",
+    phone: "",
+    code: "",
   };
 };
 

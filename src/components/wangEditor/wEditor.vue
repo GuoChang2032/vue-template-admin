@@ -80,12 +80,12 @@ export default defineComponent({
           // headers: {
           //   "x-access-token": getUserInfo().token,
           // },
-          customInsert(res: any, insertFn: InsertFnType) {
-            let url = res.message;
-            let alt = '图片';
-            let href = res.message;
-            insertFn(url, alt, href);
-          },
+          // customInsert(res: any, insertFn: InsertFnType) {
+          //   let url = res.message;
+          //   let alt = '图片';
+          //   let href = res.message;
+          //   insertFn(url, alt, href);
+          // },
         },
       },
     };
@@ -96,8 +96,7 @@ export default defineComponent({
     });
 
     onBeforeUnmount(() => {
-      const z = editorRef.value;
-      z && z.destroy();
+      editorRef.value && editorRef.value.destroy();
     });
     watch(
       () => [prop.defaultVal, prop.isClear],

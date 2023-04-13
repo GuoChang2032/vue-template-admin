@@ -1,17 +1,19 @@
 <script lang="ts" setup>
 import { onMounted } from "vue";
+import { UserManageListType,UserManageListDataType } from "@/utils/types";
+
 onMounted(() => {});
 
 const emits = defineEmits(["callback"]);
-const props = defineProps([
-  "data",
-  "column",
-  "delete",
-  "detail",
-  "editor",
-  "selection",
-]);
-const cb = (type: number, data?: any) => {
+const props = defineProps({
+  data:Array<UserManageListDataType>,
+  column:Array<UserManageListType>,
+  delete:Boolean,
+  detail:Boolean,
+  editor:Boolean,
+  selection:Boolean,
+});
+const cb = (type: number, data?: UserManageListDataType) => {
   // 1编辑,2详情,3删除
   emits("callback", { type,data });
 };
@@ -27,8 +29,8 @@ const handleSelectionChange = (val: []) => {
       <el-table-column v-if="props.selection" type="selection" width="55" />
       <!-- 数据栏 -->
       <el-table-column
-        v-for="item in props.column"
-        :key="item.id"
+        v-for="item, idx in props.column"
+        :key="idx"
         :prop="item.prop"
         :label="item.label"
         :width="item.width"
@@ -47,7 +49,7 @@ const handleSelectionChange = (val: []) => {
             class="mr-3"
             text
             type="info"
-            @click="cb(1,scope.row)"
+            @click="cb(1, scope.row)"
             >编辑</n-button
           >
           <n-button
