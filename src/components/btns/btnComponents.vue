@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import { onMounted } from "vue";
-
 onMounted(() => {});
 
 const props = defineProps(["type", "text"]);

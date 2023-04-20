@@ -6,25 +6,46 @@ import menuDrawer from "@/views/sys/components/menuDrawer.vue";
 import { useMenus } from "@/stores/menu";
 import { useRouter } from "vue-router";
 import _ from "super-tools-lib";
-onMounted(() => {});
+import http from "@/service/http";
+onMounted(() => {
+  getList();
+});
+
 const router = useRouter();
 const um = useMenus();
 const show = ref<boolean>(false);
-
-const tableData = ref<MenuDataType[]>(um.getMenus);
+const loading = ref<boolean>(false);
+const tableData = ref<MenuDataType[]>([]);
 const pageObj = ref<pageType>({
   total: 0,
   page: 1,
 });
 const menuItem = ref<MenuDataType>();
 
-watch(
-  () => um.getMenus,
-  (nv, ov) => {
-    tableData.value = nv;
-  }
-);
+// watch(
+//   () => um.getMenus,
+//   (nv, ov) => {
+//     tableData.value = nv;
+//   }
+// );
 
+const getList = () => {
+  loading.value = true;
+  http
+    .get("/getMenuList?pageNo=1&pageSize=10")
+    .then((res) => {
+      if (res.success) {
+        tableData.value = res.data;
+        pageObj.value.total = res.records.total;
+      }
+    })
+    .catch((err) => {
+      loading.value = false;
+    })
+    .finally(() => {
+      loading.value = false;
+    });
+};
 const searchHandle = () => {
   Message("success", "搜索");
 };
@@ -39,8 +60,12 @@ interface confirmType {
   value: MenuDataType;
 }
 
+const successHandle = () => {
+  show.value = false;
+  getList();
+};
+
 const confirmHandle = (params: confirmType) => {
-  // 暂时无法动态生成路由,还是要手动添加,
   let temp = _.cloneDeep(um.getMenus);
   let val = params.value;
   if (val.parentMenu === "layout") {
@@ -59,67 +84,101 @@ const confirmHandle = (params: confirmType) => {
 
 // 后面用接口模拟吧，懒得写了
 const deleteMenu = (id: string) => {
-  Message("success", "delete " + id);
+  http
+    .delete("/deleteMenu?id=" + id)
+    .then((res) => {
+      if (res.success) {
+        Message("success", "删除成功");
+        getList();
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+    });
 };
 const editMenu = (item: MenuDataType) => {
-  menuItem.value = item;
+  menuItem.value = _.cloneDeep(item);
   show.value = true;
 };
 </script>
 
 <template>
   <themeComponent>
-    <div>
-      <n-space :size="[25, 10]">
-        <div class="flex items-center">
-          <div class="w-20" for="">菜单名称</div>
-          <n-input placeholder="输入菜单名称" class="w-64" />
-        </div>
-        <btnComponents type="search" @callback="searchHandle" text="搜索" />
-        <btnComponents type="reset" @callback="resetHandle" text="重置" />
-      </n-space>
-    </div>
-    <div class="my-4">
-      <btnComponents type="add" @callback="addHandle" text="新建路由" />
-    </div>
-    <n-alert class="mb-6" title="提示" type="info" closeable>
-      生成页面路由需要手动添加路由配置，然后还得有那个页面
-    </n-alert>
-    <div>
-      <el-table :data="tableData" style="width: 100%" row-key="key">
-        <el-table-column label="菜单名称" prop="routeName" />
-        <el-table-column label="Key" prop="key" />
-        <el-table-column header-align="center" label="图标" prop="routeIcon">
-          <template #default="scope">
-            <icon :icon="scope.row.routeIcon" />
-          </template>
-        </el-table-column>
-        <el-table-column label="组件路径" prop="path" />
-        <el-table-column label="排序" prop="sort" />
-        <el-table-column label="状态" prop="status">
-          <template #default="scope">
-            <n-tag v-if="scope.row.status === 1" type="success"> 正常 </n-tag>
-            <n-tag v-else type="error"> 隐藏 </n-tag>
-          </template>
-        </el-table-column>
-        <el-table-column label="操作">
-          <template #default="props">
-            <n-button class="mr-4" text type="info" @click="editMenu(props.row)"
-              >编辑</n-button
-            >
-            <n-button text type="error" @click="deleteMenu(props.row.key)"
-              >删除</n-button
-            >
-          </template>
-        </el-table-column>
-      </el-table>
-      <pagination :total="pageObj.total" :current="pageObj.page" />
-    </div>
-
+    <n-spin :show="loading">
+      <div>
+        <n-space :size="[25, 10]">
+          <div class="flex items-center">
+            <div class="w-20" for="">菜单名称</div>
+            <n-input placeholder="输入菜单名称" class="w-64" />
+          </div>
+          <btnComponents type="search" @callback="searchHandle" text="搜索" />
+          <btnComponents type="reset" @callback="resetHandle" text="重置" />
+        </n-space>
+      </div>
+      <div class="my-4">
+        <btnComponents type="add" @callback="addHandle" text="新建路由" />
+      </div>
+      <n-alert class="mb-6" title="提示" type="info" closeable>
+        生成页面路由需要手动添加路由配置，然后还得有那个页面
+      </n-alert>
+      <div>
+        <el-table
+          :data="tableData"
+          style="width: 100%"
+          row-key="id"
+        >
+          <el-table-column label="路由名称" prop="menuName" />
+          <el-table-column label="路由Key" prop="menuKey" />
+          <el-table-column
+            header-align="center"
+            label="菜单图标"
+            prop="menuIcon"
+          >
+            <template #default="scope">
+              <icon :icon="scope.row.menuIcon" />
+            </template>
+          </el-table-column>
+          <el-table-column label="组件路径" prop="pagePath" />
+          <el-table-column label="排序" prop="menuSort" />
+          <el-table-column label="状态" prop="status">
+            <template #default="scope">
+              <n-tag v-if="scope.row.status === '1'" type="success">
+                正常
+              </n-tag>
+              <n-tag v-else-if="scope.row.status === '0'" type="error">
+                隐藏
+              </n-tag>
+              <n-tag v-else-if="scope.row.status === '2'" type="info">
+                锁定
+              </n-tag>
+            </template>
+          </el-table-column>
+          <el-table-column label="操作">
+            <template #default="props">
+              <n-button
+                class="mr-4"
+                text
+                type="info"
+                @click="editMenu(props.row)"
+                >编辑</n-button
+              >
+              <n-popconfirm @positive-click="deleteMenu(props.row.id)">
+                <template #trigger>
+                  <n-button text type="error">删除</n-button>
+                </template>
+                确定删除吗?
+              </n-popconfirm>
+            </template>
+          </el-table-column>
+        </el-table>
+        <pagination :total="pageObj.total" :current="pageObj.page" />
+      </div>
+    </n-spin>
     <menuDrawer
       :show="show"
       @cancel="show = false"
       @confirm="confirmHandle"
+      @success="successHandle"
       :itemData="menuItem"
     />
   </themeComponent>

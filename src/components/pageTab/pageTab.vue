@@ -169,7 +169,7 @@ const onSelect = (key: string) => {
   }
 }
 .white {
-  background-color: #4258e5;
+  background-color: #4facfe;
 }
 .select-black {
   background-color: #202541;

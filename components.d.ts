@@ -52,6 +52,7 @@ declare module '@vue/runtime-core' {
     NoticeDetail: typeof import('./src/components/noticeComponents/noticeDetail.vue')['default']
     NoticeList: typeof import('./src/components/noticeComponents/components/noticeList.vue')['default']
     NPageHeader: typeof import('naive-ui')['NPageHeader']
+    NPopconfirm: typeof import('naive-ui')['NPopconfirm']
     NPopover: typeof import('naive-ui')['NPopover']
     NScrollbar: typeof import('naive-ui')['NScrollbar']
     NSelect: typeof import('naive-ui')['NSelect']

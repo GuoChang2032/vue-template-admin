@@ -2,9 +2,8 @@
 import axios, { AxiosRequestConfig } from "axios";
 import { Message } from "@/utils/utils";
 import { start, done } from "@/utils/nprogress.js";
-import { ApiReturnType, ResType, UserLoginInfoType } from "@/utils/types";
+import { ApiReturnType, UserLoginInfoType } from "@/utils/types";
 import { useUserInfo } from "@/stores/user";
-import { request } from "./api";
 // import {start,close} from '@/utils/nprogress'
 // 设置请求头和请求路径
 

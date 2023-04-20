@@ -132,7 +132,7 @@ export const judgePage = (r_page: any, route: string): boolean => {
 export const setMenuData = () => {
   const { t } = i18n.global;
   const { hasPermission } = usePermission();
-  // let ms: any = [];
+  let ms: any = [];
   // data.forEach((item: any) => {
   //   let c: any = [];
   //   if (item.children && item.children.length > 0) {
@@ -159,7 +159,7 @@ export const setMenuData = () => {
   //     children: c,
   //   });
   // });
-  let ms = [
+  ms = [
     {
       label: () => {
         return t("page.dashboard");
@@ -179,7 +179,7 @@ export const setMenuData = () => {
           key: "index",
         },
       ],
-      key: "index",
+      key: "dashboard",
       icon: renderIconCustom("material-symbols:dashboard-outline"),
     },
     {
@@ -289,16 +289,16 @@ export function routerNameMapping(router: string) {
 }
 
 export function routeMenuAdd(data: MenuDataType[], val: any) {
-  data.forEach((item: any, idx: number) => {
-    if (item.key === val.parentMenu) {
-      if (data[idx].children) {
-        data[idx].children.push(val);
-      } else {
-        data[idx].children = [val];
-      }
-    }
-  });
-  return data;
+  // data.forEach((item: any, idx: number) => {
+  //   if (item.key === val.parentMenu) {
+  //     if (data[idx].children) {
+  //       data[idx].children.push(val);
+  //     } else {
+  //       data[idx].children = [val];
+  //     }
+  //   }
+  // });
+  // return data;
 }
 
 // 判断tab菜单中是否有重复

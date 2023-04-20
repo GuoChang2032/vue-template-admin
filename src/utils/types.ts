@@ -97,17 +97,23 @@ export interface UserManageListDataType {
 
 // 菜单数据类型
 export interface MenuDataType {
-  parentMenu: string;
-  path: string;
-  routeName: string;
-  key: string;
-  routeIcon: string;
-  status: number;
-  sort: number;
-  children: any;
+  parentMenu: string,
+  menuName:string,
+  menuKey: string,
+  menuIcon:string,
+  pagePath: string,
+  menuSort: string,
+  rolePermiss: string[],
+  status: string,
+  children?: [],
 }
 
 // 分页改变事件中传递的数据的类型
 export interface pageChangeDataType{
   page:number
+}
+
+export interface optsType {
+  label: string;
+  value: number | string;
 }
