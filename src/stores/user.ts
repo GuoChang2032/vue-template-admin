@@ -3,16 +3,15 @@ import { defineStore } from "pinia";
 export const useUserInfo = defineStore("user", {
   state: () => {
     return {
-      info: {},
+      info: { role: "", token: "" },
     };
   },
   getters: {
-    getInfo(){
-    },
+    getInfo() {},
   },
   actions: {
     setUserInfo(res: any) {
-      this.info = res
+      this.info = res;
     },
   },
   persist: true,
