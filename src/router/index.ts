@@ -50,6 +50,22 @@ const routes: RouteRecordRaw[] = [
     },
     component: () => import("@/views/login/userLogin.vue"),
   },
+  {
+    path: "/403",
+    name: "403",
+    meta: {
+      key: "exception",
+    },
+    component: () => import("@/views/abnormal/403.vue"),
+  },
+  {
+    path: "/:path(.*)",
+    name: "404",
+    meta: {
+      key: "exception",
+    },
+    component: () => import("@/views/abnormal/404.vue"),
+  },
 ];
 
 const router = createRouter({
