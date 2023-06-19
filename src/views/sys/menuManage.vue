@@ -5,8 +5,9 @@ import { pageType, MenuDataType } from "@/utils/types";
 import menuDrawer from "@/views/sys/components/menuDrawer.vue";
 import { useMenus } from "@/stores/menu";
 import { useRouter } from "vue-router";
-import _ from "super-tools-lib";
 import http from "@/service/http";
+import cloneDeep from "lodash/cloneDeep"
+
 onMounted(() => {
   getList();
 });
@@ -66,7 +67,7 @@ const successHandle = () => {
 };
 
 const confirmHandle = (params: confirmType) => {
-  let temp = _.cloneDeep(um.getMenus);
+  let temp:any = cloneDeep(um.getMenus);
   let val = params.value;
   if (val.parentMenu === "layout") {
     temp.push(val);
@@ -97,7 +98,7 @@ const deleteMenu = (id: string) => {
     });
 };
 const editMenu = (item: MenuDataType) => {
-  menuItem.value = _.cloneDeep(item);
+  menuItem.value = cloneDeep(item);
   show.value = true;
 };
 </script>

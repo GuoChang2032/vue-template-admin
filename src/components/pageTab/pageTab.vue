@@ -3,7 +3,6 @@ import { onMounted } from "vue";
 import { useIndex } from "@/stores/indexStore";
 import { useMenuTag } from "@/stores/menu";
 import { useRouter } from "vue-router";
-import _ from "super-tools-lib";
 import m from "@/utils/mitt";
 import { renderIconCustom, switchTab } from "@/utils/utils";
 import { TabsType, EmitDataType } from "@/utils/types";

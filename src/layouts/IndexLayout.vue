@@ -145,7 +145,6 @@ onUnmounted(() => {
   transition: all 0.5s ease-out;
 }
 .slide-fade-leave-active {
-  // transition: all 0.1s cubic-bezier(1, 0.5, 0.8, 1);
 }
 
 .slide-fade-enter-from,

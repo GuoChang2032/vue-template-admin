@@ -3,7 +3,7 @@ import { onMounted } from "vue";
 import iconData from "@/utils/icon.data";
 import { FormInst } from "naive-ui";
 import { useMenus } from "@/stores/menu";
-import _ from "super-tools-lib";
+import cloneDeep from "lodash/cloneDeep"
 import { MenuDataType } from "@/utils/types";
 
 onMounted(() => {
@@ -13,12 +13,12 @@ onMounted(() => {
 watch(
   () => props.itemData,
   (nv, ov) => {
-    model.value = _.cloneDeep(nv);
+    model.value = cloneDeep(nv);
   }
 );
 
 const setParent = () => {
-  let temp = _.cloneDeep(um.getMenus);
+  let temp:any = cloneDeep(um.getMenus);
   temp.unshift({
     key: "layout",
     routeName: "layout",

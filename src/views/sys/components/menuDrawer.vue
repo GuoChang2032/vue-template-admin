@@ -3,7 +3,7 @@ import { onMounted } from "vue";
 import iconData from "@/utils/icon.data";
 import { FormInst } from "naive-ui";
 import { useMenus } from "@/stores/menu";
-import _ from "super-tools-lib";
+import cloneDeep from "lodash/cloneDeep"
 import { MenuDataType, optsType } from "@/utils/types";
 import http from "@/service/http";
 import { Message } from "@/utils/utils";
@@ -20,7 +20,7 @@ watch(
 );
 
 const setParent = () => {
-  let temp = _.cloneDeep(um.getMenus);
+  let temp:any = cloneDeep(um.getMenus);
   temp.unshift({
     key: "layout",
     routeName: "layout",
@@ -92,7 +92,7 @@ const model = ref<MenuDataType>({
 const confirm = () => {
   formRef.value?.validate((err) => {
     if (!err) {
-      let f = _.cloneDeep(model.value);
+      let f:any = cloneDeep(model.value);
       if (Array.isArray(f.rolePermiss)) {
         f.rolePermiss = f.rolePermiss.join();
       }
