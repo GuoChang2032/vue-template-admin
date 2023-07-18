@@ -13,15 +13,15 @@
 
 - ### permission 路由的权限验证还不是很完整,需要完善
 
-- ### naive ui 的表格自定义列渲染太麻烦了,建议不使用 naive ui(已换成 element-ui-plus,可惜了),尝试是否能两个一起用...(有了按需加载的话是可以一起用的,已经一起用了,想用多少个用多少个!这就是自信!)
+- ### naive ui 的表格自定义列渲染太麻烦了,~~建议不使用 naive ui~~(已换成 element-ui-plus,可惜了),~~尝试是否能两个一起用...~~(有了按需加载的话是可以一起用的,已经一起用了,想用多少个用多少个!这就是自信!)
 
-- ### 状态管理 pinia 在这些个小项目里,没有太大的用处
+- ### 状态管理 pinia 在这些个小项目里,~~没有太大的用处~~（有用）
 
 - ### ts...好像不用也可以,但还是规范一点,显得专业一点吧(用成 anyscript 了...(优化了,没有那么多any了,能不用any就不用...))
 
 - ### eslint 刚开始用会有点麻烦,习惯就好
 
-- ### 富文本编辑器 wangEditor
+- ### 富文本编辑器 tinyMce
 
 - ### 代码编辑器 Monaco(部署到线上有不可预期的错误), 现改为 codeMirror
 
@@ -43,14 +43,17 @@
 
 ## 待优化/添加 🤔
 
-- ### 代码架构和质量和功能需要提高完善.
-- ### 一些常用插件集成
-- ### 埋点系统,对用户的使用进行记录统计
+- ### wangEditor编辑器不好用,换成tinyMce
+- ### 前台的indexLayout布局需要优化
+- ### 换一个分页器
+- ### 前后台,不要使用保留关键字,header和footer
+- ### 前后台,http请求的错误处理优化
+- ### 前后台的echarts如果封装在组件中使用,自带的初始化动画就不会触发
+- ### super-tools-lib换成lodash
 
 --- 
 
 ## 接口数据
-用的自己写得go,替换mock数据
 [https://github.com/Gi2032/vue-template-admin-backstage](https://github.com/Gi2032/vue-template-admin-backstage)
 
 ---

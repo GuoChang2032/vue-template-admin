@@ -53,6 +53,7 @@ export default defineConfig({
     },
   },
   server: {
+    port: 8750,
     // proxy: {
     //   "/weather": {
     //     target: "https://devapi.qweather.com/v7",
