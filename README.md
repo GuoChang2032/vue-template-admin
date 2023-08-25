@@ -1,4 +1,4 @@
-# 项目运行 😅
+# 项目运行 
 ## pnpm/npm/yarn install
 
 ## pnpm/npm/yarn run dev
