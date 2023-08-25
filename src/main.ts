@@ -1,7 +1,7 @@
 import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
-import "@/permission.js";
+import "@/permission";
 import 'element-plus/theme-chalk/dark/css-vars.css'
 import i18n from '@/locales/i18n'
 
