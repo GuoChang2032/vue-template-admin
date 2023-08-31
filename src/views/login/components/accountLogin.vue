@@ -31,25 +31,40 @@ const { t } = useI18n();
 const handleLogin = () => {
   loading.value = true;
   let f = formValue.value;
-  http
-    .post("/login", f)
-    .then((res: ApiReturnType) => {
-      if (res.success) {
-        let info: UserLoginReturnType = res.data;
-        info.token = "xixixixixixixixxix";
-        us.setUserInfo(info);
-        umt.resetTab();
-        switchTab("index");
-        m.emit("login", {});
-        router.push({ path: "/index" });
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-    })
-    .finally(() => {
-      loading.value = false;
-    });
+  setTimeout(() => {
+    loading.value = false;
+    let info: UserLoginReturnType = {
+      account: "admin",
+      nickName: "过场",
+      phone: "15777777777",
+      role: "admin",
+      token: "xixixixixixixixxix",
+    };
+    us.setUserInfo(info);
+    umt.resetTab();
+    switchTab("index");
+    m.emit("login", {});
+    router.push({ path: "/index" });
+  }, 300);
+  // http
+  //   .post("/login", f)
+  //   .then((res: ApiReturnType) => {
+  //     if (res.success) {
+  //       let info: UserLoginReturnType = res.data;
+  //       info.token = "xixixixixixixixxix";
+  //       us.setUserInfo(info);
+  //       umt.resetTab();
+  //       switchTab("index");
+  //       m.emit("login", {});
+  //       router.push({ path: "/index" });
+  //     }
+  //   })
+  //   .catch((err) => {
+  //     console.error(err);
+  //   })
+  //   .finally(() => {
+  //     loading.value = false;
+  //   });
 };
 const other = (type: string) => {
   emit("callback", { type });

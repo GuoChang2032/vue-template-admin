@@ -72,7 +72,7 @@ const cb = (val: valType) => {
   background-size: cover;
 }
 .l-wrap {
-  text-shadow: 1px 1px 10px rgb(0, 0, 0);
+  text-shadow: 0px 0px 10px rgb(0, 0, 0);
 }
 
 .none-block {
