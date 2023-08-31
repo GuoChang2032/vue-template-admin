@@ -47,7 +47,7 @@ export default defineConfig({
     },
   },
   server: {
-    port: 9999,
+    port: 3354,
     // proxy: {
     //   "/": {
     //     target: "https://c.elanginfo.com/elang-math",

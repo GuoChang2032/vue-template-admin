@@ -2,7 +2,6 @@
 import http from "@/service/http";
 import { Message, getUserInfo } from "@/utils/utils";
 import indexAddEditModalVue from "@/components/indexAddEditModal.vue";
-import _ from "super-tools-lib";
 import { useRouter } from "vue-router";
 import Pagination from "@/components/pagination/pagination.vue";
 export default defineComponent({
