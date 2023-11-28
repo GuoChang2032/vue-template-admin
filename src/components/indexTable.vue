@@ -1,6 +1,6 @@
 <script lang='ts'>
 import { defineComponent, ref, watch } from "vue";
-import { queryParams, Song } from "@/utils/types";
+import { queryParams } from "@/utils/types";
 import indexAddEditModal from "@/components/indexAddEditModal.vue";
 import pagination from "@/components/pagination/pagination.vue";
 import Icon from "@/components/icon.vue";
@@ -53,19 +53,8 @@ export default defineComponent({
       close() {
         addShow.value = false;
       },
-      rowKey: (row: Song) => row.id,
       addShow,
       itemData,
-      edit(row: Song) {
-        addShow.value = true;
-        itemData.value = row;
-      },
-      deleteItem(row: Song) {
-      },
-      retry(row: Song) {
-      },
-      cancel(row: Song) {
-      },
       // 分页变换
       pageChange(param: any) {
         params.value.pageNo = param.page;
@@ -98,30 +87,6 @@ export default defineComponent({
       <el-table-column prop="impactFactor" label="影响因子" width="100" />
       <el-table-column prop="downloadCount" label="下载次数" width="100" />
       <el-table-column prop="createTime" label="创建时间" width="200" />
-      <el-table-column fixed="right" label="操作" width="200">
-        <template #default="scope">
-          <n-button text tag="a" type="info" size="small" class="action-btn" @click="edit(scope.row)">
-            编辑
-          </n-button>
-          <n-button text tag="a" type="info" size="small" class="action-btn" @click="retry(scope.row)">
-            重试
-          </n-button>
-          <el-popconfirm title="确定取消?" @confirm="cancel(scope.row)">
-            <template #reference>
-              <n-button text tag="a" type="info" size="small" class="action-btn"> 取消 </n-button>
-            </template>
-          </el-popconfirm>
-
-          <el-popconfirm
-            title="确定删除这条数据?"
-            @confirm="deleteItem(scope.row)"
-          >
-            <template #reference>
-              <n-button text tag="a" type="info" size="small" class="action-btn"> 删除 </n-button>
-            </template>
-          </el-popconfirm>
-        </template>
-      </el-table-column>
     </el-table>
     <pagination :total="pages.pageCount" @pageChange="pageChange" />
     <indexAddEditModal

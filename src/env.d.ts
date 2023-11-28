@@ -7,6 +7,5 @@ declare module "*.vue" {
   export default component;
 }
 
-declare module "@/utils/tool.js";
 declare module "@/utils/nprogress.js";
 declare module "@/service/api/index.js";
