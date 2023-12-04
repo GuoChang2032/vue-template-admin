@@ -1,6 +1,7 @@
 // import { Message } from "@/utils/tool.js";
 import { createDiscreteApi } from "naive-ui";
 import router from "../router";
+import { useUserInfo } from "@/stores/user";
 
 const LOCAL_NAME = "localStorageName";
 export const backTop = (num = 0, duration = 50): void => {
@@ -100,6 +101,19 @@ export const Message = (type: any, msg: string) => {
   }
 };
 
+// 获取登录信息
+export const userInfoAbout = (type: string): any => {
+  const uui = useUserInfo();
+  // let info = uui.getInfo()
+  // if (!uui) return;
+  // const token = uui.access_token;
+  // const user_info = uui.user_info;
+  // if (type === "info") {
+  //   return user_info && user_info;
+  // } else if (type === "token") {
+  //   return token;
+  // }
+};
 // const Notification = (type: any, title: string, content: string) => {
 //   const { notification } = createDiscreteApi(["notification"]);
 //   notification.create({ type, title, content, duration: 2500 });
