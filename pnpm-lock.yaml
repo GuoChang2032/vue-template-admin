@@ -2490,9 +2490,6 @@ packages:
       acorn: 8.8.1
     dev: true
 
-  /super-tools-lib/1.39.0:
-    resolution: {integrity: sha512-o0c7zZqJh/aNBTMyxBF7JqtxDUKyofX2odLqwc4KXweY/319mGNhO5iEECmqWsMd26yAxkWUAmnGVKTnr76wIQ==}
-    dev: false
 
   /supports-color/7.2.0:
     resolution: {integrity: sha512-qpCAvRl9stuOHveKsn7HncJRvv501qIacKzQlO/+Lwxc9+0q2wLyv4Dfvt80/DPn2pqOBsJdDiogXGR9+OvwRw==}

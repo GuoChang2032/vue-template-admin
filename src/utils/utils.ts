@@ -104,15 +104,15 @@ export const Message = (type: any, msg: string) => {
 // 获取登录信息
 export const userInfoAbout = (type: string): any => {
   const uui = useUserInfo();
-  // let info = uui.getInfo()
-  // if (!uui) return;
-  // const token = uui.access_token;
-  // const user_info = uui.user_info;
-  // if (type === "info") {
-  //   return user_info && user_info;
-  // } else if (type === "token") {
-  //   return token;
-  // }
+  let info = uui.getInfo
+  if (!uui) return;
+  const token = info.access_token;
+  const user_info = info.user_info;
+  if (type === "info") {
+    return user_info && user_info;
+  } else if (type === "token") {
+    return token;
+  }
 };
 // const Notification = (type: any, title: string, content: string) => {
 //   const { notification } = createDiscreteApi(["notification"]);
