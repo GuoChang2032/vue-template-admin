@@ -52,7 +52,7 @@ export default defineComponent({
         } else {
           theme.value = undefined;
         }
-        if (i18n.locale.value === "zh") {
+        if (nv[1] === "zh") {
           language.value = zhCN;
           datelanguage.value = dateZhCN;
         } else {
