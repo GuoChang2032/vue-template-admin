@@ -1,16 +1,7 @@
-<script lang='ts'>
-import { defineComponent } from "vue";
-export default defineComponent({
-    setup() {
-        return {};
-    },
-    components: {},
-});
-</script>
+<script lang="ts" setup></script>
 
 <template>
-    <router-view></router-view>
+  <router-view></router-view>
 </template>
 
-<style scoped lang='less'>
-</style>
+<style scoped lang="less"></style>

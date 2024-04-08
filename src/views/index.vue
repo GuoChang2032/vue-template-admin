@@ -5,9 +5,9 @@ const isDark = useDark();
 </script>
 
 <template>
-  <section class="text-white bg-gray-900">
+  <section class="h-screen text-white bg-gray-900">
     <div
-      class="max-w-screen-xl px-4 py-32 mx-auto lg:flex lg:h-screen lg:items-center"
+      class="max-w-screen-xl px-4 mx-auto lg:flex lg:h-screen lg:items-center"
     >
       <div class="max-w-3xl mx-auto text-center">
         <h1

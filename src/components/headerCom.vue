@@ -1,33 +1,18 @@
-<script lang="ts">
-import { defineComponent, ref } from "vue";
+<script lang="ts" setup>
 import { useRouter } from "vue-router";
-export default defineComponent({
-  name: "Header",
-  setup() {
-    const options = ref<any>([
-      {
-        label: "个人中心",
-        key: "1",
-      },
-      {
-        label: "退出登录",
-        key: "2",
-      },
-    ]);
-    const router = useRouter();
-    return {
-      options,
-      handleSelect(key: string) {
-        if (key === "1") {
-          router.push({ path: "/usercenter" });
-        }
-      },
-      goCenter() {
-        router.push({ path: "/usercenter" });
-      },
-    };
+const options = ref<any>([
+  {
+    label: "个人中心",
+    key: "1",
   },
-});
+  {
+    label: "退出登录",
+    key: "2",
+  },
+]);
+const router = useRouter();
+const goCenter = () => {
+};
 </script>
 
 <template>

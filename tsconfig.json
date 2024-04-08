@@ -30,7 +30,7 @@
     "src/**/*.d.ts",
     "src/**/*.tsx",
     "src/**/*.vue",
-    "src/service/api/index.js"
+    "src/service/api/index.ts"
   ],
   "references": [
     {

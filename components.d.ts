@@ -7,12 +7,12 @@ declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     Chart2: typeof import('./src/components/chartComponents/chart2.vue')['default']
     CodeMirror: typeof import('./src/components/codeMirror/codeMirror.vue')['default']
-    Footer: typeof import('./src/components/footer.vue')['default']
-    Header: typeof import('./src/components/header.vue')['default']
+    FooterCom: typeof import('./src/components/footerCom.vue')['default']
+    HeaderCom: typeof import('./src/components/headerCom.vue')['default']
     Icon: typeof import('./src/components/icon.vue')['default']
-    IndexAddEditModal: typeof import('./src/components/indexAddEditModal.vue')['default']
     IndexTable: typeof import('./src/components/indexTable.vue')['default']
     LineCahrt: typeof import('./src/components/chartComponents/lineCahrt.vue')['default']
+    NaPagination: typeof import('./src/components/pagination/naPagination.vue')['default']
     NBreadcrumb: typeof import('naive-ui')['NBreadcrumb']
     NBreadcrumbItem: typeof import('naive-ui')['NBreadcrumbItem']
     NConfigProvider: typeof import('naive-ui')['NConfigProvider']
@@ -26,7 +26,6 @@ declare module '@vue/runtime-core' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Upload: typeof import('./src/components/fileUploadCom/upload.vue')['default']
-    WEditor: typeof import('./src/components/wangEditor/wEditor.vue')['default']
   }
 }
 

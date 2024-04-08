@@ -23,7 +23,7 @@
     "eslint-config-prettier": "^8.5.0",
     "mitt": "^3.0.0",
     "moment": "^2.29.4",
-    "naive-ui": "^2.30.2",
+    "naive-ui": "^2.38.1",
     "nprogress": "^0.2.0",
     "pinia": "^2.0.14",
     "pinia-plugin-persistedstate": "^2.4.0",

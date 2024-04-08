@@ -1,4 +1,4 @@
-<script lang="ts">
+<script lang="ts" setup>
 import { defineComponent, ref, onMounted, h } from "vue";
 import { useRouter, RouterLink } from "vue-router";
 import { NIcon } from "naive-ui";
@@ -7,42 +7,34 @@ import { BookOutline } from "@vicons/ionicons5";
 function renderIcon(icon: any) {
   return () => h(NIcon, null, { default: () => h(icon) });
 }
-export default defineComponent({
-  setup() {
-    const router = useRouter();
-    const menuOpt = ref<any>([
-      {
-        label: () =>
-          h(
-            RouterLink,
-            {
-              to: {
-                name: "usercenter",
-              },
-            },
-            { default: () => "课程中心" }
-          ),
-        key: "1",
-        icon: renderIcon(BookOutline),
-      },
-    ]);
-    onMounted(() => {});
-
-    return {
-      menuOpt,
-      logoutHandle() {
-        router.push({ path: "/login" });
-      },
-      goFuckingIndex() {
-        router.push({ path: "/" });
-      },
-      menuChange(key: string, item: any) {
-        // 退出登录要清除
-      },
-    };
+const router = useRouter();
+const menuOpt = ref<any>([
+  {
+    label: () =>
+      h(
+        RouterLink,
+        {
+          to: {
+            name: "usercenter",
+          },
+        },
+        { default: () => "课程中心" }
+      ),
+    key: "1",
+    icon: renderIcon(BookOutline),
   },
-  components: {},
-});
+]);
+onMounted(() => {});
+
+const logoutHandle = () => {
+  router.push({ path: "/login" });
+};
+const goFuckingIndex = () => {
+  router.push({ path: "/" });
+};
+const menuChange = (key: string, item: any) => {
+  // 退出登录要清除
+};
 </script>
 
 <template>

@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import IndexLayout from "@/layouts/IndexLayout.vue";
-import userCenterLayout from "@/layouts/userCenterLayout.vue";
 
 const routes: RouteRecordRaw[] = [
   {
@@ -23,21 +22,6 @@ const routes: RouteRecordRaw[] = [
           title: "图表",
         },
         component: () => import("@/views/charts/charts.vue"),
-      },
-    ],
-  },
-  {
-    path: "/us",
-    redirect: "usercenter",
-    component: userCenterLayout,
-    children: [
-      {
-        path: "/usercenter",
-        name: "usercenter",
-        meta: {
-          title: "课程中心",
-        },
-        component: () => import("@/views/listPage/list.vue"),
       },
     ],
   },

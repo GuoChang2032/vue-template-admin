@@ -113,7 +113,11 @@ export interface pageChangeDataType{
   page:number
 }
 
+// 一般ui组件中，例如select中选项的值类型
 export interface optsType {
   label: string;
   value: number | string;
 }
+
+// Message弹窗的类型
+export type msgType = "success" | "warning" | "info" | "error";

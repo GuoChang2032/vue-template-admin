@@ -1,7 +1,7 @@
-// import { Message } from "@/utils/tool.js";
 import { createDiscreteApi } from "naive-ui";
 import router from "../router";
 import { useUserInfo } from "@/stores/user";
+import { msgType } from "./types";
 
 const LOCAL_NAME = "localStorageName";
 export const backTop = (num = 0, duration = 50): void => {
@@ -85,10 +85,10 @@ export const setUserInfo = (data: any): void => {
 export const logout = () => {
   router.push({ path: "/login", replace: true });
   localStorage.removeItem("user_login_info");
-  // Message("warning", "登录过期,请重新登录!");
 };
 
-export const Message = (type: any, msg: string) => {
+
+export const Message = (type: msgType, msg: string) => {
   const { message } = createDiscreteApi(["message"]);
   if (type === "info") {
     message.info(msg);
@@ -114,7 +114,3 @@ export const userInfoAbout = (type: string): any => {
     return token;
   }
 };
-// const Notification = (type: any, title: string, content: string) => {
-//   const { notification } = createDiscreteApi(["notification"]);
-//   notification.create({ type, title, content, duration: 2500 });
-// };

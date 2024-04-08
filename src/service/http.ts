@@ -1,4 +1,5 @@
-//http.ts
+// 复用api集合
+
 import axios, { AxiosRequestConfig } from "axios";
 import { Message,userInfoAbout } from "@/utils/utils";
 import { start, done } from "@/utils/nprogress.js";
@@ -8,9 +9,11 @@ import { useUserInfo } from "@/stores/user";
 // 设置请求头和请求路径
 
 
-// 请求urlignore
+// 请求url
 axios.defaults.baseURL = import.meta.env.VITE_APP_API_BASE_URL;
+// 请求超时时间
 axios.defaults.timeout = 30000;
+// 请求响应类型
 axios.defaults.headers.post["Content-Type"] = "application/json;charset=UTF-8";
 
 // 请求拦截
@@ -28,6 +31,7 @@ axios.interceptors.request.use(
     return error;
   }
 );
+
 // 响应拦截
 axios.interceptors.response.use(
   (res) => {
@@ -56,6 +60,7 @@ interface Http {
   download(url: string): void;
 }
 type method = 'get'|'post'|'delete'|'patch'|'put'
+
 const http: Http = {
   get<T>(url: string, params?: unknown): Promise<T> {
     return this.action("get", url, params);
