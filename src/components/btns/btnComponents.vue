@@ -1,8 +1,14 @@
 <script lang="ts" setup>
 import { onMounted } from "vue";
+import { btnComType } from "@/utils/types";
+
 onMounted(() => {});
 
-const props = defineProps(["type", "text"]);
+const props = withDefaults(defineProps<{ type: btnComType; text: string }>(), {
+  type: "add",
+  text: "添加",
+});
+
 const emit = defineEmits(["callback"]);
 const clickHandle = () => {
   emit("callback", {});
@@ -30,7 +36,13 @@ const clickHandle = () => {
     </template>
     {{ text }}
   </n-button>
-  <n-button strong secondary type="success" v-else-if="props.type === 'search'" @click="clickHandle">
+  <n-button
+    strong
+    secondary
+    type="success"
+    v-else-if="props.type === 'search'"
+    @click="clickHandle"
+  >
     <template #icon>
       <icon icon="material-symbols:search" />
     </template>
@@ -42,13 +54,23 @@ const clickHandle = () => {
     </template>
     {{ text }}
   </n-button>
-  <n-button dashed type="info" v-else-if="props.type === 'export'" @click="clickHandle">
+  <n-button
+    dashed
+    type="info"
+    v-else-if="props.type === 'export'"
+    @click="clickHandle"
+  >
     <template #icon>
       <icon icon="clarity:export-line" />
     </template>
     {{ text }}
   </n-button>
-  <n-button text type="info" v-else-if="props.type === 'import'" @click="clickHandle">
+  <n-button
+    text
+    type="info"
+    v-else-if="props.type === 'import'"
+    @click="clickHandle"
+  >
     {{ text }}
   </n-button>
 </template>

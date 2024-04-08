@@ -5,7 +5,7 @@ import m from "@/utils/mitt";
 import { setMenuData } from "@/utils/utils";
 import { useUserInfo } from "@/stores/user";
 import { MenuInst } from "naive-ui";
-import type { MenuOption } from 'naive-ui'
+import type { MenuOption } from "naive-ui";
 
 // import headerCom from '@/components/headerCom'
 const ui = useIndex();
@@ -29,6 +29,7 @@ m.on("pageTabChange", (e: any) => {
   activeKey.value = e.val;
   menuInstRef.value?.showOption(activeKey.value);
 });
+
 // 用户角色变化,重新获取菜单
 watch(
   () => us.info,
@@ -49,7 +50,7 @@ const setMenu = () => {
 
 const menuSelect = (key: string) => {
   ui.setActiveKey(key);
-  m.emit("layoutTabChange", {val:key});
+  m.emit("layoutTabChange", { val: key });
 };
 
 const expandMenuOpt = () => {
@@ -88,18 +89,14 @@ onUnmounted(() => {
         @expand="collapsed = false"
       >
         <div class="grid py-2 justify-items-center">
-          <img
-            v-show="collapsed"
-            src="@/assets/logo.png"
-            class="h-l-logo"
-            alt=""
-          />
-          <img
+          <!-- v-show="collapsed" -->
+          <img src="@/assets/atom.svg" class="h-l-logo" alt="" />
+          <!-- <img
             v-show="!collapsed"
             src="@/assets/elogo-large.png"
             class="h-l-logo"
             alt=""
-          />
+          /> -->
         </div>
         <n-menu
           ref="menuInstRef"
@@ -143,8 +140,6 @@ onUnmounted(() => {
 }
 .slide-fade-enter-active {
   transition: all 0.5s ease-out;
-}
-.slide-fade-leave-active {
 }
 
 .slide-fade-enter-from,

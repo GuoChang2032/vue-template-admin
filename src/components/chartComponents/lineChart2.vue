@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { onMounted } from "vue";
+import { onMounted,ref } from "vue";
 import * as echarts from "echarts";
 
 const e = echarts;

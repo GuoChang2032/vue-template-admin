@@ -21,7 +21,7 @@
   <!-- </div> -->
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import {
   zhCN,
   dateZhCN,
@@ -35,66 +35,52 @@ import { useI18n } from "vue-i18n";
 import type { NLocale, NDateLocale, GlobalTheme } from "naive-ui";
 
 // import m from "@/utils/mitt";
-export default defineComponent({
-  setup() {
-    const loading = ref(false);
-    const inver = useIndex();
-    const theme = ref<GlobalTheme>();
-    const tips = ref("");
-    const i18n = useI18n();
-    const language = ref<NLocale>(zhCN);
-    const datelanguage = ref<NDateLocale>(dateZhCN);
-    watch(
-      () => [inver.getInverted, i18n.locale.value],
-      (nv, ov) => {
-        if (nv[0]) {
-          theme.value = darkTheme;
-        } else {
-          theme.value = undefined;
-        }
-        if (nv[1] === "zh") {
-          language.value = zhCN;
-          datelanguage.value = dateZhCN;
-        } else {
-          language.value = enUS;
-          datelanguage.value = dateEnUS;
-        }
-      }
-    );
+const loading = ref(false);
+const inver = useIndex();
+const theme = ref<GlobalTheme>();
+const tips = ref("");
+const i18n = useI18n();
+const language = ref<NLocale>(zhCN);
+const datelanguage = ref<NDateLocale>(dateZhCN);
+watch(
+  () => [inver.getInverted, i18n.locale.value],
+  (nv, ov) => {
+    if (nv[0]) {
+      theme.value = darkTheme;
+    } else {
+      theme.value = undefined;
+    }
+    if (nv[1] === "zh") {
+      language.value = zhCN;
+      datelanguage.value = dateZhCN;
+    } else {
+      language.value = enUS;
+      datelanguage.value = dateEnUS;
+    }
+  }
+);
 
-    onMounted(() => {
-      if (inver.getInverted) {
-        theme.value = darkTheme;
-      } else {
-        theme.value = undefined;
-      }
-    });
-
-    // naive组件的主题颜色
-    const themeOverrides: GlobalThemeOverrides = {
-      common: {
-        primaryColor: "#5A67BA",
-        primaryColorHover: "#6d77b5",
-        primaryColorPressed: "#4c5bb5",
-      },
-    };
-
-    return {
-      language,
-      datelanguage,
-      theme,
-      loading,
-      tips,
-      themeOverrides,
-    };
-  },
+onMounted(() => {
+  if (inver.getInverted) {
+    theme.value = darkTheme;
+  } else {
+    theme.value = undefined;
+  }
 });
+
+// naive组件的主题颜色
+const themeOverrides: GlobalThemeOverrides = {
+  common: {
+    primaryColor: "#5A67BA",
+    primaryColorHover: "#6d77b5",
+    primaryColorPressed: "#4c5bb5",
+  },
+};
 </script>
+
 <style>
 .slide-fade-app-enter-active {
   transition: all 0.5s ease-out;
-}
-.slide-fade-leave-active {
 }
 
 .slide-fade-app-enter-from,

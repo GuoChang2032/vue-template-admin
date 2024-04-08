@@ -10,3 +10,4 @@ declare module "*.vue" {
 declare module "@/utils/tool.js";
 declare module "@/utils/nprogress.js";
 declare module "@/service/api/index.js";
+declare module "vue-i18n";

@@ -117,3 +117,5 @@ export interface optsType {
   label: string;
   value: number | string;
 }
+
+export type btnComType = 'add' | 'delete' | 'success' | 'reset' | 'export' | 'import' | 'search'
