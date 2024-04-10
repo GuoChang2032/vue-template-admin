@@ -41,14 +41,6 @@ const routes: RouteRecordRaw[] = [
         component: () => import("@/views/sys/menuManage.vue"),
       },
       {
-        path: "/chat",
-        name: "chat",
-        meta: {
-          title: "ChatGPT",
-        },
-        component: () => import("@/views/chat/chat.vue"),
-      },
-      {
         path: "/stats",
         name: "stats",
         meta: {

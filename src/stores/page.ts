@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-// 用于记录分页或其他状态
+// 用于记忆分页页码或相关搜索
 export const usePage = defineStore("pagination", {
   state: () => {
     return {

@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import m from "@/utils/mitt";
 import { TabsType, MenuDataType } from "@/utils/types";
 
+
 // 菜单栏
 export const useMenus = defineStore("menus", {
   state: () => {
@@ -60,12 +61,12 @@ export const useMenus = defineStore("menus", {
     };
   },
   getters: {
-    getMenus(): MenuDataType[] {
+    getMenus():any {
       return this.menusData;
     },
   },
   actions: {
-    setMenus(data: MenuDataType[]) {
+    setMenus(data: any) {
       this.menusData = data;
     },
   },

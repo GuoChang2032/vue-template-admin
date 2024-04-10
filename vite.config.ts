@@ -13,6 +13,34 @@ import PkgConfig from "vite-plugin-package-config";
 const path = require("path");
 
 export default defineConfig({
+  base: "./",
+  // 路由懒加载配置
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          "normal-group": ["./views/login/login.vue"],
+          "catch-group": [
+            "./views/abnormal/403.vue",
+            "./views/abnormal/404.vue",
+          ],
+          "dashboard-group": [
+            "./views/statistics/statistics.vue",
+            "./views/dashboard/dashboard.vue",
+          ],
+          "system-group": [
+            "./views/sys/menuManage.vue",
+            "./views/noticeCenter/noticeCenter.vue",
+            "./views/sys/userManage.vue",
+          ],
+          "form-group": [
+            "./views/charts/charts.vue",
+            "./views/editor/editor.vue",
+          ],
+        },
+      },
+    },
+  },
   plugins: [
     vue(),
     AutoImport({
@@ -68,8 +96,7 @@ export default defineConfig({
       //   changeOrigin: true, // 如果接口跨域，需要进行这个参数配置
       //   rewrite: path => path.replace(/^\/weather\/3d/, '')
       // },
-    }
-
+    },
   },
   esbuild: {
     pure: ["console.log", "console.info"],
