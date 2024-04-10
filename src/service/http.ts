@@ -6,14 +6,10 @@ import { start, done } from "@/utils/nprogress.js";
 import { ApiReturnType, UserLoginInfoType } from "@/utils/types";
 import { useUserInfo } from "@/stores/user";
 // import {start,close} from '@/utils/nprogress'
+
 // 设置请求头和请求路径
-
-
-// 请求url
 axios.defaults.baseURL = import.meta.env.VITE_APP_API_BASE_URL;
-// 请求超时时间
 axios.defaults.timeout = 30000;
-// 请求响应类型
 axios.defaults.headers.post["Content-Type"] = "application/json;charset=UTF-8";
 
 // 请求拦截
@@ -21,8 +17,7 @@ axios.interceptors.request.use(
   (config): AxiosRequestConfig<any> => {
     // 请求token或其他鉴权
     let t: string = userInfoAbout('token');;
-    if (t) {
-      //@ts-ignore
+    if (t && config.headers) {
       config.headers["x-access-token"] = t;
     }
     return config;

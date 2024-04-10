@@ -29,7 +29,7 @@ onMounted(() => {});
 const logoutHandle = () => {
   router.push({ path: "/login" });
 };
-const goFuckingIndex = () => {
+const goIndex = () => {
   router.push({ path: "/" });
 };
 const menuChange = (key: string, item: any) => {
@@ -40,7 +40,7 @@ const menuChange = (key: string, item: any) => {
 <template>
   <div class="uc-header">
     <div class="g-layout-container flex-between">
-      <div class="uc-h-left flex-center-start" @click="goFuckingIndex">
+      <div class="uc-h-left flex-center-start" @click="goIndex">
         <img class="logo" src="@/assets/logo.png" alt="" />
         <div class="uc-head-topic">个人中心</div>
       </div>
@@ -79,7 +79,7 @@ const menuChange = (key: string, item: any) => {
           >
             <div class="nav">
               <n-breadcrumb>
-                <n-breadcrumb-item @click="goFuckingIndex">
+                <n-breadcrumb-item @click="goIndex">
                   首页
                 </n-breadcrumb-item>
                 <n-breadcrumb-item> 个人中心</n-breadcrumb-item>

@@ -2,7 +2,10 @@ import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import AutoImport from "unplugin-auto-import/vite";
 import Components from "unplugin-vue-components/vite";
-import { ElementPlusResolver,NaiveUiResolver } from "unplugin-vue-components/resolvers";
+import {
+  ElementPlusResolver,
+  NaiveUiResolver,
+} from "unplugin-vue-components/resolvers";
 import PurgeIcons from "vite-plugin-purge-icons";
 import commpressPlugin from "vite-plugin-compression";
 
@@ -11,13 +14,15 @@ const path = require("path");
 export default defineConfig({
   plugins: [
     vue(),
+    // 自动引入
     AutoImport({
-      resolvers: [ElementPlusResolver(),NaiveUiResolver()],
-      imports: ["vue",'vue-i18n','vue-router'],
+      resolvers: [ElementPlusResolver(), NaiveUiResolver()],
+      imports: ["vue", "vue-i18n", "vue-router"],
       dts: "src/auto-import.d.ts",
     }),
+    // 全局引入UI组件
     Components({
-      resolvers: [ElementPlusResolver(),NaiveUiResolver()],
+      resolvers: [ElementPlusResolver(), NaiveUiResolver()],
     }),
     PurgeIcons({
       /* PurgeIcons Options */
@@ -31,6 +36,30 @@ export default defineConfig({
       ext: ".gz", //文件类型
     }),
   ],
+  build: {
+    chunkSizeWarningLimit: 1000, // 单个模块文件大小限制1000KB
+    terserOptions: {
+      // 清除代码中console和debugger
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
+      },
+    },
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          // 静态资源拆分
+          if (id.includes("node_modules")) {
+            return id
+              .toString()
+              .split("node_modules/")[1]
+              .split("/")[0]
+              .toString();
+          }
+        },
+      },
+    },
+  },
   css: {
     // css预处理器
     preprocessorOptions: {
