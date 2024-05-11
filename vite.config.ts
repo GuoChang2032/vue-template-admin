@@ -13,8 +13,8 @@ import PkgConfig from "vite-plugin-package-config";
 const path = require("path");
 
 export default defineConfig({
-  base: "./",
-  // 路由懒加载配置
+  base: "/",
+  // 代码分割优化配置
   build: {
     rollupOptions: {
       output: {
