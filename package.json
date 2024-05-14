@@ -1,7 +1,7 @@
 {
   "name": "vite_vue3_ts",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "scripts": {
     "dev": "vite --host",
     "build": "vue-tsc --noEmit && vite build",
@@ -11,29 +11,30 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.0.4",
-    "@iconify/iconify": "^2.2.1",
     "@types/nprogress": "^0.2.0",
     "@vicons/ionicons5": "^0.12.0",
     "@vueuse/core": "^9.12.0",
-    "axios": "^0.27.2",
+    "axios": "^1.6.8",
     "codemirror-editor-vue3": "^2.1.7",
     "echarts": "^5.3.3",
     "element-plus": "^2.2.5",
     "eslint": "^8.17.0",
     "eslint-config-prettier": "^8.5.0",
+    "iconify-icon": "^2.1.0",
     "mitt": "^3.0.0",
     "moment": "^2.29.4",
-    "naive-ui": "^2.38.1",
+    "naive-ui": "^2.38.2",
     "nprogress": "^0.2.0",
-    "pinia": "^2.0.14",
+    "pinia": "^2.1.7",
     "pinia-plugin-persistedstate": "^2.4.0",
     "prettier": "^2.6.2",
     "vue": "^3.2.25",
-    "vue-router": "^4.0.15"
+    "vue-router": "^4.0.15",
+    "vite": "^5.2.11"
   },
   "devDependencies": {
     "@iconify/json": "^2.1.63",
-    "@types/node": "^17.0.40",
+    "@types/node": "^20.12.11",
     "@vitejs/plugin-vue": "^2.3.3",
     "autoprefixer": "^10.4.13",
     "less": "^4.1.2",
@@ -43,7 +44,6 @@
     "typescript": "^4.5.4",
     "unplugin-auto-import": "^0.8.8",
     "unplugin-vue-components": "^0.19.6",
-    "vite": "^2.9.9",
     "vite-plugin-compression": "^0.5.1",
     "vite-plugin-purge-icons": "^0.8.1",
     "vue-tsc": "^0.34.7"
