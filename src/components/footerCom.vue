@@ -9,7 +9,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="footer">copyright@2099 上海熠朗信息科技有限公司</div>
+  <div class="footer">copyright@2099 XXXXXXXXXXXXXXXXXXX</div>
 </template>
 
 <style scoped lang="less">
