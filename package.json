@@ -39,7 +39,7 @@
   },
   "devDependencies": {
     "@types/node": "^20.12.11",
-    "@vitejs/plugin-vue": "^2.3.3",
+    "@vitejs/plugin-vue": "^4.6.2",
     "autoprefixer": "^10.4.13",
     "less": "^4.1.2",
     "less-loader": "^11.0.0",
@@ -51,7 +51,7 @@
     "vite-plugin-compression": "^0.5.1",
     "vite-plugin-optimize-persist": "^0.1.2",
     "vite-plugin-package-config": "^0.1.1",
-    "vite-plugin-purge-icons": "^0.8.1",
+    "vite-plugin-purge-icons": "^0.9.2",
     "vue-tsc": "^0.34.7"
   }
 }
