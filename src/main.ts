@@ -4,8 +4,7 @@ import router from "./router";
 import "@/permission.js";
 import 'element-plus/theme-chalk/dark/css-vars.css'
 
-// 自定义全局css
-// import "./assets/style/main.less";
+import "./assets/style/main.less";
 import "nprogress/nprogress.css";
 import ElementPlus from "element-plus";
 import zhCn from "element-plus/es/locale/lang/zh-cn";

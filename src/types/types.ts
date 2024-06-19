@@ -97,20 +97,20 @@ export interface UserManageListDataType {
 
 // 菜单数据类型
 export interface MenuDataType {
-  parentMenu: string,
-  menuName:string,
-  menuKey: string,
-  menuIcon:string,
-  pagePath: string,
-  menuSort: string,
-  rolePermiss: string[],
-  status: string,
-  children?: [],
+  parentMenu: string;
+  menuName: string;
+  menuKey: string;
+  menuIcon: string;
+  pagePath: string;
+  menuSort: string;
+  rolePermiss: string[];
+  status: string;
+  children?: [];
 }
 
 // 分页改变事件中传递的数据的类型
-export interface pageChangeDataType{
-  page:number
+export interface pageChangeDataType {
+  page: number;
 }
 
 // 一般ui组件中，例如select中选项的值类型
@@ -121,3 +121,8 @@ export interface optsType {
 
 // Message弹窗的类型
 export type msgType = "success" | "warning" | "info" | "error";
+
+export type fetchReturnType = {
+  data: any;
+  error: any;
+}

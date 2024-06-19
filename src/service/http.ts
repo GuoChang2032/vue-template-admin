@@ -1,11 +1,10 @@
 // 复用api集合
 
 import axios, { AxiosRequestConfig } from "axios";
-import { Message,userInfoAbout } from "@/utils/utils";
+import { Message, userInfoAbout } from "@/utils/utils";
 import { start, done } from "@/utils/nprogress.js";
-import { ApiReturnType, UserLoginInfoType } from "@/utils/types";
+import { ApiReturnType, UserLoginInfoType } from "@/types/types";
 import { useUserInfo } from "@/stores/user";
-// import {start,close} from '@/utils/nprogress'
 
 // 设置请求头和请求路径
 axios.defaults.baseURL = import.meta.env.VITE_APP_API_BASE_URL;
@@ -14,9 +13,9 @@ axios.defaults.headers.post["Content-Type"] = "application/json;charset=UTF-8";
 
 // 请求拦截
 axios.interceptors.request.use(
-  (config): AxiosRequestConfig<any> => {
+  (config): any => {
     // 请求token或其他鉴权
-    let t: string = userInfoAbout('token');;
+    let t: string = userInfoAbout("token");
     if (t && config.headers) {
       config.headers["x-access-token"] = t;
     }
@@ -49,12 +48,16 @@ interface Http {
   get<T = ApiReturnType>(url: string, params?: unknown): Promise<T>;
   post<T = ApiReturnType>(url: string, params?: unknown): Promise<T>;
   delete<T = ApiReturnType>(url: string, params?: unknown): Promise<T>;
-  action<T = ApiReturnType>(type: string, url: string, params?: unknown): Promise<T>;
+  action<T = ApiReturnType>(
+    type: string,
+    url: string,
+    params?: unknown
+  ): Promise<T>;
   upload<T>(url: string, params: unknown): Promise<T>;
   downFile<T>(url: string, params: unknown): Promise<T>;
   download(url: string): void;
 }
-type method = 'get'|'post'|'delete'|'patch'|'put'
+type method = "get" | "post" | "delete" | "patch" | "put";
 
 const http: Http = {
   get<T>(url: string, params?: unknown): Promise<T> {

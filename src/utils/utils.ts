@@ -1,7 +1,8 @@
-import { createDiscreteApi } from "naive-ui";
+import { createDiscreteApi, NIcon as naiveIcon } from "naive-ui";
 import router from "../router";
 import { useUserInfo } from "@/stores/user";
-import { msgType } from "./types";
+import { msgType } from "../types/types";
+import type { Component } from "vue";
 
 const LOCAL_NAME = "localStorageName";
 export const backTop = (num = 0, duration = 50): void => {
@@ -87,7 +88,6 @@ export const logout = () => {
   localStorage.removeItem("user_login_info");
 };
 
-
 export const Message = (type: msgType, msg: string) => {
   const { message } = createDiscreteApi(["message"]);
   if (type === "info") {
@@ -104,7 +104,7 @@ export const Message = (type: msgType, msg: string) => {
 // 获取登录信息
 export const userInfoAbout = (type: string): any => {
   const uui = useUserInfo();
-  let info = uui.getInfo
+  let info = uui.getInfo;
   if (!uui) return;
   const token = info.access_token;
   const user_info = info.user_info;
@@ -113,4 +113,16 @@ export const userInfoAbout = (type: string): any => {
   } else if (type === "token") {
     return token;
   }
+};
+
+export const renderIcon = (icon: Component) => {
+  return () => {
+    return h(
+      naiveIcon,
+      {},
+      {
+        default: () => h(icon),
+      }
+    );
+  };
 };

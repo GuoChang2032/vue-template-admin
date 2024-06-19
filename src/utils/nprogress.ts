@@ -2,7 +2,7 @@ import NProgress from 'nprogress'
 
 NProgress.configure({
     easing: 'ease',
-    speed: '500',
+    speed: 500,
 })
 
 export const start = () => {
