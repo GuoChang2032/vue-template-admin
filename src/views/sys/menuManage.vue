@@ -186,3 +186,4 @@ const editMenu = (item: MenuDataType) => {
 </template>
 
 <style scoped lang="less"></style>
+@/types/types

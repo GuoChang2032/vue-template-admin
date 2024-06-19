@@ -97,20 +97,20 @@ export interface UserManageListDataType {
 
 // 菜单数据类型
 export interface MenuDataType {
-  parentMenu: string,
-  menuName:string,
-  menuKey: string,
-  menuIcon:string,
-  pagePath: string,
-  menuSort: string,
-  rolePermiss: string[],
-  status: string,
-  children?: [],
+  parentMenu: string;
+  menuName: string;
+  menuKey: string;
+  menuIcon: string;
+  pagePath: string;
+  menuSort: string;
+  rolePermiss: string[];
+  status: string;
+  children?: [];
 }
 
 // 分页改变事件中传递的数据的类型
-export interface pageChangeDataType{
-  page:number
+export interface pageChangeDataType {
+  page: number;
 }
 
 export interface optsType {
@@ -118,4 +118,16 @@ export interface optsType {
   value: number | string;
 }
 
-export type btnComType = 'add' | 'delete' | 'success' | 'reset' | 'export' | 'import' | 'search'
+export type btnComType =
+  | "add"
+  | "delete"
+  | "success"
+  | "reset"
+  | "export"
+  | "import"
+  | "search";
+
+export type fetchReturnType = {
+  data: any;
+  error: any;
+};

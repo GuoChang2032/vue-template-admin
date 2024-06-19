@@ -75,3 +75,4 @@ const handleSelectionChange = (val: []) => {
 </template>
 
 <style scoped lang="less"></style>
+@/types/types

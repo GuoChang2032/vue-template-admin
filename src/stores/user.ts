@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { UserLoginInfoType } from "@/utils/types";
+import { UserLoginInfoType } from "@/types/types";
 // 记录用户信息
 export const useUserInfo = defineStore("user", {
   state: () => {

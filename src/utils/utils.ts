@@ -9,7 +9,7 @@ import { usePermission } from "@/hooks/common/business";
 import { useUserInfo } from "@/stores/user";
 import m from "@/utils/mitt";
 import { useIndex } from "@/stores/indexStore";
-import { UserLoginInfoType, MenuDataType, TabsType } from "@/utils/types";
+import { UserLoginInfoType, MenuDataType, TabsType } from "@/types/types";
 
 const LOCAL_NAME = "localStorageName";
 

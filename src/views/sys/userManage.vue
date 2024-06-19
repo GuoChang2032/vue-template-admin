@@ -186,3 +186,4 @@ const pc = (e: pageChangeDataType) => {
 </template>
 
 <style scoped lang="less"></style>
+@/types/types@/types/types

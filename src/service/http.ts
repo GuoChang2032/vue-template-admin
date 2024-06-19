@@ -2,7 +2,7 @@
 import axios, { AxiosRequestConfig } from "axios";
 import { Message } from "@/utils/utils";
 import { start, done } from "@/utils/nprogress.js";
-import { ApiReturnType, UserLoginInfoType } from "@/utils/types";
+import { ApiReturnType, UserLoginInfoType } from "@/types/types";
 import { useUserInfo } from "@/stores/user";
 // import {start,close} from '@/utils/nprogress'
 
@@ -13,7 +13,7 @@ axios.defaults.headers.post["Content-Type"] = "application/json;charset=UTF-8";
 
 // 请求拦截
 axios.interceptors.request.use(
-  (config): AxiosRequestConfig<any> => {
+  (config): any => {
     // 请求token或其他鉴权
     let user: UserLoginInfoType = useUserInfo().info;
     let token = user.token;
@@ -80,7 +80,6 @@ const http: Http = {
         data: params,
       })
         .then((res) => {
-          done();
           if (!res.data.success) {
             Message("error", res.data.message);
           }
@@ -88,8 +87,10 @@ const http: Http = {
           resolve(d);
         })
         .catch((err) => {
-          done();
           reject(err.data);
+        })
+        .finally(() => {
+          done();
         });
     });
   },
@@ -102,13 +103,14 @@ const http: Http = {
           headers: { "Content-Type": "multipart/form-data" },
         })
         .then((res) => {
-          done();
           const d: T = res.data;
           resolve(d);
         })
         .catch((err) => {
-          done();
           reject(err.data);
+        })
+        .finally(() => {
+          done();
         });
     });
   },
@@ -124,12 +126,13 @@ const http: Http = {
         responseType: "blob",
       })
         .then((res) => {
-          done();
           resolve(res.data);
         })
         .catch((err) => {
-          done();
           reject(err.data);
+        })
+        .finally(() => {
+          done();
         });
     });
   },

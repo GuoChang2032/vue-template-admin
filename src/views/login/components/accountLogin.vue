@@ -132,3 +132,4 @@ const other = (type: string) => {
 </template>
 
 <style scoped lang="less"></style>
+@/types/types

@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import m from "@/utils/mitt";
-import { TabsType, MenuDataType } from "@/utils/types";
+import { TabsType, MenuDataType } from "@/types/types";
 
 
 // 菜单栏

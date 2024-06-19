@@ -1,6 +1,6 @@
 import http from "@/service/http";
 import { Message } from "@/utils/utils";
-import { ApiReturnType } from "@/utils/types";
+import { ApiReturnType } from "@/types/types";
 
 type method = 'get'|'post'|'delete'|'patch'|'put'
 
