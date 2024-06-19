@@ -81,7 +81,6 @@ const http: Http = {
         data: params,
       })
         .then((res) => {
-          done();
           if (!res.data.success) {
             Message("error", res.data.message);
           }
@@ -89,9 +88,9 @@ const http: Http = {
           resolve(d);
         })
         .catch((err) => {
-          done();
           reject(err.data);
-        });
+        })
+        .finally(() => done());
     });
   },
 
@@ -103,14 +102,13 @@ const http: Http = {
           headers: { "Content-Type": "multipart/form-data" },
         })
         .then((res) => {
-          done();
           const d: T = res.data;
           resolve(d);
         })
         .catch((err) => {
-          done();
           reject(err.data);
-        });
+        })
+        .finally(() => done());
     });
   },
 
@@ -125,13 +123,12 @@ const http: Http = {
         responseType: "blob",
       })
         .then((res) => {
-          done();
           resolve(res.data);
         })
         .catch((err) => {
-          done();
           reject(err.data);
-        });
+        })
+        .finally(() => done());
     });
   },
 
