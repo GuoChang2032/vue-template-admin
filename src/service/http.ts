@@ -123,7 +123,7 @@ const http: Http = {
         url: url,
         params: parameter,
         method: "get",
-        responseType: "blob",
+        responseType: "arraybuffer",
       })
         .then((res) => {
           resolve(res.data);

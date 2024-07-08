@@ -350,3 +350,64 @@ export function switchTab(name: string) {
   m.emit("pageTabChange", { val: name });
   ui.setActiveKey(name);
 }
+
+/**
+ * 判断用户表单填写是否完整。
+ * 该函数遍历表单对象的属性，检查是否存在未填写的必填项。
+ * 如果发现未填写的项，将显示警告消息并返回true，表示表单不完整。
+ * 如果所有项都已填写，则返回false，表示表单完整。
+ *
+ * @param f 表单对象，包含用户输入的数据。
+ * @returns {boolean} 如果表单不完整返回true，否则返回false。
+ */
+export const judgeUserForm = (f: any): boolean => {
+  let flag = false;
+  const currentItem: any = {
+    username: "请填写账户名",
+    realname: "请填写用户名",
+    phone: "请填写手机号",
+    email: "请填写邮箱地址",
+    avlTimeEnd: "请选择试用时间",
+    avlTimeStart: "请选择试用时间",
+    tenantName: "请填写机构名称",
+    password: "请填写登录密码",
+  };
+  for (const k in f) {
+    if (!f[k] && currentItem[k]) {
+      Message("warning", `${currentItem[k]}`);
+      flag = true;
+      break;
+    }
+  }
+
+  return flag;
+};
+
+/**
+ * 将Base64编码的字符串转换为Blob对象。
+ * Blob对象用于表示二进制大型对象，这种转换对于处理大型二进制数据非常有用，例如图片或音频文件。
+ *
+ * @param base64String Base64编码的字符串，通常是由图片等二进制数据转换而来的。
+ * @returns 返回一个Blob对象，代表原始的二进制数据。
+ */
+export const base64dataToBlob = (base64String: string) => {
+  const base64WithoutPrefix = base64String.replace(/^data\:.*?;base64,/, "");
+
+  const byteCharacters = atob(base64WithoutPrefix);
+  const byteArrays = [];
+
+  for (let offset = 0; offset < byteCharacters.length; offset += 1024) {
+    const slice = byteCharacters.slice(offset, offset + 1024);
+
+    const byteNumbers = new Array(slice.length);
+    for (let i = 0; i < slice.length; i++) {
+      byteNumbers[i] = slice.charCodeAt(i);
+    }
+
+    const byteArray = new Uint8Array(byteNumbers);
+    byteArrays.push(byteArray);
+  }
+
+  const blob = new Blob(byteArrays, { type: "application/octet-stream" });
+  return blob;
+};
