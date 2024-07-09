@@ -5,13 +5,16 @@ import { msgType } from "../types/types";
 import type { Component } from "vue";
 
 const LOCAL_NAME = "localStorageName";
+
+/**
+ * 返回页面顶部的函数
+ * @param num {number} - 滚动到页面顶部的距离，默认为0，表示滚动到页面的最顶部
+ * @param duration {number} - 滚动回顶部所需的时间，默认为50毫秒，用于控制滚动的平滑度
+ * @returns {void}
+ */
 export const backTop = (num = 0, duration = 50): void => {
-  // document.documentElement.scrollTop = num === 0 ? document.body.scrollTop : num
-  // 现在的位置
   let top = document.documentElement.scrollTop || document.body.scrollTop;
-  // 实现滚动效果
   const timeTop = setInterval(() => {
-    // 视图位置 =
     document.documentElement.scrollTop =
       document.documentElement.scrollTop =
       top -=

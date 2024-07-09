@@ -2,28 +2,14 @@
 import { onMounted } from "vue";
 const props = defineProps(["page", "total", "pageSize"]);
 
-watch(
-  () => props.page, 
-  (newVal: number) => {
-    pageNo.value = newVal;
-  }
-)
-
-watch(
-  () => props.total, 
-  (newVal: number) => {
-    pageTotal.value = newVal;
-  }
-)
-
-watch(
-  () => props.pageSize, 
-  (newVal: number) => {
-    pageSize.value = newVal;
-  }
-)
+watchEffect(() => {
+  pageNo.value = props.page;
+  pageTotal.value = props.total;
+  pageSize.value = props.pageSize;
+});
 
 const emits = defineEmits(["pageChange"]);
+
 const pageNo = ref<number>(1);
 const pageSize = ref<number>(20);
 const pageTotal = ref<number>(0);
@@ -51,5 +37,4 @@ const pageChange = (page: number) => {
   </div>
 </template>
 
-<style scoped lang="less">
-</style>
+<style scoped lang="less"></style>
