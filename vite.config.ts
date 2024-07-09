@@ -8,8 +8,6 @@ import {
 } from "unplugin-vue-components/resolvers";
 import PurgeIcons from "vite-plugin-purge-icons";
 import commpressPlugin from "vite-plugin-compression";
-import OptimizationPersist from "vite-plugin-optimize-persist";
-import PkgConfig from "vite-plugin-package-config";
 const path = require("path");
 
 export default defineConfig(({ command, mode }) => {
@@ -64,8 +62,6 @@ export default defineConfig(({ command, mode }) => {
         algorithm: "gzip", //压缩算法
         ext: ".gz", //文件类型
       }),
-      PkgConfig(),
-      OptimizationPersist(),
     ],
     css: {
       // css预处理器

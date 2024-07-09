@@ -5,7 +5,7 @@ import { useMenuTag } from "@/stores/menu";
 import { useRouter } from "vue-router";
 import m from "@/utils/mitt";
 import { renderIconCustom, switchTab } from "@/utils/utils";
-import { TabsType, EmitDataType } from "@/utils/types";
+import { TabsType, EmitDataType } from "@/types/types";
 
 interface TabMenuType {
   label: string;
