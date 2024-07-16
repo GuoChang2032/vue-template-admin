@@ -12,7 +12,7 @@ import {
 import { notice } from "@/components/noticeComponents";
 import { useI18n } from "vue-i18n";
 import { useUserInfo } from "@/stores/user";
-import { UserLoginInfoType, LanguageType, IndexUserMenu } from "@/utils/types";
+import { UserLoginInfoType, LanguageType, IndexUserMenu } from "@/types/types";
 
 const isDark = useDark();
 const toggleDark = useToggle(isDark);
