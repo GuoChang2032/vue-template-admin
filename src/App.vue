@@ -19,6 +19,8 @@ import { zhCN, dateZhCN, GlobalThemeOverrides } from "naive-ui";
 
 const loading = ref(false);
 const tips = ref("");
+
+// 组件样式
 const themeOverrides: GlobalThemeOverrides = {
   common: {
     primaryColor: "#5983b8",

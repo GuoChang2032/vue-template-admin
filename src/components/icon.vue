@@ -1,24 +1,28 @@
 <template>
-  <div class="icon-wrap" :style="{ fontSize: size }">
+  <div class="icon-wrap" :style="{ fontSize: props.size }">
     <!-- <span class="iconify m-iconify" :data-icon="icon"></span> -->
-    <iconify-icon class="iconify m-iconify" :icon="icon"></iconify-icon>
+    <iconify-icon class="iconify m-iconify" :icon="props.icon"></iconify-icon>
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
-import 'iconify-icon';
-export default defineComponent({
-  name: "Icon",
-  props: {
-    icon: { type: String, required: true },
-    size: { type: String, default: "17px" },
-  },
+<script lang="ts" setup>
+import "iconify-icon";
 
-  setup() {
-    return {};
-  },
-});
+const props = withDefaults(
+  defineProps<{
+    icon: string;
+    size: string;
+  }>(),
+  {
+    icon: "",
+    size: "17px",
+  }
+);
+
+// props: {
+//   icon: { type: String, required: true },
+//   size: { type: String, default: "17px" },
+// },
 </script>
 
 <style scoped lang="less">
