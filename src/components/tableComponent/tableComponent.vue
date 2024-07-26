@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { onMounted } from "vue";
-import { UserManageListType,UserManageListDataType } from "@/utils/types";
+import { UserManageListType,UserManageListDataType } from "@/types/types";
 
 onMounted(() => {});
 

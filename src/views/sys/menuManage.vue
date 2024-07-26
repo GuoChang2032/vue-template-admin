@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { Message, routeMenuAdd } from "@/utils/utils";
 import { onMounted } from "vue";
-import { pageType, MenuDataType } from "@/utils/types";
+import { pageType, MenuDataType } from "@/types/types";
 import menuDrawer from "@/views/sys/components/menuDrawer.vue";
 import { useMenus } from "@/stores/menu";
 import { useRouter } from "vue-router";
@@ -112,12 +112,12 @@ const editMenu = (item: MenuDataType) => {
             <div class="w-20" for="">菜单名称</div>
             <n-input placeholder="输入菜单名称" class="w-64" />
           </div>
-          <btnComponents type="search" @callback="searchHandle" text="搜索" />
-          <btnComponents type="reset" @callback="resetHandle" text="重置" />
+          <n-button type="primary" @click="searchHandle">搜索</n-button>
+          <n-button secondary @click="resetHandle" >重置</n-button>
         </n-space>
       </div>
       <div class="my-4">
-        <btnComponents type="add" @callback="addHandle" text="新建路由" />
+        <n-button type="primary" @click="addHandle">新建路由</n-button>
       </div>
       <n-alert class="mb-6" title="提示" type="info" closeable>
         生成页面路由需要手动添加路由配置，然后还得有那个页面

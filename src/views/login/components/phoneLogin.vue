@@ -93,7 +93,7 @@ export default defineComponent({
         />
       </n-form-item>
       <n-form-item label="" path="code">
-        <div class="code-wrap flex-between">
+        <div class="flex justify-between code-wrap">
           <div style="width: 85%">
             <n-input
               size="large"

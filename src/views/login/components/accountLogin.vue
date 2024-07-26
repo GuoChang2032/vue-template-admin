@@ -7,7 +7,7 @@ import { Message, switchTab } from "@/utils/utils";
 import m from "@/utils/mitt";
 import { useIndex } from "@/stores/indexStore";
 import http from "@/service/http";
-import { UserLoginReturnType, ApiReturnType } from "@/utils/types";
+import { UserLoginReturnType, ApiReturnType } from "@/types/types";
 
 interface fvType {
   account: string;
@@ -131,5 +131,22 @@ const other = (type: string) => {
   </div>
 </template>
 
-<style scoped lang="less"></style>
-@/types/types
+<style scoped lang="less">
+.l-c-operation {
+  padding: 5px 0;
+}
+.l-c-btn {
+  margin: 10px 0 20px;
+}
+.l-c-head {
+  font-size: 28px;
+  margin: 15px 0;
+}
+.l-f {
+  width: 400px;
+}
+.code-img {
+  width: 100px;
+  margin-left: 10px;
+}
+</style>

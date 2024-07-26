@@ -4,7 +4,7 @@ import iconData from "@/utils/icon.data";
 import { FormInst } from "naive-ui";
 import { useMenus } from "@/stores/menu";
 import cloneDeep from "lodash/cloneDeep"
-import { MenuDataType } from "@/utils/types";
+import { MenuDataType } from "@/types/types";
 
 onMounted(() => {
   setParent();

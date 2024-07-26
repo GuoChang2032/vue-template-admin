@@ -76,7 +76,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <n-layout style="height: 100%">
+  <n-layout style="height: 100vh">
     <n-layout class="heights" has-sider>
       <n-layout-sider
         bordered

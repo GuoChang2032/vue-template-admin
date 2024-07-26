@@ -86,7 +86,10 @@ const userMenuSelect = (key: string) => {
 
 <template>
   <div :class="[theme ? 'theme-black' : 'theme-white']">
-    <div class="header flex-between" :class="[theme ? 'bm-black' : 'bm-white']">
+    <div
+      class="flex items-center justify-between header"
+      :class="[theme ? 'bm-black' : 'bm-white']"
+    >
       <div class="h-left flex-center-start">
         <!-- <icon
           class="contract"
@@ -110,7 +113,7 @@ const userMenuSelect = (key: string) => {
         </n-breadcrumb>
       </div>
       <div class="h-right">
-        <div class="flex-center">
+        <div class="flex items-center justify-center">
           <div class="theme-content">
             <n-switch v-model:value="theme" @update:value="themeChange">
               <template #checked-icon>
@@ -137,7 +140,7 @@ const userMenuSelect = (key: string) => {
           </div>
 
           <n-dropdown :options="userMenu" @select="userMenuSelect">
-            <div class="user-content flex-center">
+            <div class="flex justify-center user-content">
               <n-avatar size="small" round src="/atom.svg" />
               <div class="h-r-a-name">
                 {{ user_info.nickName || "未知名称" }}
@@ -242,4 +245,3 @@ const userMenuSelect = (key: string) => {
   text-align: right;
 }
 </style>
-@/types/types

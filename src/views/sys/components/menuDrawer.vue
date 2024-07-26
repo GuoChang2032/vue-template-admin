@@ -4,7 +4,7 @@ import iconData from "@/utils/icon.data";
 import { FormInst } from "naive-ui";
 import { useMenus } from "@/stores/menu";
 import cloneDeep from "lodash/cloneDeep"
-import { MenuDataType, optsType } from "@/utils/types";
+import { MenuDataType, optsType } from "@/types/types";
 import http from "@/service/http";
 import { Message } from "@/utils/utils";
 

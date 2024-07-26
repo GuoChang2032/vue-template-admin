@@ -1,11 +1,10 @@
 <script lang="ts" setup>
 import { Message } from "@/utils/utils";
-import { pageType, ApiReturnType } from "@/utils/types";
+import { pageType, ApiReturnType } from "@/types/types";
 import { onMounted } from "vue";
-import btnComponents from "@/components/btns/btnComponents.vue";
 import http from "@/service/http";
 import addUserModal from "@/views/sys/components/addUserModal.vue";
-import { UserManageListDataType, pageChangeDataType } from "@/utils/types";
+import { UserManageListDataType, pageChangeDataType } from "@/types/types";
 
 onMounted(() => {
   getList();
@@ -132,24 +131,13 @@ const pc = (e: pageChangeDataType) => {
             <div class="w-12" for="">状态</div>
             <n-select placeholder="选择用户状态" class="w-64" :options="[]" />
           </div>
-          <btnComponents type="search" @callback="searchHandle" text="搜索" />
-          <btnComponents type="reset" @callback="resetHandle" text="重置" />
+          <n-button type="primary" @click="searchHandle">搜索</n-button>
+          <n-button secondary @click="resetHandle">重置</n-button>
         </n-space>
       </div>
       <div class="mb-8">
         <n-space :size="[25, 5]" align="center">
-          <btnComponents type="add" @callback="addHandle" text="新建用户" />
-          <btnComponents
-            v-if="selectArr && selectArr.length > 0"
-            type="export"
-            @callback="exportHandle"
-            text="导出用户"
-          />
-          <btnComponents
-            type="import"
-            @callback="importHandle"
-            text="导入用户"
-          />
+          <n-button type="primary" @click="addHandle">搜索</n-button>
         </n-space>
       </div>
       <div>
