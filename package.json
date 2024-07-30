@@ -17,7 +17,7 @@
     "axios": "^1.6.8",
     "codemirror-editor-vue3": "^2.1.7",
     "echarts": "^5.3.3",
-    "element-plus": "^2.2.5",
+    "element-plus": "^2.7.8",
     "eslint": "^8.17.0",
     "eslint-config-prettier": "^8.5.0",
     "iconify-icon": "^2.1.0",
@@ -28,13 +28,14 @@
     "pinia": "^2.1.7",
     "pinia-plugin-persistedstate": "^2.4.0",
     "prettier": "^2.6.2",
+    "vite": "^5.2.11",
     "vue": "^3.2.25",
-    "vue-router": "^4.0.15",
-    "vite": "^5.2.11"
+    "vue-router": "^4.0.15"
   },
   "devDependencies": {
     "@iconify/json": "^2.1.63",
     "@types/node": "^20.12.11",
+    "@vitejs/plugin-vue": "^4.6.2",
     "autoprefixer": "^10.4.13",
     "less": "^4.1.2",
     "less-loader": "^11.0.0",
@@ -44,7 +45,6 @@
     "unplugin-auto-import": "^0.8.8",
     "unplugin-vue-components": "^0.19.6",
     "vite-plugin-compression": "^0.5.1",
-    "@vitejs/plugin-vue": "^4.6.2",
     "vite-plugin-purge-icons": "^0.9.2",
     "vue-tsc": "^0.34.7"
   }
