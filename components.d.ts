@@ -75,6 +75,7 @@ declare module '@vue/runtime-core' {
     RouterView: typeof import('vue-router')['RouterView']
     TableComponent: typeof import('./src/components/tableComponent/tableComponent.vue')['default']
     TEditor: typeof import('./src/components/tinyEditor/TEditor.vue')['default']
+    TestCom: typeof import('./src/components/testCom.vue')['default']
     ThemeComponent: typeof import('./src/components/themeComponent/themeComponent.vue')['default']
     Upload: typeof import('./src/components/fileUploadCom/upload.vue')['default']
   }
