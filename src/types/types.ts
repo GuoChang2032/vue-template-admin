@@ -1,14 +1,5 @@
-export type queryParams = {
-  pageNo: number;
-  pageSize: number;
-  column: string;
-  order: string;
-  articleName: string;
-  querySource: string;
-  processStatus: string;
-  articleAuthor: string;
-};
 
+// http请求返回数据格式
 export interface ResType {
   status: number;
   message: string;
@@ -16,9 +7,11 @@ export interface ResType {
   data?: any;
 }
 
+// 分页格式
 export type pageType = {
   page: number;
   total: number;
+  size?: number;
 };
 
 // 用户登录返回数据类型
@@ -125,4 +118,4 @@ export type msgType = "success" | "warning" | "info" | "error";
 export type fetchReturnType = {
   data: any;
   error: any;
-}
+};
