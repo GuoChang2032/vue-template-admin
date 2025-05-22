@@ -42,7 +42,13 @@ export default defineConfig(({ command, mode }) => {
       },
     },
     plugins: [
-      vue(),
+      vue({
+        template: {
+          compilerOptions: {
+            isCustomElement: (tag) => tag === "iconify-icon",
+          },
+        },
+      }),
       AutoImport({
         resolvers: [ElementPlusResolver(), NaiveUiResolver()],
         imports: ["vue", "vue-i18n", "vue-router"],
