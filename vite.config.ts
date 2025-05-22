@@ -6,7 +6,6 @@ import {
   ElementPlusResolver,
   NaiveUiResolver,
 } from "unplugin-vue-components/resolvers";
-import PurgeIcons from "vite-plugin-purge-icons";
 import commpressPlugin from "vite-plugin-compression";
 
 const path = require("path");
@@ -16,7 +15,13 @@ export default defineConfig(({ command, mode }) => {
   return {
     base: env.BASE_URL,
     plugins: [
-      vue(),
+      vue({
+        template: {
+          compilerOptions: {
+            isCustomElement: (tag) => tag === "iconify-icon",
+          },
+        },
+      }),
       // 自动引入
       AutoImport({
         resolvers: [ElementPlusResolver(), NaiveUiResolver()],
@@ -26,9 +31,6 @@ export default defineConfig(({ command, mode }) => {
       // 全局引入UI组件
       Components({
         resolvers: [ElementPlusResolver(), NaiveUiResolver()],
-      }),
-      PurgeIcons({
-        /* PurgeIcons Options */
       }),
       commpressPlugin({
         verbose: true, // 默认即可
