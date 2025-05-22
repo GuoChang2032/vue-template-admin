@@ -31,6 +31,11 @@ export const backTop = (num = 0, duration = 50): void => {
   }, 10);
 };
 
+/**
+ *
+ * @param str {string} - 需要进行编码的字符串
+ * @returns
+ */
 export const toCode = (str: string): string => {
   const key = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   const st = key.length;
@@ -81,6 +86,7 @@ export const getUserInfo = () => {
   if (!d) return;
   return JSON.parse(fromCode(d));
 };
+
 export const setUserInfo = (data: any): void => {
   const str = toCode(JSON.stringify(data));
   localStorage.setItem(LOCAL_NAME, str);
@@ -128,4 +134,21 @@ export const renderIcon = (icon: Component) => {
       }
     );
   };
+};
+
+// 通过递归实现深拷贝
+export const deepClone = (obj: any): any => {
+  // 空或者简单类型，直接返回该值
+  if (obj === null || typeof obj !== "object") {
+    return obj;
+  }
+  // 初始化赋值，判断是数组还是对象
+  const copy: any = Array.isArray(obj) ? [] : {};
+  // 循环值
+  for (const key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      copy[key] = deepClone(obj[key]);
+    }
+  }
+  return copy;
 };

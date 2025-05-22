@@ -142,4 +142,5 @@ const http: Http = {
     document.body.appendChild(iframe);
   },
 };
+
 export default http;

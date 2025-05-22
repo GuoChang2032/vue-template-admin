@@ -1,20 +1,20 @@
 // 逻辑复用文件
 
 import http from "@/service/http";
-import { fetchReturnType } from "@/types/types";
+import { fetchReturnType, ResType } from "@/types/types";
 
 export function useFetch(
   url: string,
   params?: {},
   method: string = "get"
 ): Promise<fetchReturnType> {
-  const data = ref<any>(null);
-  const error = ref<any>(null);
+  const data = ref<ResType|null>();
+  const error = ref<string>();
 
   return new Promise((resolve) => {
     http
       .action(method, url, params)
-      .then((res: any) => {
+      .then((res: ResType) => {
         if (res.success) {
           data.value = res;
         } else {
