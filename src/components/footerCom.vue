@@ -19,6 +19,5 @@ export default defineComponent({
   padding: 10px 0 ;
   text-align: center;
   font-size: 14px;
-  
 }
 </style>
