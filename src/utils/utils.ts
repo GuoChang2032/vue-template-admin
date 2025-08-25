@@ -113,10 +113,8 @@ export const Message = (type: msgType, msg: string) => {
 // 获取登录信息
 export const userInfoAbout = (type: string): any => {
   const uui = useUserInfo();
-  let info = uui.getInfo;
-  if (!uui) return;
-  const token = info.getToken;
-  const user_info = info.getInfo;
+  const token = uui.getToken;
+  const user_info = uui.getInfo;
   if (type === "info") {
     return user_info && user_info;
   } else if (type === "token") {
