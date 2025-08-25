@@ -154,25 +154,20 @@ export const deepClone = (obj: any): any => {
 };
 
 /**
- * 校验表单（遇到第一个没填的就提示）
+ * 校验表单必填项
  * @param form 表单对象
- * @param requiredKeys 必填字段数组（按顺序）
- * @param fieldNames 字段对应的中文提示
- * @returns { valid: boolean, message: string }
+ * @param rules 字段校验提示信息（key 对应字段，value 为提示）
+ * @returns 是否有未填写项
  */
-export function validateFormSequential<T extends Record<string, any>>(
-  form: T,
-  requiredKeys: (keyof T)[],
-  fieldNames: Partial<Record<keyof T, string>>
-): { valid: boolean; message: string } {
-  for (const key of requiredKeys) {
-    const value = form[key];
-    if (value === null || value === undefined || value === "") {
-      return {
-        valid: false,
-        message: `${fieldNames[key] || String(key)}不能为空`,
-      };
+export const judgeUserForm = (
+  form: Record<string, any>,
+  rules: Record<string, string>
+): boolean => {
+  for (const k in rules) {
+    if (!form[k]) {
+      Message("warning", rules[k]);
+      return true; // 一旦发现未填写就返回
     }
   }
-  return { valid: true, message: "" };
-}
+  return false;
+};
