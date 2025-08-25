@@ -152,3 +152,27 @@ export const deepClone = (obj: any): any => {
   }
   return copy;
 };
+
+/**
+ * 校验表单（遇到第一个没填的就提示）
+ * @param form 表单对象
+ * @param requiredKeys 必填字段数组（按顺序）
+ * @param fieldNames 字段对应的中文提示
+ * @returns { valid: boolean, message: string }
+ */
+export function validateFormSequential<T extends Record<string, any>>(
+  form: T,
+  requiredKeys: (keyof T)[],
+  fieldNames: Partial<Record<keyof T, string>>
+): { valid: boolean; message: string } {
+  for (const key of requiredKeys) {
+    const value = form[key];
+    if (value === null || value === undefined || value === "") {
+      return {
+        valid: false,
+        message: `${fieldNames[key] || String(key)}不能为空`,
+      };
+    }
+  }
+  return { valid: true, message: "" };
+}
