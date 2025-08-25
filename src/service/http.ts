@@ -2,7 +2,7 @@
 import axios, { AxiosRequestConfig } from "axios";
 import { Message } from "@/utils/utils";
 import { start, done } from "@/utils/nprogress.js";
-import { ApiReturnType, UserLoginInfoType } from "@/types/types";
+import { ApiReturnType, UserInfo } from "@/types/types";
 import { useUserInfo } from "@/stores/user";
 // import {start,close} from '@/utils/nprogress'
 
@@ -15,8 +15,7 @@ axios.defaults.headers.post["Content-Type"] = "application/json;charset=UTF-8";
 axios.interceptors.request.use(
   (config): any => {
     // 请求token或其他鉴权
-    let user: UserLoginInfoType = useUserInfo().info;
-    let token = user.token;
+    let token = useUserInfo().token;
     if (token && config.headers) {
       config.headers["x-access-token"] = token;
     }

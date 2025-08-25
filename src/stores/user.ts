@@ -1,25 +1,36 @@
+import { LoginResponse, UserInfo } from "@/types/types";
 import { defineStore } from "pinia";
-import { UserLoginInfoType } from "@/types/types";
-// 记录用户信息
+
 export const useUserInfo = defineStore("user", {
   state: () => {
     return {
-      info: {
-        role: "",
-        token: "",
-      },
+      token: "" as string,
+      info: {} as UserInfo,
     };
   },
   getters: {
-    getInfo(): UserLoginInfoType {
-      return this.info;
+    getInfo(state): UserInfo {
+      return state.info;
     },
+    getToken(state): string {
+      return state.token;
+    },
+    isLoggedIn(state): boolean {
+      return !!state.token;
+    }
   },
   actions: {
-    setUserInfo(res: UserLoginInfoType) {
-      this.info = res;
+    setUserInfo(res: LoginResponse) {
+      this.token = res.token;
+      this.info = res.userInfo;
     },
+    clearUserInfo() {
+      this.token = "";
+      this.info = {} as UserInfo;
+    },
+    updateUserInfo(partial: Partial<UserInfo>) {
+      this.info = { ...this.info, ...partial };
+    }
   },
-  // 持久化存储
   persist: true,
 });

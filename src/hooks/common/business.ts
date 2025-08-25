@@ -2,7 +2,7 @@ import { useUserInfo } from "@/stores/user";
 // 判断是否有权限
 export function usePermission() {
   const us = useUserInfo();
-  const role = ref(us.getInfo.role);
+  const role = ref(us.info.role);
   // watch(
   //   () => us.getInfo,
   //   (nv, ov) => {

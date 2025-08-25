@@ -21,7 +21,7 @@ router.beforeEach((to: any, from: any, next) => {
     ? to.meta.title + " - " + APP_NAME
     : "前端模板" + " - " + APP_NAME;
   // 在此判断是否登录和确定角色是否有权限访问
-  let token = user?.info?.token || "";
+  let token = user?.token || "";
   let role = user?.info?.role || "";
   if (!whiteList.includes(to.path) && !token) {
     // 判断是否登录

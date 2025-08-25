@@ -1,5 +1,7 @@
 import http from "@/service/http";
+import { useUserInfo } from "@/stores/user";
 import { fetchReturnType } from "@/types/types";
+import { Message } from "@/utils/utils";
 
 export function useFetch(
   url: string,
@@ -33,9 +35,9 @@ export function useLogout() {
     .get("cl/sys/logout")
     .then((res) => {
       if (res.success) {
-        // const info = useUserInfo();
-        // info.setUserInfo({});
-        // Message("success", "退出登录成功");
+        const info = useUserInfo();
+        info.clearUserInfo();
+        Message("success", "退出登录成功");
       }
     })
     .catch((err) => {

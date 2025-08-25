@@ -2,10 +2,10 @@
 import { onMounted } from "vue";
 import { lineChart, pieChart } from "./index";
 import { useUserInfo } from "@/stores/user";
-import {UserLoginInfoType} from '@/types/types'
+import {UserInfo} from '@/types/types'
 onMounted(() => {});
 const us = useUserInfo();
-const user_info = ref<UserLoginInfoType>(us.info);
+const user_info = ref<UserInfo>(us.info);
 watch(
   () => us.info,
   (nv, ob) => {

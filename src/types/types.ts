@@ -39,14 +39,6 @@ export interface ApiReturnType {
   records?: any;
 }
 
-// 用户登录后缓存的数据类型
-export interface UserLoginInfoType {
-  role: string;
-  token: string;
-  account?: string;
-  nickName?: string;
-  phone?: string;
-}
 // 国际化选项类型
 export interface LanguageType {
   label: string;
@@ -131,3 +123,41 @@ export type fetchReturnType = {
   data: any;
   error: any;
 };
+
+// 登录后的用户信息类型
+export interface UserInfo {
+  id: string;
+  username: string;
+  realname: string;
+  password?: string;
+  salt?: string;
+  avatar?: string;
+  birthday?: string;
+  gender?: number;
+  email?: string;
+  phone?: string;
+  workNo?: string;
+  post?: string;
+  roleCode?: string;
+  userIdentity?: number;
+  tenantId?: number;
+  departId?: string;
+  classId?: string;
+  userType?: number;
+  accountType?: number;
+  avlTimeStart?: string;
+  avlTimeEnd?: string;
+  ipPeriods?: string;
+  delFlag?: number;
+  status?: number;
+  createTime?: string;
+  updateBy?: string;
+  updateTime?: string;
+  tenantName?: string;
+  [key: string]: any;
+}
+
+export interface LoginResponse {
+  token: string;
+  userInfo: UserInfo;
+}

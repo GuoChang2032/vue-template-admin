@@ -9,7 +9,7 @@ import { usePermission } from "@/hooks/common/business";
 import { useUserInfo } from "@/stores/user";
 import m from "@/utils/mitt";
 import { useIndex } from "@/stores/indexStore";
-import { UserLoginInfoType, MenuDataType, TabsType } from "@/types/types";
+import { UserInfo, MenuDataType, TabsType } from "@/types/types";
 
 const LOCAL_NAME = "localStorageName";
 
@@ -95,7 +95,7 @@ export const getUserInfo = () => {
 };
 
 // 设置用户信息
-export const setUserInfo = (data: UserLoginInfoType): void => {
+export const setUserInfo = (data: UserInfo): void => {
   const str = toCode(JSON.stringify(data));
   localStorage.setItem(LOCAL_NAME, str);
 };
@@ -103,7 +103,7 @@ export const setUserInfo = (data: UserLoginInfoType): void => {
 // 登出
 export const logout = () => {
   const us = useUserInfo();
-  us.setUserInfo({ role: "", token: "" });
+  us.clearUserInfo();
   router.push({ path: "/login", replace: true });
   // localStorage.removeItem("user_login_info");
   // Message("warning", "登录过期,请重新登录!");

@@ -7,7 +7,7 @@ import { Message, switchTab } from "@/utils/utils";
 import m from "@/utils/mitt";
 import { useIndex } from "@/stores/indexStore";
 import http from "@/service/http";
-import { UserLoginReturnType, ApiReturnType } from "@/types/types";
+import { UserInfo, ApiReturnType } from "@/types/types";
 
 interface fvType {
   account: string;
@@ -33,14 +33,15 @@ const handleLogin = () => {
   let f = formValue.value;
   setTimeout(() => {
     loading.value = false;
-    let info: UserLoginReturnType = {
-      account: "admin",
+    let info: UserInfo = {
+      id: 'aaaaa',
+      username: "过场",
+      realname: "过场",
       nickName: "过场",
       phone: "15777777777",
       role: "admin",
-      token: "xixixixixixixixxix",
     };
-    us.setUserInfo(info);
+    us.setUserInfo({ userInfo: info, token: '2222222' });
     umt.resetTab();
     switchTab("index");
     m.emit("login", {});
@@ -76,14 +77,12 @@ const other = (type: string) => {
     <div class="mb-6 mb-10 text-3xl">账号登录</div>
     <div class="flex justify-around mx-4">
       <div
-        class="flex px-4 py-2 text-base text-gray-800 border border-gray-200 cursor-pointer rounded-xl hover:bg-gray-200"
-      >
+        class="flex px-4 py-2 text-base text-gray-800 border border-gray-200 cursor-pointer rounded-xl hover:bg-gray-200">
         <img src="@/assets/google-icon.svg" class="w-6 mr-1.5" alt="" />
         <span> Google 登录</span>
       </div>
       <div
-        class="flex px-4 py-2 text-base text-gray-800 border border-gray-200 cursor-pointer rounded-xl hover:bg-gray-200"
-      >
+        class="flex px-4 py-2 text-base text-gray-800 border border-gray-200 cursor-pointer rounded-xl hover:bg-gray-200">
         <img src="@/assets/facebook.svg" class="w-6 mr-1.5" alt="" />
         <span> Facebook 登录</span>
       </div>
@@ -92,18 +91,8 @@ const other = (type: string) => {
       - OR -
     </div>
     <div class="" @keypress.enter="handleLogin">
-      <input
-        class="login-input"
-        v-model="formValue.account"
-        placeholder="输入账号"
-        type="text"
-      />
-      <input
-        class="login-input"
-        v-model="formValue.password"
-        placeholder="输入密码"
-        type="password"
-      />
+      <input class="login-input" v-model="formValue.account" placeholder="输入账号" type="text" />
+      <input class="login-input" v-model="formValue.password" placeholder="输入密码" type="password" />
     </div>
     <div class="flex mt-4 mb-8">
       <div class="flex-1">
@@ -114,14 +103,7 @@ const other = (type: string) => {
       </div>
     </div>
     <div class="mb-6">
-      <n-button
-        type="primary"
-        block
-        size="large"
-        @click="handleLogin"
-        :loading="loading"
-        >登 录</n-button
-      >
+      <n-button type="primary" block size="large" @click="handleLogin" :loading="loading">登 录</n-button>
     </div>
     <div class="">
       没有账号？<n-button text type="primary" @click="other('2')">
@@ -135,16 +117,20 @@ const other = (type: string) => {
 .l-c-operation {
   padding: 5px 0;
 }
+
 .l-c-btn {
   margin: 10px 0 20px;
 }
+
 .l-c-head {
   font-size: 28px;
   margin: 15px 0;
 }
+
 .l-f {
   width: 400px;
 }
+
 .code-img {
   width: 100px;
   margin-left: 10px;
