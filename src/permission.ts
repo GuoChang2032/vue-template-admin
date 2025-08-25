@@ -15,7 +15,7 @@ router.beforeEach((to, from, next) => {
         document.title = '前端模板项目'
     }
 
-    // let token = user.tokens
+    // let token = user.token
     // if (!token && !whiteList.includes(to.path)) {
     //     done()
     //     Message('warning', '请登录')

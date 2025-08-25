@@ -115,8 +115,8 @@ export const userInfoAbout = (type: string): any => {
   const uui = useUserInfo();
   let info = uui.getInfo;
   if (!uui) return;
-  const token = info.access_token;
-  const user_info = info.user_info;
+  const token = info.getToken;
+  const user_info = info.getInfo;
   if (type === "info") {
     return user_info && user_info;
   } else if (type === "token") {

@@ -4,7 +4,6 @@ import axios, { AxiosRequestConfig } from "axios";
 import { Message, userInfoAbout } from "@/utils/utils";
 import { start, done } from "@/utils/nprogress.js";
 import { ApiReturnType, UserLoginInfoType } from "@/types/types";
-import { useUserInfo } from "@/stores/user";
 
 // 设置请求头和请求路径
 axios.defaults.baseURL = import.meta.env.VITE_APP_API_BASE_URL;
