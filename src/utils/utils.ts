@@ -352,35 +352,22 @@ export function switchTab(name: string) {
 }
 
 /**
- * 判断用户表单填写是否完整。
- * 该函数遍历表单对象的属性，检查是否存在未填写的必填项。
- * 如果发现未填写的项，将显示警告消息并返回true，表示表单不完整。
- * 如果所有项都已填写，则返回false，表示表单完整。
- *
- * @param f 表单对象，包含用户输入的数据。
- * @returns {boolean} 如果表单不完整返回true，否则返回false。
+ * 校验表单必填项
+ * @param form 表单对象
+ * @param rules 字段校验提示信息（key 对应字段，value 为提示）
+ * @returns 是否有未填写项
  */
-export const judgeUserForm = (f: any): boolean => {
-  let flag = false;
-  const currentItem: any = {
-    username: "请填写账户名",
-    realname: "请填写用户名",
-    phone: "请填写手机号",
-    email: "请填写邮箱地址",
-    avlTimeEnd: "请选择试用时间",
-    avlTimeStart: "请选择试用时间",
-    tenantName: "请填写机构名称",
-    password: "请填写登录密码",
-  };
-  for (const k in f) {
-    if (!f[k] && currentItem[k]) {
-      Message("warning", `${currentItem[k]}`);
-      flag = true;
-      break;
+export const judgeUserForm = (
+  form: Record<string, any>,
+  rules: Record<string, string>
+): boolean => {
+  for (const k in rules) {
+    if (!form[k]) {
+      Message("warning", rules[k]);
+      return true; // 一旦发现未填写就返回
     }
   }
-
-  return flag;
+  return false;
 };
 
 /**
