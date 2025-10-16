@@ -92,22 +92,18 @@ export const setUserInfo = (data: any): void => {
   localStorage.setItem(LOCAL_NAME, str);
 };
 
-export const logout = () => {
-  router.push({ path: "/login", replace: true });
-  localStorage.removeItem("user_login_info");
-};
+const { message } = createDiscreteApi(["message"]);
 
+// 消息提示弹窗
 export const Message = (type: msgType, msg: string) => {
-  const { message } = createDiscreteApi(["message"]);
-  if (type === "info") {
-    message.info(msg);
-  } else if (type === "warning") {
-    message.warning(msg);
-  } else if (type === "error") {
-    message.error(msg);
-  } else if (type === "success") {
-    message.success(msg);
-  }
+  const typeMap: Record<msgType, (msg: string) => void> = {
+    info: message.info,
+    warning: message.warning,
+    error: message.error,
+    success: message.success,
+  };
+
+  typeMap[type]?.(msg);
 };
 
 // 获取登录信息
@@ -169,3 +165,35 @@ export const judgeUserForm = (
   }
   return false;
 };
+
+// 判断资源前缀，追加完整路径
+export function ensureHttpPrefix(
+  url: string,
+  prefix: string = import.meta.env.VITE_APP_API_BASE_URL
+) {
+  if (!url) return "";
+
+  // 检查是否已有 http:// 或 https:// 前缀
+  if (/^https?:\/\//i.test(url)) {
+    return url;
+  }
+
+  return prefix + url;
+}
+
+// 下载某个链接地址的资源
+export async function downloadUrl(path:string) {
+  const response = await fetch(path);
+  const blob = await response.blob();
+
+  const url = window.URL.createObjectURL(blob);
+
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = `xxxx`;
+  document.body.appendChild(link);
+  link.click();
+
+  document.body.removeChild(link);
+  window.URL.revokeObjectURL(url);
+}
